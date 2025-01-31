@@ -11,20 +11,12 @@ const typeDefs = `
     quantity: Int!
   }
 
-  type Review {
-    _id: ID!
-    username: String!
-    content: String!
-    stars: Int!
-  }
-
   type Item {
     _id: ID!
     name: String!
     price: Float!
     imagePath: String!
     tags: [String]
-    reviews: [Review]
   }
 
   type Query {
