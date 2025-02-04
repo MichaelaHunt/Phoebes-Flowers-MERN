@@ -53,3 +53,28 @@
 #navList > li {
     margin: 0 1rem;
 }
+
+/* Item component */
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex: 1 1 calc(33.33% - 10px); /*This line courtesy of ChatGPT*/
+    max-width: calc(33.33% - 10px); /*This line courtesy of ChatGPT*/
+}
+
+.item > img {
+    width: 25rem;
+}
+
+.item > h3 {
+    color: black;
+    font-size: 2rem;
+    margin: 32px 0 14px 0;
+}
+
+.item > p {
+    color: black;
+    font-size: 1rem;
+}

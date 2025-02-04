@@ -5,7 +5,7 @@ function Nav() {
         <>
             <div className='headerBlue nav'>
                 <ul className='row' id='navList'>
-                    <li>Occassions</li>
+                    <li>Occasions</li>
                     <li>Browse Extras</li>
                     <li>Browse By Color</li>
                     <li>Custom Order</li>

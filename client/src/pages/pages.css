@@ -1,0 +1,53 @@
+/* This file should only contain CSS that applies to pages */
+
+/* Home page */
+.homeSection {
+    margin: 40px 0 0 0;
+}
+
+.miniSection {
+    background-color: var(--powder-pink);
+}
+
+.bestSellerSection {
+    background-color: var(--powder-orange);
+}
+
+.giftSection {
+    background-color: var(--powder-yellow);
+}
+
+.sectionTitle {
+    color: black;
+    padding: 24px 0;
+    font-size: 40px;
+    font-family: 'Poppins-Light';
+}
+
+.sectionButton {
+    padding: 16px 48px;
+    border-radius: 16px;
+    font-size: 32px;
+    color: white;
+    font-family: 'Poppins-Regular';
+}
+
+.miniButton {
+    background-color: #426A5A;
+}
+
+.bestSellerButton {
+    margin: 1rem 0 2.5rem 0;
+    background-color: #E58673;
+}
+
+.giftButton {
+    margin: 1rem 0 2.5rem 0;
+    background-color: #402E2A;
+}
+
+.itemContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
