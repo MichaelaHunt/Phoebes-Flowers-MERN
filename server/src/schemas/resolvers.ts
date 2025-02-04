@@ -1,6 +1,7 @@
 import { signToken, AuthenticationError } from '../utils/auth';
 import { User, Item } from '../models/index.js';
 import { Query } from 'mongoose';
+import db from '../config/connections.js';
 
 //define types for the resolvers
 
@@ -38,45 +39,70 @@ interface AuthPayload {
 // define the resolvers
 const resolvers = {
     Query: {
-        //get a user by id
-      getUser: async (_: any, { id }: { id: string }, context: any): Promise<User | null> => {
-        return context.db.getUserById(id);
+      // Get a user by ID
+      getUser: async (_: any, { id }: { id: string }): Promise<User | null> => {
+        return db.getUserById(id);
       },
-      //check if a user is logged in
+      // Check if a user is logged in
       me: async (_: any, __: any, context: any): Promise<User | null> => {
+        if (!context.user) throw new AuthenticationError("Not authenticated");
         return context.user;
       },
-      //get all items in cart
+      // Get all items in the cart
       viewCart: async (_: any, __: any, context: any): Promise<Cart | null> => {
-        return context.db.getCartByUserId(context.user.id);
+        if (!context.user) throw new AuthenticationError("Not authenticated");
+        return db.getCartByUserId(context.user.id);
       },
-      //get specific item by id
-      getItemsById: async (_: any, { id }: { id: string }, context: any): Promise<Item[]> => {
-        return context.db.getItemsById(id);
+      // Get specific item by ID
+      getItemsById: async (_: any, { id }: { id: string }): Promise<Item | null> => {
+        return db.getItemById(id);
       },
-      getRandomItems: async (_: any, __: any, context: any): Promise<Item[]> => {
-        return context.db.getRandomItems(3);
+      // Get 3 random items
+      getRandomItems: async (_: any, __: any): Promise<Item[]> => {
+        return db.getRandomItems(3);
       }
     },
-
-    // Mutation resolvers
+  
     Mutation: {
-        addUser: async (_: any, { username, email, password }: { username: string; email: string; password: string }, context: any): Promise<User> => {
-          return context.db.createUser({ username, email, password });
-        },
-        login: async (_: any, { email, password }: { email: string; password: string }, context: any): Promise<AuthPayload> => {
-          return context.auth.login(email, password);
-        },
-        addToCart: async (_: any, { itemId, quantity }: { itemId: string; quantity: number }, context: any): Promise<Cart> => {
-          return context.db.addToCart(context.user.id, itemId, quantity);
-        },
-        removeFromCart: async (_: any, { itemId }: { itemId: string }, context: any): Promise<Cart> => {
-          return context.db.removeFromCart(context.user.id, itemId);
-        },
-        editCartQuantity: async (_: any, { itemId, quantity }: { itemId: string; quantity: number }, context: any): Promise<Cart> => {
-          return context.db.updateCartItem(context.user.id, itemId, quantity);
-        }
+      // Add a new user
+      addUser: async (
+        _: any,
+        { username, email, password }: { username: string; email: string; password: string }
+      ): Promise<User> => {
+        const newUser = await db.createUser({ username, email, password });
+        return newUser;
+      },
+      // User login
+      login: async (_: any, { email, password }: { email: string; password: string }): Promise<AuthPayload> => {
+        return auth.login(email, password);
+      },
+      // Add item to cart
+      addToCart: async (
+        _: any,
+        { itemId, quantity }: { itemId: string; quantity: number },
+        context: any
+      ): Promise<Cart> => {
+        if (!context.user) throw new AuthenticationError("Not authenticated");
+        return db.addToCart(context.user.id, itemId, quantity);
+      },
+      // Remove item from cart
+      removeFromCart: async (_: any, { itemId }: { itemId: string }, context: any): Promise<Cart> => {
+        if (!context.user) throw new AuthenticationError("Not authenticated");
+        return db.removeFromCart(context.user.id, itemId);
+      },
+      // Edit quantity of an item in the cart
+      editCartQuantity: async (
+        _: any,
+        { itemId, quantity }: { itemId: string; quantity: number },
+        context: any
+      ): Promise<Cart> => {
+        if (!context.user) throw new AuthenticationError("Not authenticated");
+        return db.updateCartItem(context.user.id, itemId, quantity);
       }
-    };
+    }
+  };
+  
+  export default resolvers;
+  
 
     export default resolvers;
