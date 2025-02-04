@@ -76,9 +76,9 @@ userSchema.pre<IUser>('save', async function (next) {
     }
 
     next();
-}
+})
 // Method to check if the entered password matches the stored hashed password
-userSchema.methods.isCorrectPassword = async function (password: string): Promise<boolean> {
+    userSchema.methods.isCorrectPassword = async function (password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);
 };
 
