@@ -58,18 +58,18 @@
 }
 
 #mug1 {
-    height: 350px;
+    height: 400px;
     border-radius: 0 0 60px 0;
 }
 
 #mug2 {
-    height: 350px;
+    height: 400px;
     border-radius: 60px 60px 0 0;
     margin: 0 4rem -2rem;
 }
 
 #mug3 {
-    height: 350px;
+    height: 400px;
     border-radius: 0 0 0 60px;
     /* object-fit: cover; */
 }
@@ -108,4 +108,5 @@
 .miniSection > div {
     justify-content: center;
     align-items: center;
+    padding: 16px 0;
 }
