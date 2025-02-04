@@ -82,3 +82,8 @@ ul {
 button {
   border: none;
 }
+
+link, a {
+  text-decoration: none;
+  color: white;
+}

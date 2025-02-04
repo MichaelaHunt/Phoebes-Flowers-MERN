@@ -1,4 +1,5 @@
 import './components.css'
+import { Link } from 'react-router-dom';
 
 function Title() {
     return (
@@ -6,7 +7,7 @@ function Title() {
             <div className='headerBlue title'>
                 <ul className='center-row center-column' id='titleList'>
                     <li>
-                        <h1 id="title">Phoebe's Flowers</h1>
+                        <Link to='/' id="title">Phoebe's Flowers</Link>
                     </li>
                     <li>
                         <i className="fa-solid fa-basket-shopping" id="basket"></i>
