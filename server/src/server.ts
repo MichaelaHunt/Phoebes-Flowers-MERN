@@ -1,0 +1,1 @@
+import { authenticateToken } from "./utils/auth.js";
