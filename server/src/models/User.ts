@@ -44,16 +44,17 @@ const userSchema = new Schema<IUser>(
         toObject: {getters: true},
     }
 );
-
+// Middleware: Runs before saving a new user or modifying the password
 userSchema.pre<IUser>('save', async function (next) {
+    // Check if the password is new or modified before hashing
     if (this.isNew || this.isModified('password')) {
-        const saltRounds = 10;
-        this.password = await bcrypt.hash(this.password, saltRounds);
+        const saltRounds = 10;  // Defines the number of salt rounds for bcrypt hashing
+        this.password = await bcrypt.hash(this.password, saltRounds); // Hash the password
     }
 
     next();
 }
-
+// Method to check if the entered password matches the stored hashed password
 userSchema.methods.isCorrectPassword = async function (password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);
 };
