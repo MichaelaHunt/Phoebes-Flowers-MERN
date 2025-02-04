@@ -37,3 +37,10 @@ export const signToken = (username: string, email: string, _id: unknown) => {
     //sign the token with the payload and secret key, set the expiration to 2 hours
     return jwt.sign({ data: payload }, secretKey, { expiresIn: '2h' });
 };
+
+export class AuthenticationError extends GraphQLError {
+    constructor(message: string) {
+        super(message, undefined, undefined, undefined, undefined, undefined, [ 'UNAUTHENTICATED' ]);
+        Object.defineProperty(this, 'name', { value: 'AuthenticationError' });
+    }
+};
