@@ -2,12 +2,35 @@ import {Schema, model, Document} from 'mongoose';
 import bcrypt from 'bcrypt';
 
 // Define an interface for the User document
-
+interface ICartItem extends Document {
+    item: Schema.Types.ObjectId;
+    quantity: number;
+}
+//Define the schema for a cart item (used within the Item schema, but no standalone model)
+const cartItemSchema = new Schema<ICartItem>(
+    {
+        item: {
+            type: Schema.Types.ObjectId,
+            ref: 'Item',
+        },
+        quantity: {
+            type: Number,
+            required: true,
+            min: 1,
+        },
+    },
+    {
+        _id: false, // Prevents Mongoose from automatically creating an _id field for embedded documents
+        toJSON: { getters: true }, // Ensures virtuals and getters are included when converting to JSON
+        toObject: { getters: true }, // Ensures virtuals and getters are included when converting to a JavaScript object
+        timestamps: true, // Adds createdAt and updatedAt timestamps
+    }
+);
 interface IUser extends Document {
     username: string;
     email: string;
     password: string;
-    cart: Schema.Types.ObjectId[];
+    cart: ICartItem[];
     isCorrectPassword(password: string): Promise<boolean>;
 }
 
@@ -33,7 +56,7 @@ const userSchema = new Schema<IUser>(
         },
         cart: [
             {
-                type: Schema.Types.ObjectId,
+                type: cartItemSchema,
                 ref: 'CartItem',
             },
         ],
