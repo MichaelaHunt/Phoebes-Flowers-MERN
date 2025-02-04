@@ -34,6 +34,7 @@
 
 .miniButton {
     background-color: #426A5A;
+    margin: 50px 0 0;
 }
 
 .bestSellerButton {
@@ -50,4 +51,61 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+
+#mugImages > img {
+    border: thick solid white;
+}
+
+#mug1 {
+    height: 350px;
+    border-radius: 0 0 60px 0;
+}
+
+#mug2 {
+    height: 350px;
+    border-radius: 60px 60px 0 0;
+    margin: 0 4rem -2rem;
+}
+
+#mug3 {
+    height: 350px;
+    border-radius: 0 0 0 60px;
+    /* object-fit: cover; */
+}
+
+#mug1, #mug3 {
+    margin-top: -2rem;
+    /* object-fit: cover; */
+}
+
+#mugText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 44rem;
+    font-size: 32px;
+    padding: 2rem;
+    margin-left: 2%;
+}
+
+#mugText > h1 {
+    font-family: "Delius";
+    color: #E57E7E;
+    font-size: 105px;
+    rotate: -13deg;
+    margin: 0 0 0 -20rem;
+}
+
+#mugText > h3 {
+    color: black;
+    font-family: "Poppins-Light";
+    font-size: 2.5rem;
+    margin-top: 24px;
+}
+
+.miniSection > div {
+    justify-content: center;
+    align-items: center;
 }
