@@ -20,11 +20,19 @@ const typeDefs = `
   }
 
   type Query {
-
+  getUser: (id: ID!): User
+  me: User
+  viewCart: Cart
+  getItemsById: (id: ID!): Item
+  getRandomItems: [Item]
   }
 
   type Mutation {
-
+  addUser(username: String!, email: String!, password: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+  addToCart(itemId: ID!, quantity: Int!): Cart
+  removeFromCart(itemId: ID!): Cart
+  editCartQuantity(itemId: ID!, quantity: Int!): Cart
   }
 `;
 
