@@ -1,0 +1,21 @@
+/* This file should only contain CSS that applies to components */
+.headerBlue {
+
+}
+
+/* Title component */
+#title {
+    font-family: "Delius";
+}
+
+.title {
+
+}
+
+#basket {
+    font-size: 32px;
+}
+
+
+
+/* Nav component */
