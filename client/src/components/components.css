@@ -30,6 +30,10 @@
     padding: 0 4rem;
 }
 
+#titleList > li:last-child {
+    font-size: 24px;
+}
+
 .title {
     height: 8rem;
     border-bottom: 2px solid #62849B;
@@ -52,6 +56,7 @@
 
 #navList > li {
     margin: 0 1rem;
+    font-size: 20px;
 }
 
 /* Item component */
