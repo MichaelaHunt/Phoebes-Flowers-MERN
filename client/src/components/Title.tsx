@@ -4,7 +4,7 @@ function Title() {
     return (
         <>
             <div className='headerBlue title'>
-                <ul className='row'>
+                <ul className='center-row center-column' id='titleList'>
                     <li>
                         <h1 id="title">Phoebe's Flowers</h1>
                     </li>

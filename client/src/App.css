@@ -5,8 +5,19 @@
 }
 
 #root {
-  --powder-blue: #;
-  --powder-pink: #;
+  --powder-blue: #6689A1;
+  --powder-pink: #FFBBBB;
+  --powder-orange: #FFDBAC;
+  --powder-yellow: #E9EBC6;
+  background-color: white;
+}
+
+.site {
+  min-height: 100vh;
+  max-width: 100vw;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 @font-face {
@@ -34,8 +45,9 @@
   src: url("./assets/fonts/DeliusSwashCaps-Regular.ttf");
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, p, li {
   font-family: "Poppins-Regular";
+  color: white;
 }
 
 ul {
@@ -50,4 +62,18 @@ ul {
 .column {
   display: flex;
   flex-direction: column;
+}
+
+.center-column {
+  display: flex;
+  align-items: center;
+}
+
+.center-row {
+  display: flex;
+  justify-content: center;
+}
+
+.invisible {
+  visibility: hidden;
 }

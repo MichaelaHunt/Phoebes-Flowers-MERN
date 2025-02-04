@@ -1,21 +1,55 @@
 /* This file should only contain CSS that applies to components */
 .headerBlue {
-
+    background-color: var(--powder-blue);
+    display: flex;
+    align-items: center;
 }
 
 /* Title component */
 #title {
     font-family: "Delius";
+    font-size: 4rem;
+}
+
+#titleList {
+    display: flex;
+    justify-content: end;
+    width: 100vw;
+    position: relative;
+    padding: 0 4rem;
+}
+
+#titleList>li:first-child {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+#titleList > li:nth-child(2) {
+    padding: 0 4rem;
 }
 
 .title {
-
+    height: 8rem;
+    border-bottom: 2px solid #62849B;
 }
 
 #basket {
     font-size: 32px;
 }
 
-
-
 /* Nav component */
+.nav {
+    height: 4.75rem;
+}
+
+#navList {
+    width: 100vw;
+    justify-content: space-around;
+    padding: 0 18%;
+}
+
+#navList > li {
+    margin: 0 1rem;
+}
