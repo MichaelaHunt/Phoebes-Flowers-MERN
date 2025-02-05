@@ -12,6 +12,16 @@ const typeDefs = `
     quantity: Int!
   }
 
+  input CartItemInput {
+    itemId: ID!
+    quantity: Int!
+  }
+
+  type AuthPayload {
+    token: String!
+    user: User!
+  }
+
   type Item {
     _id: ID!
     name: String!
@@ -21,19 +31,18 @@ const typeDefs = `
   }
 
   type Query {
-  getUser: (id: ID!): User
+  users: [User]
+  user(username: String!): User
+  items: [Item]
+  item(itemId: ID!): Item
   me: User
-  viewCart: Cart
-  getItemsById: (id: ID!): Item
-  getRandomItems: [Item]
   }
 
   type Mutation {
-  addUser(username: String!, email: String!, password: String!): AuthPayload
+  createUser(username: String!, email: String!, password: String!): User
   login(email: String!, password: String!): AuthPayload
-  addToCart(itemId: ID!, quantity: Int!): Cart
-  removeFromCart(itemId: ID!): Cart
-  editCartQuantity(itemId: ID!, quantity: Int!): Cart
+  createItem(name: String!, price: Float!, tags: [String]): Item
+  createCart(userId: ID!, items: [CartItemInput]): User
   }
 `;
 
