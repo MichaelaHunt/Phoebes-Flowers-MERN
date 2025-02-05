@@ -25,3 +25,44 @@ login(email: $email, password: $password) {
 }
 }
 `;
+
+export const ADD_TO_CART = gql`
+mutation addToCart($itemId: ID!) {
+addToCart(itemId: $itemId) {
+    _id
+    cart {
+    _id
+    name
+    price
+    }
+}
+}
+`;
+
+export const UPDATE_CART = gql`
+mutation updateCart($itemId: ID!, $quantity: Int!) {
+updateCart(itemId: $itemId, quantity: $quantity) {
+    _id
+    cart {
+    _id
+    name
+    price
+    quantity
+    }
+}
+}
+`;
+
+export const REMOVE_FROM_CART = gql`
+mutation removeFromCart($itemId: ID!) {
+removeFromCart(itemId: $itemId) {
+    _id
+    cart {
+    _id
+    name
+    price
+    quantity
+    }
+}
+}
+`;
