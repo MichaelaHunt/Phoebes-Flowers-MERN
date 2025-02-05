@@ -12,7 +12,7 @@ function Login() {
         <h4>Password</h4>
         <input type="text" />
       </div>
-      <p>errors go here</p>
+      <p>Incorrect login. Please try again.</p>
         <button>Login</button>
         <p>or</p>
         <button>Sign Up</button>
