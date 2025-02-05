@@ -25,6 +25,7 @@ return (
         <input type="text" />
     </div>
     <p>Passwords do not match</p>
+    <button>Create Account</button>
    
     </>
 );
