@@ -1,15 +1,15 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import './components.css';
 
 interface Props {
-    open: boolean;
-    cancelFn?: () => void;
-    primaryFn?: () => void;
-    secondaryFn?: () => void;
-    closeIcon?: string;
-    content?: React.ReactNode;
-    titleContent?: React.ReactNode;
-    className?: string;
+    open: boolean; // Controls modal visibility
+    cancelFn?: () => void;// Function to close the modal
+    primaryFn?: () => void;// Primary action (e.g., "Continue")
+    secondaryFn?: () => void; // Secondary action (e.g., "Cancel")
+    closeIcon?: string; // Custom close button icon
+    content?: React.ReactNode; // Main content inside the modal
+    titleContent?: React.ReactNode; // Title/header content
+    className?: string; // Additional class for styling
 
 }
 
@@ -17,25 +17,32 @@ export const Cart: React.FC<Props> = (props) => {
     const {open, cancelFn, primaryFn, secondaryFn, closeIcon, content, titleContent} = props;
 
     //use effect captures esc key to close modal
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if(e.key === 'Escape' && open) {
-                if(cancelFn) {
-                    cancelFn();
-                }
+   
+        const handleKeyDown = useCallback((e: KeyboardEvent) => {
+            if(e.key === 'Escape' && open && cancelFn) {
+                cancelFn();
             }
-        };
+        }, [open, cancelFn]);
 
+        
+        useEffect(() => {
         document.addEventListener('keydown', handleKeyDown);
         return () => document.removeEventListener('keydown', handleKeyDown);
     }, [open, cancelFn]);
+
+    // Close modal when clicking outside (optional feature)
+    const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (e.target === e.currentTarget && cancelFn) {
+            cancelFn();
+        }
+    };
 
     if(!open) {
         return null;
     }
         
     return (
-        <div className="modalBackground">
+        <div className="modalBackground" onClick={handleBackgroundClick}>
             <div className="modalContainer">
                 {titleContent && (<div className="title">
                         {titleContent}
