@@ -1,9 +1,9 @@
-//import enviorment variables
+//import environment variables
 import dotenv from 'dotenv';
 dotenv.config();
 //connect to MongoDB
 import mongoose from 'mongoose';
-//get MongoDB URI from enviorment variables default to empty string
+//get MongoDB URI from environment variables default to empty string
 const MONGODB_URI = process.env.MONGODB_URI || '';
 
 // 
