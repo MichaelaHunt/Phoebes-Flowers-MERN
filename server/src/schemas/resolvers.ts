@@ -47,8 +47,8 @@ const resolvers = {
         return Item.findById(id);
       },
       // get all items
-      items: async () => {
-        return Item.find();
+      items: async (_: any, { tag }: { tag: string } ) => {
+        return Item.find({ tags: { $in: [tag] } });
       },
     me: async (_parent: any, _args: any, context: any) => {
         if (context.user) {
