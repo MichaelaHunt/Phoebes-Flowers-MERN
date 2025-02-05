@@ -56,17 +56,6 @@ export const QUERY_BY_TAG = gql`
     }
 `;
 
-export const QUERY_3_ITEMS = gql`
-    query getItems {
-        items {
-        _id
-        name
-        price
-        imagePath
-        tags
-        }
-    }
-`;
 
 export const QUERY_CART = gql`
     query getCart {
