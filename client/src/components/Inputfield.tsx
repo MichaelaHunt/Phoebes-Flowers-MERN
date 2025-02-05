@@ -5,7 +5,7 @@ interface InputFieldProps {
   function InputField(props: InputFieldProps) {
     return (
       <>
-        <div>
+        <div id="input-field" className = "column">
           <h4>{props.name}</h4>
           <input type="text" />
         </div>

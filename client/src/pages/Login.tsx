@@ -12,7 +12,8 @@ function Login() {
   
   return (
     <>
-    <div>
+    <div id="loginpage"> 
+      <div>
     <h2>Login to Phoebe's Flowers</h2>
     <Inputfield name="Username" />
       <Inputfield name="Password" />
@@ -21,6 +22,7 @@ function Login() {
         <p>or</p>
         <button>Sign Up</button>
     </div>
+     </div>
    
     </>
   );

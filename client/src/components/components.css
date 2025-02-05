@@ -83,3 +83,26 @@
     color: black;
     font-size: 1rem;
 }
+
+/* input field component */
+#input-field {
+    display: flex;
+    align-items: left;
+    margin: 12px 0;
+
+}
+#input-field > h4 {
+    color: white;
+    font-size: 20px;
+}
+#input-field > input {
+    width: 470px;
+    height: 40px;
+    border: solid white 2px;
+    background-color: #e58673;
+    border-radius: 12px;
+    font-size: 20px;
+    font-family:"Poppins-Light";
+    padding-left: 8px;
+
+}
