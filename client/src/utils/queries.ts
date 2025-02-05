@@ -44,9 +44,9 @@ export const QUERY_SINGLE_ITEM = gql`
     }
 `;
 
-export const QUERY_ALL_ITEMS = gql`
-    query getItems {
-        items {
+export const QUERY_BY_TAG = gql`
+    query getItems($tag: String!) {
+        items(tag: $tag) {
         _id
         name
         price
@@ -56,17 +56,6 @@ export const QUERY_ALL_ITEMS = gql`
     }
 `;
 
-export const QUERY_3_ITEMS = gql`
-    query getItems {
-        items {
-        _id
-        name
-        price
-        imagePath
-        tags
-        }
-    }
-`;
 
 export const QUERY_CART = gql`
     query getCart {
