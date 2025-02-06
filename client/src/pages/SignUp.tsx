@@ -2,9 +2,11 @@
 function Signup() {
 return (
     <>
-    <div>
+    <div id="loginpage">
+         <div>
+         
         <h2>Sign Up for Phoebe's Flowers</h2>
-    </div>
+    
     <div>
         <h4>Email Address</h4>
         <input type="text" />
@@ -26,7 +28,10 @@ return (
     </div>
     <p>Passwords do not match</p>
     <button>Create Account</button>
+    </div>
+    </div>
    
     </>
 );
 }
+export default Signup;

@@ -1,8 +1,7 @@
 import { useState, type FormEvent, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
-import Auth from '../utils/auth';
+import Inputfield from '../components/Inputfield';
 
 
 
@@ -40,25 +39,22 @@ setFormState({
   password: '',
 });
 };
-
   return (
     <>
-    <div>
+    <div id="loginpage"> 
+      <div>
     <h2>Login to Phoebe's Flowers</h2>
-      <div>
-        <h4>Username</h4>
-        <input type="text" />
-      </div>
-      <div>
-        <h4>Password</h4>
-        <input type="text" />
-      </div>
+    <Inputfield name="Username" />
+      <Inputfield name="Password" />
       <p>Incorrect login. Please try again.</p>
         <button>Login</button>
         <p>or</p>
         <button>Sign Up</button>
     </div>
+     </div>
    
     </>
   );
 }
+
+export default Login;
