@@ -2,17 +2,17 @@ import React, {useState, useEffect, useCallback} from 'react';
 import './components.css';
 
 interface Props {
-    open: boolean; // Controls modal visibility
-    cancelFn?: () => void;// Function to close the modal
-    primaryFn?: () => void;// Primary action (e.g., "Continue")
-    secondaryFn?: () => void; // Secondary action (e.g., "Cancel")
-    closeIcon?: string; // Custom close button icon
-    titleContent?: React.ReactNode; // Title/header content
-    className?: string; // Additional class for styling
+    open: boolean; // controls modal visibility
+    cancelFn?: () => void;// function to close the modal
+    primaryFn?: () => void;// primary action (e.g., "Continue")
+    secondaryFn?: () => void; // secondary action (e.g., "Cancel")
+    closeIcon?: string; // custom close button icon
+    titleContent?: React.ReactNode; // title/header content
+    className?: string; // additional class for styling
 
 }
 
-// Define item structure
+// define item structure
 interface CartItem {
     name: string;
     quantity: number;
@@ -22,7 +22,7 @@ interface CartItem {
 export const Cart: React.FC<Props> = (props) => {
     const {open, cancelFn, primaryFn, secondaryFn, closeIcon, titleContent} = props;
 
-    // State to hold cart items
+    // state to hold cart items
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
 
@@ -67,7 +67,7 @@ export const Cart: React.FC<Props> = (props) => {
         return () => document.removeEventListener('keydown', handleKeyDown);
     }, [open, cancelFn]);
 
-    // Close modal when clicking outside (optional feature)
+    // close modal when clicking outside (optional feature)
     const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target === e.currentTarget && cancelFn) {
             cancelFn();
@@ -81,7 +81,7 @@ export const Cart: React.FC<Props> = (props) => {
     return (
         <div className="modalBackground" onClick={handleBackgroundClick}>
             <div className="modalContainer">
-                {/* Modal Title with Close Button */}
+                {/* modal title with close button */}
                 {titleContent && (
                     <div className="title">
                         {titleContent}
@@ -91,16 +91,16 @@ export const Cart: React.FC<Props> = (props) => {
                     </div>
                 )}
 
-                {/* Cart Items Section */}
+                {/* cart Items Section */}
                 <div className="cartBody">
                     <h3>Shopping Cart</h3>
 
-                    {/* Sample Buttons to Add Items */}
+                    {/* sample buttons to add items */}
                     <button onClick={() => addItemToCart('Apple')} className="addItemBtn">Add Apple</button>
                     <button onClick={() => addItemToCart('Banana')} className="addItemBtn">Add Banana</button>
                     <button onClick={() => addItemToCart('Orange')} className="addItemBtn">Add Orange</button>
 
-                    {/* Display items in cart */}
+                    {/* display items in cart */}
                     <ul className="cartList">
                         {cartItems.length > 0 ? (
                             cartItems.map((item) => (
@@ -118,7 +118,7 @@ export const Cart: React.FC<Props> = (props) => {
                     </ul>
                 </div>
 
-                {/* Footer Buttons */}
+                {/* footer buttons */}
                 <div className="footer">
                     {secondaryFn && (
                         <button onClick={secondaryFn} id="cancelBtn">
