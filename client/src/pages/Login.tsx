@@ -10,6 +10,37 @@ import Auth from '../utils/auth';
 
 
 function Login() {
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [login, { error, data }] = useMutation(LOGIN_USER);
+
+const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const { name, value } = event.target;
+
+  setFormState({
+    ...formState,
+    [name]: value,
+  })
+};
+
+const handleFormSubmit = async (event: FormEvent) => {
+  event.preventDefault();
+  console.log(formState);
+try {
+  const { data } = await login({
+    variables: { ...formState },
+});
+
+Auth.login(data.login.token);
+} catch (error) {
+  console.error(error);
+}
+
+setFormState({
+  email: '',
+  password: '',
+});
+};
+
   return (
     <>
     <div>
