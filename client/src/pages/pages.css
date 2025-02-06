@@ -58,18 +58,18 @@
 }
 
 #mug1 {
-    height: 400px;
+    height: 350px;
     border-radius: 0 0 60px 0;
 }
 
 #mug2 {
-    height: 400px;
+    height: 350px;
     border-radius: 60px 60px 0 0;
     margin: 0 4rem -2rem;
 }
 
 #mug3 {
-    height: 400px;
+    height: 350px;
     border-radius: 0 0 0 60px;
     /* object-fit: cover; */
 }
@@ -87,11 +87,13 @@
     justify-content: center;
     width: 44rem;
     font-size: 32px;
-    padding: 2rem;
+    width: 550px;
+    padding: 2rem 0;
     margin-left: 2%;
 }
 
 #mugText>h1 {
+    position: relative;
     font-family: "Delius";
     color: #E57E7E;
     font-size: 105px;
@@ -107,9 +109,9 @@
 }
 
 .miniSection>div {
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 16px 0;
+    padding: 16px 16px;
 }
 
 /* login section */
