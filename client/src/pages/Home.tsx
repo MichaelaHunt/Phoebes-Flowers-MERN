@@ -8,6 +8,7 @@ import { QUERY_BY_TAG } from "../utils/queries";
 import mug1 from '../assets/images/mug2.jpg';
 import mug2 from '../assets/images/mug1.png';
 import mug3 from '../assets/images/mug3.png';
+import image from '../assets/images/bouquet1.png'
 
 function Home() {
     return (
@@ -21,14 +22,17 @@ function Home() {
             {/* Mini's Section */}
             <div className="homeSection miniSection">
                 <div className="row">
-                    <div id="mugImages">
+                    <div>
+                        <h2></h2>
+                    </div>
+                    <div id="mugImages" className="row">
                         <img src={mug1} id="mug1"></img>
                         <img src={mug2} id="mug2"></img>
                         <img src={mug3} id="mug3"></img>
                     </div>
                     <div id="mugText">
                         <h1>New!</h1>
-                        <h3>Mini-Bouquets in a <br></br>Mug!</h3>
+                        <h3>Mini-Bouquets in a<br></br>Mug!</h3>
                         <button className="sectionButton miniButton">Shop Minis</button>
                     </div>
                 </div>
