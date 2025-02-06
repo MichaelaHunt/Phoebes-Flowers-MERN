@@ -4,6 +4,7 @@ import Item from "../components/Item";
 import './pages.css';
 import { useQuery } from '@apollo/client';
 import { QUERY_SINGLE_ITEM } from "../utils/queries";
+import { QUERY_BY_TAG } from "../utils/queries";
 import mug1 from '../assets/images/mug2.jpg';
 import mug2 from '../assets/images/mug1.png';
 import mug3 from '../assets/images/mug3.png';
