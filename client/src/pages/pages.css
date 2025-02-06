@@ -53,7 +53,7 @@
     justify-content: space-around;
 }
 
-#mugImages > img {
+#mugImages>img {
     border: thick solid white;
 }
 
@@ -74,7 +74,8 @@
     /* object-fit: cover; */
 }
 
-#mug1, #mug3 {
+#mug1,
+#mug3 {
     margin-top: -2rem;
     /* object-fit: cover; */
 }
@@ -90,7 +91,7 @@
     margin-left: 2%;
 }
 
-#mugText > h1 {
+#mugText>h1 {
     font-family: "Delius";
     color: #E57E7E;
     font-size: 105px;
@@ -98,28 +99,54 @@
     margin: 0 0 0 -20rem;
 }
 
-#mugText > h3 {
+#mugText>h3 {
     color: black;
     font-family: "Poppins-Light";
     font-size: 2.5rem;
     margin-top: 24px;
 }
 
-.miniSection > div {
+.miniSection>div {
     justify-content: center;
     align-items: center;
     padding: 16px 0;
 }
+
 /* login section */
 #loginpage {
-    background-color: #ffdabc; 
+    background-color: #ffdabc;
+    align-items: center;
+
 }
 
-#loginpage > div {
+#loginpage::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('../assets/images/flowers-warm.png') no-repeat center center/cover;
+    z-index: 1;
+}
+
+#loginpage>div:nth-child(2) {
     background-color: #e58673;
-
+    width: 598px;
+    border-radius: 16px;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 48px 64px;
+    z-index: 2;
 }
-#loginpage > div > button {
+
+#loginpage>div>h2 {
+    font-size: 48px;
+    font-family: "Poppins-Light";
+    margin-bottom: 24px;
+}
+
+#loginpage>div>button {
     width: 470px;
     height: 60px;
     border-radius: 12px;
@@ -128,3 +155,33 @@
     font-family: "Poppins-Medium";
 }
 
+.error {
+    color: red;
+    visibility: hidden;
+}
+
+.loginError {
+    margin-bottom: 8px;
+}
+
+#loginpage>.title {
+    background-color: #E58673;
+    border-bottom: none;
+    z-index: 2;
+}
+
+#space {
+    margin: 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#space::after,
+#space::before {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background-color: white;
+}

@@ -35,7 +35,7 @@
 }
 
 .title {
-    height: 8rem;
+    height: 6rem;
     border-bottom: 2px solid #62849B;
 }
 
@@ -87,14 +87,17 @@
 /* input field component */
 #input-field {
     display: flex;
-    align-items: left;
-    margin: 12px 0;
-
+    margin: 12px 0 8px;
+    text-align: left;
+    justify-content: center;
 }
+
 #input-field > h4 {
     color: white;
     font-size: 20px;
+    width: 40px;
 }
+
 #input-field > input {
     width: 470px;
     height: 40px;
@@ -104,5 +107,5 @@
     font-size: 20px;
     font-family:"Poppins-Light";
     padding-left: 8px;
-
+    color: white;
 }

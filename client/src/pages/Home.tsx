@@ -7,6 +7,7 @@ import { QUERY_SINGLE_ITEM } from "../utils/queries";
 import mug1 from '../assets/images/mug2.jpg';
 import mug2 from '../assets/images/mug1.png';
 import mug3 from '../assets/images/mug3.png';
+import image from '../assets/images/bouquet1.png'
 
 function Home() {
     return (
