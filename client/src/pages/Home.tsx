@@ -11,6 +11,12 @@ import mug3 from '../assets/images/mug3.png';
 import image from '../assets/images/bouquet1.png'
 
 function Home() {
+    //fetch "gift" tag items
+    const { loading, error, data } = useQuery(QUERY_BY_TAG, {
+        variables: { tag: "gift" }
+    });
+//extract 6 items
+const giftItems = data?.items.slice(0, 6) || [];
     return (
         <>
             {/* Header */}
@@ -48,18 +54,27 @@ function Home() {
                 </div>
                 <button className="sectionButton bestSellerButton">Shop Best Sellers</button>
             </div>
-            {/* Gifts to Accompany Section */}
-            <div className="homeSection giftSection">
+       {/* Gifts to Accompany Section */}
+       <div className="homeSection giftSection">
                 <h1 className="sectionTitle">Gifts to Accompany</h1>
-                <div className="itemContainer">
-                    {/* Update later to: Grab items of "gift" tag, then input the first 6 into here. */}
-                    <Item imagePath={image} name="Pale Beach" price={2.50}></Item>
-                    <Item imagePath={image} name="Pale Beach" price={2.50}></Item>
-                    <Item imagePath={image} name="Pale Beach" price={2.50}></Item>
-                    <Item imagePath={image} name="Pale Beach" price={2.50}></Item>
-                    <Item imagePath={image} name="Pale Beach" price={2.50}></Item>
-                    <Item imagePath={image} name="Pale Beach" price={2.50}></Item>
-                </div>
+
+                {loading ? (
+                    <p>Loading gifts...</p>
+                ) : error ? (
+                    <p>Error loading gifts.</p>
+                ) : (
+                    <div className="itemContainer">
+                        {giftItems.map((item: { _id: string; imagePath: string; name: string; price: number }) => (
+                            <Item
+                                key={item._id}
+                                imagePath={item.imagePath || image}
+                                name={item.name}
+                                price={item.price}
+                            />
+                        ))}
+                    </div>
+                )}
+
                 <button className="sectionButton giftButton">Shop Extras</button>
             </div>
         </>
