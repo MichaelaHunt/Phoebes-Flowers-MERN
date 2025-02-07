@@ -1,11 +1,9 @@
-//import enviorment variables
 import dotenv from 'dotenv';
 dotenv.config();
-//connect to MongoDB
-import mongoose from 'mongoose';
-//get MongoDB URI from enviorment variables default to empty string
-const MONGODB_URI = process.env.MONGODB_URI || '';
 
+import mongoose from 'mongoose';
+
+const MONGODB_URI = process.env.MONGODB_URI || '';
 // 
 const db = async (): Promise<typeof mongoose.connection> => {
     try {

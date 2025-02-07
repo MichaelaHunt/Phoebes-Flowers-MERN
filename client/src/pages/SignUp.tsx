@@ -6,7 +6,7 @@ import Auth from '../utils/auth';
 
 function Signup() {
     const [formState, setFormState] = useState({ email: '', username: '', password: '' });
-    const [createUser, { error, data }] = useMutation(CREATE_USER);
+    const [createUser, { error }] = useMutation(CREATE_USER);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
