@@ -1,4 +1,4 @@
-import { signToken, AuthenticationError } from '../utils/auth';
+import { signToken, AuthenticationError } from '../utils/auth.js';
 import { User, Item } from '../models/index.js';
 
 //define types for the resolvers
