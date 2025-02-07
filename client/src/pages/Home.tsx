@@ -3,8 +3,8 @@ import Title from "../components/Title";
 import Item from "../components/Item";
 import './pages.css';
 import { useQuery } from '@apollo/client';
-import { QUERY_SINGLE_ITEM } from "../utils/queries";
-import { QUERY_BY_TAG } from "../utils/queries";
+// import { QUERY_SINGLE_ITEM } from "../utils/queries";
+import { QUERY_BY_TAG, QUERY_RANDOM_NON_GIFT_ITEMS } from "../utils/queries";
 import mug1 from '../assets/images/mug2.jpg';
 import mug2 from '../assets/images/mug1.png';
 import mug3 from '../assets/images/mug3.png';
@@ -15,8 +15,13 @@ function Home() {
     const { loading, error, data } = useQuery(QUERY_BY_TAG, {
         variables: { tag: "gift" }
     });
+//fetch 3 random non-gift items
+    const { loading: bestSellerLoading, error: bestSellerError, data: bestSellerData } = useQuery(QUERY_RANDOM_NON_GIFT_ITEMS);
+
 //extract 6 items
-const giftItems = data?.items.slice(0, 6) || [];
+const giftItems = data?.items.slice(0, 6) || [];    
+//extract 3 items without "gift" tag
+const bestSellers = bestSellerData?.randomNonGiftItems || [];       
     return (
         <>
             {/* Header */}

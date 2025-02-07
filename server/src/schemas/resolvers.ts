@@ -50,6 +50,10 @@ const resolvers = {
       items: async (_: any, { tag }: { tag: string } ) => {
         return Item.find({ tags: { $in: [tag] } });
       },
+      randomNonGiftItems: async () => {
+        const items = await Item.find({ tags: { $ne: "gift" } }); // Exclude "gift" items
+        return items.sort(() => Math.random() - 0.5).slice(0, 3); // Shuffle & return 3 items
+      },
     me: async (_parent: any, _args: any, context: any) => {
         if (context.user) {
           return User.findOne({ _id: context.user._id });

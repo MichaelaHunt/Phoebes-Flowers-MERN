@@ -56,6 +56,18 @@ export const QUERY_BY_TAG = gql`
     }
 `;
 
+export const QUERY_RANDOM_NON_GIFT_ITEMS = gql`
+    query getRandomNonGiftItems {
+        randomNonGiftItems {
+            _id
+            name
+            price
+            imagePath
+            tags
+        }
+    }
+`;
+
 
 export const QUERY_CART = gql`
     query getCart {

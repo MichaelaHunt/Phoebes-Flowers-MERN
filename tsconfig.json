@@ -2,6 +2,8 @@
   "compilerOptions": {
     /* Language and Environment */
     "target": "ES2020" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+    "outDir": "dist", // Ensure compiled files go to a separate directory
+    "rootDir": "src", // Ensures TypeScript only compiles files from src
 
     "outDir": "dist", // Ensure compiled files go to a separate directory
     "rootDir": "src", // Ensures TypeScript only compiles files from src
