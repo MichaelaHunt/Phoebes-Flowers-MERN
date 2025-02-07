@@ -35,7 +35,9 @@ const typeDefs = `
   user(username: String!): User
   items(tag: String!): [Item]
   item(itemId: ID!): Item
+  randomNonGiftItems: [Item]
   me: User
+
   }
 
   type Mutation {
