@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { useMutation} from '@apollo/client';
 import { CREATE_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
+import Inputfield from '../components/Inputfield';
 
 function Signup() {
-    const [formState, setFormState] = useState({ email: '', username: '', password: '' });
+    const [formState, setFormState] = useState({ email: '', username: '', password: '', confirmPassword: '' });
     const [createUser, { error }] = useMutation(CREATE_USER);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,30 +35,18 @@ function Signup() {
 
 return (
     <>
-    <div id="loginpage">
+    <div id="SignUppage">
          <div>
          
         <h2>Sign Up for Phoebe's Flowers</h2>
     
-    <div>
-        <h4>Email Address</h4>
-        <input type="text" />
-    </div>
+    <Inputfield name="email" value={formState.email} onChange={handleChange} />
     <p>invalid Email</p>
-    <div>
-        <h4>Username</h4>
-        <input type="text" />
-    </div>
+    <Inputfield name="username" value={formState.username} onChange={handleChange} />
     <p>Username already exists</p>
-    <div>
-        <h4>Password</h4>
-        <input type="text" />
-    </div>
+    <Inputfield name="password" value={formState.password} onChange={handleChange} />
     <p>Password must contain...details here</p>
-    <div>
-        <h4>Confirm Password</h4>
-        <input type="text" />
-    </div>
+    <Inputfield name="confirmPassword" value={formState.confirmPassword} onChange={handleChange} />
     <p>Passwords do not match</p>
     <button>Create Account</button>
     </div>
