@@ -1,10 +1,11 @@
 import express from 'express';
 import path from 'node:path';
 import type { Request, Response } from 'express';   
-import db from './config/connection.js';
-import { ApolloServer } from '@apollo/server-express';
-import { expressMiddleware } from '@apollo/server-express';
-import { typeDefs, resolvers } from './schemas/index.js';
+import db from './config/connections.js';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import typeDefs from './schemas/typeDefs.js';
+import resolvers from './schemas/resolvers.js';
 import { authenticateToken } from './utils/auth.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
