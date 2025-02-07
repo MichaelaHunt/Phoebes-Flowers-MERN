@@ -1,3 +1,4 @@
+//import Cart from './Cart';
 import './components.css'
 
 function Nav() {
@@ -10,6 +11,7 @@ function Nav() {
                     <li>Browse By Color</li>
                     <li>Custom Order</li>
                 </ul>
+                
             </div>
         </>
     );
