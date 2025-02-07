@@ -48,15 +48,27 @@ const bestSellers = bestSellerData?.randomNonGiftItems || [];
                     </div>
                 </div>
             </div>
-            {/* Best Seller's Section */}
-            <div className="homeSection bestSellerSection">
+             {/* Best Seller's Section */}
+             <div className="homeSection bestSellerSection">
                 <h1 className="sectionTitle">Best Sellers</h1>
-                <div className="itemContainer">
-                    {/* Update later to: Grab 3 random items, then input them into here. */}
-                    <Item imagePath={image} name="Pale Beach" price={2.50}></Item>
-                    <Item imagePath={image} name="Pale Beach" price={2.50}></Item>
-                    <Item imagePath={image} name="Pale Beach" price={2.50}></Item>
-                </div>
+
+                {bestSellerLoading ? (
+                    <p>Loading best sellers...</p>
+                ) : bestSellerError ? (
+                    <p>Error loading best sellers.</p>
+                ) : (
+                    <div className="itemContainer">
+                        {bestSellers.map((item: { _id: string; imagePath: string; name: string; price: number }) => (
+                            <Item
+                                key={item._id}
+                                imagePath={item.imagePath || image}
+                                name={item.name}
+                                price={item.price}
+                            />
+                        ))}
+                    </div>
+                )}
+
                 <button className="sectionButton bestSellerButton">Shop Best Sellers</button>
             </div>
        {/* Gifts to Accompany Section */}
