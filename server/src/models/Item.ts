@@ -6,7 +6,6 @@ import {Schema, model, Document} from 'mongoose';
 //Definer an interface for the Item document, extending Mongoose's Document
 interface IItem extends Document { 
     name: string;
-    description: string;
     imagePath: string;
     price: number;
     tags: string[];
@@ -15,15 +14,13 @@ interface IItem extends Document {
 // Define the schema for the Item document
 const itemSchema = new Schema<IItem>(
     {
+        _id: {
+            type: Number,
+        },
         name: {
             type: String,
             required: true,
             unique: true,
-            trim: true,
-        },
-        description: {
-            type: String,
-            required: true,
             trim: true,
         },
         imagePath: {

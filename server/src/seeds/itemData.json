@@ -1,6 +1,5 @@
 [
     {
-        "_id": 1,
         "name": "Flower Bear",
         "price": 15.00,
         "imagePath": "../assets/images/bear.png",
@@ -12,7 +11,6 @@
         ]
     },
     {
-        "_id": 2,
         "name": "Pastel Beauty",
         "price": 40.00,
         "imagePath": "../assets/images/bouquet1.png",
@@ -27,7 +25,6 @@
         ]
     },
     {
-        "_id": 3,
         "name": "Pale Beach",
         "price": 25.00,
         "imagePath": "../assets/images/bouquet2.png",
@@ -43,7 +40,6 @@
         ]
     },
     {
-        "_id": 4,
         "name": "Multi-Size Roses",
         "price": 45.00,
         "imagePath": "../assets/images/bouquet3.png",
@@ -58,7 +54,6 @@
         ]
     },
     {
-        "_id": 5,
         "name": "Custom Card",
         "price": 1.50,
         "imagePath": "../assets/images/card.png",
@@ -69,7 +64,6 @@
         ]
     },
     {
-        "_id": 6,
         "name": "Chocolates",
         "price": 18.00,
         "imagePath": "../assets/images/chocolates.jpg",
@@ -78,7 +72,6 @@
         ]
     },
     {
-        "_id": 7,
         "name": "Chocolate Strawberries",
         "price": 10.00,
         "imagePath": "../assets/images/chocolatestrawberries.png",
@@ -87,7 +80,6 @@
         ]
     },
     {
-        "_id": 8,
         "name": "Flower Food",
         "price": 4.00,
         "imagePath": "../assets/images/flowerFood.png",
@@ -96,7 +88,6 @@
         ]
     },
     {
-        "_id": 9,
         "name": "Blue Belle Mug",
         "price": 35.00,
         "imagePath": "../assets/images/mug1.png",
@@ -106,7 +97,6 @@
         ]
     },
     {
-        "_id": 10,
         "name": "Purple Bud Mug",
         "price": 28.00,
         "imagePath": "../assets/images/mug2.jpg",
@@ -116,7 +106,6 @@
         ]
     },
     {
-        "_id": 11,
         "name": "Pink Assorted Mug",
         "price": 20.99,
         "imagePath": "../assets/images/mug3.png",
@@ -126,7 +115,6 @@
         ]
     },
     {
-        "_id": 12,
         "name": "Ceramic Earthy Vase",
         "price": 55.00,
         "imagePath": "../assets/images/vase.png",
@@ -138,7 +126,6 @@
         ]
     },
     {
-        "_id": 13,
         "name": "Ceramic Taupe Vase",
         "price": 55.00,
         "imagePath": "../assets/images/vase2.png",
@@ -150,7 +137,6 @@
         ]
     },
     {
-        "_id": 14,
         "name": "Glass Bubble Vase",
         "price": 50.00,
         "imagePath": "../assets/images/vase3.png",
@@ -162,7 +148,6 @@
         ]
     },
     {
-        "_id": 15,
         "name": "Spring Flowers",
         "price": 35.00,
         "imagePath": "../assets/images/bouquet4.png",
@@ -175,7 +160,6 @@
         ]
     },
     {
-        "_id": 16,
         "name": "Pink Ribbon",
         "price": 3.00,
         "imagePath": "../assets/images/Ribbon1.png",
@@ -186,7 +170,6 @@
         ]
     },
     {
-        "_id": 17,
         "name": "Yellow Ribbon",
         "price": 3.00,
         "imagePath": "../assets/images/Ribbon2.png",
@@ -197,7 +180,6 @@
         ]
     },
     {
-        "_id": 18,
         "name": "Silver Ribbon",
         "price": 3.00,
         "imagePath": "../assets/images/Ribbon3.png",
@@ -208,7 +190,6 @@
         ]
     },
     {
-        "_id": 19,
         "name": "Blue Ribbon",
         "price": 3.00,
         "imagePath": "../assets/images/Ribbon4.png",
@@ -219,7 +200,6 @@
         ]
     },
     {
-        "_id": 20,
         "name": "Salmon Ribbon",
         "price": 3.00,
         "imagePath": "../assets/images/Ribbon5.png",
@@ -230,7 +210,6 @@
         ]
     },
     {
-        "_id": 21,
         "name": "Gold Ribbon",
         "price": 3.00,
         "imagePath": "../assets/images/Ribbon6.png",
