@@ -1,4 +1,68 @@
 /* Only the cart CSS will be here. */
 .modalBackground {
-    background-color: yellow;
+    z-index: 2;
+    width: 600px;
+    height: 800px;
+    background-color: var(--modal-background);
+    border-radius: 16px;
+}
+
+.cartHeader {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--modal-accent);
+    border-radius: 16px 16px 0 0;
+    align-items: center;
+    height: 60px;
+    padding: 0 16px;
+}
+
+.cartHeader>button {
+    background-color: var(--modal-accent);
+    height: 32px;
+    color: white;
+    font-size: 24px;
+}
+
+.cartBody {}
+
+.cartFooter {}
+
+/* CartItem styling here */
+.cartItem {
+    border-bottom: solid 2px var(--modal-accent);
+    padding: 24px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cartItemDetails {
+    align-items: center;
+}
+
+.cartItemDetails>button {
+    background-color: var(--modal-background);
+    color: var(--modal-accent);
+    font-size: 24px;
+    margin-right: 24px;
+}
+
+.quantityButtons {
+    background-color: var(--modal-background);
+    color: white;
+    font-size: 18px;
+}
+
+.quantity {
+    align-items: center;
+    padding: 0 4px;
+}
+
+.cartItemDetails>h2 {
+    font-family: 'Poppins-Light';
+    font-weight: 600;
+}
+
+.cartItem>h2 {
+    font-weight: 400;
 }

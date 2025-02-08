@@ -43,7 +43,6 @@ function Title() {
                 cancelFn={closeCart} // Close function
                 primaryFn={() => console.log('Proceed to Checkout')}
                 secondaryFn={closeCart} // Optional cancel function
-                titleContent={<h2>Your Shopping Cart</h2>}
                 closeIcon="X"
             />
         </>

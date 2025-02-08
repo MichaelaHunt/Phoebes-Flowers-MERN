@@ -13,6 +13,7 @@ interface Props {
 
 // define item structure
 interface CartItem {
+    id: number;
     name: string;
     quantity: number;
     price: number;
@@ -25,7 +26,19 @@ function Cart(props: Props) {
     const { open, cancelFn, primaryFn, secondaryFn, closeIcon } = props;
 
     // state to hold cart items
-    const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    // const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    const [cartItems, setCartItems] = useState<CartItem[]>([
+        {id: 1, name: "Ceramic Taupe Vase", quantity: 2, price: 2.50},
+        {id: 2, name: "Peach Beauty", quantity: 20, price: 3}
+    ]);
+
+    function increaseQuantity() {
+
+    }
+
+    function decreaseQuantity() {
+
+    }
 
     //function to add item to cart
     // const addItemToCart = (itemName: string) => {
@@ -81,11 +94,11 @@ function Cart(props: Props) {
         <div className="modalBackground" onClick={handleBackgroundClick}>
             <div className="modalContainer">
                 {/* modal title with close button */}
-                <div className="cartHeader">
+                <div className="cartHeader row">
                     {/* <h2>{itemsNumber} items</h2> */}
                     <h2>0 Items</h2>
                     <h1>Cart</h1>
-                    <button id='titleCloseBtn' onClick={cancelFn}>{closeIcon ?? 'X'}</button>
+                    <button id='titleCloseBtn' onClick={cancelFn}><i className="fa-solid fa-xmark"></i></button>
                 </div>
 
                 {/* cart Items Section */}
@@ -94,32 +107,16 @@ function Cart(props: Props) {
                     {cartItems.length > 0 ? 
                     (
                         cartItems.map((item) => (
-                        <CartItem price={item.price} title={item.name} quantity={item.quantity}></CartItem>
+                        <CartItem key={item.id} price={item.price} title={item.name} quantity={item.quantity} increaseQuantFn={increaseQuantity} decreaseQuantFn={decreaseQuantity}></CartItem>
                     ))) : (
                         <div>
                             <h1>No items - order some flowers first!</h1>
                         </div>
                     )}
-                    
-                    {/* <ul className="cartList">
-                        {cartItems.length > 0 ? (
-                            cartItems.map((item) => (
-                                <li key={item.name} className="cartItem">
-                                    <span>{item.name} (x{item.quantity})</span>
-                                    <div className="quantityControls">
-                                        <button className="quantityBtn" onClick={() => removeItemFromCart(item.name)}>-</button>
-                                        <button className="quantityBtn" onClick={() => addItemToCart(item.name)}>+</button>
-                                    </div>
-                                </li>
-                            ))
-                        ) : (
-                            <p className="emptyCart">Your cart is empty.</p>
-                        )}
-                    </ul> */}
                 </div>
 
                 {/* footer buttons */}
-                <div className="footer">
+                <div className="cartFooter">
                     <button onClick={primaryFn}>Checkout</button>
                 </div>
             </div>
