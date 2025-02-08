@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import './components.css';
+import React, { useState, useEffect, useCallback } from 'react';
+import './cart.css';
 
 interface Props {
     open: boolean; // controls modal visibility
@@ -7,9 +7,7 @@ interface Props {
     primaryFn?: () => void;// primary action (e.g., "Continue")
     secondaryFn?: () => void; // secondary action (e.g., "Cancel")
     closeIcon?: string; // custom close button icon
-    titleContent?: React.ReactNode; // title/header content
     className?: string; // additional class for styling
-
 }
 
 // define item structure
@@ -18,51 +16,50 @@ interface CartItem {
     quantity: number;
 }
 
-
-export const Cart: React.FC<Props> = (props) => {
-    const {open, cancelFn, primaryFn, secondaryFn, closeIcon, titleContent} = props;
+//Goal of this modal: It grabs the items from our User's document, then displays them.
+//Also allows the user to change the quantity of each item (should be reflected in User's document)
+//Allows user to remove an item from their cart (should be reflected in User's document)
+function Cart(props: Props) {
+    const { open, cancelFn, primaryFn, secondaryFn, closeIcon } = props;
 
     // state to hold cart items
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-
-    //funtion to add item to cart
+    //function to add item to cart
     const addItemToCart = (itemName: string) => {
-    setCartItems((prevItems) => {
-        const existingItem = prevItems.find((item) => item.name === itemName);
-        if (existingItem) {
-            return prevItems.map((item) =>
-                item.name === itemName ? { ...item, quantity: item.quantity + 1 } : item
-            );
-        } else {
-            return [...prevItems, { name: itemName, quantity: 1 }];
-        }
-    });
-};
+        setCartItems((prevItems) => {
+            const existingItem = prevItems.find((item) => item.name === itemName);
+            if (existingItem) {
+                return prevItems.map((item) =>
+                    item.name === itemName ? { ...item, quantity: item.quantity + 1 } : item
+                );
+            } else {
+                return [...prevItems, { name: itemName, quantity: 1 }];
+            }
+        });
+    };
 
-
-
-//function to remove item from cart
+    //function to remove item from cart
     const removeItemFromCart = (itemName: string) => {
-    setCartItems((prevItems) => {
-        return prevItems
-            .map((item) =>
-                item.name === itemName ? { ...item, quantity: item.quantity - 1 } : item
-            )
-            .filter((item) => item.quantity > 0);
-    });
-};
+        setCartItems((prevItems) => {
+            return prevItems
+                .map((item) =>
+                    item.name === itemName ? { ...item, quantity: item.quantity - 1 } : item
+                )
+                .filter((item) => item.quantity > 0);
+        });
+    };
 
     //use effect captures esc key to close modal
-   
-        const handleKeyDown = useCallback((e: KeyboardEvent) => {
-            if(e.key === 'Escape' && open && cancelFn) {
-                cancelFn();
-            }
-        }, [open, cancelFn]);
 
-        
-        useEffect(() => {
+    const handleKeyDown = useCallback((e: KeyboardEvent) => {
+        if (e.key === 'Escape' && open && cancelFn) {
+            cancelFn();
+        }
+    }, [open, cancelFn]);
+
+
+    useEffect(() => {
         document.addEventListener('keydown', handleKeyDown);
         return () => document.removeEventListener('keydown', handleKeyDown);
     }, [open, cancelFn]);
@@ -74,34 +71,27 @@ export const Cart: React.FC<Props> = (props) => {
         }
     };
 
-    if(!open) {
+    if (!open) {
         return null;
     }
-        
+
     return (
         <div className="modalBackground" onClick={handleBackgroundClick}>
             <div className="modalContainer">
                 {/* modal title with close button */}
-                {titleContent && (
-                    <div className="title">
-                        {titleContent}
-                        <div className="titleCloseBtn">
-                            <button onClick={cancelFn}>{closeIcon ?? 'X'}</button>
-                        </div>
-                    </div>
-                )}
+                <div className="cartHeader">
+                    {/* <h2>{itemsNumber} items</h2> */}
+                    <h2>0 Items</h2>
+                    <h1>Cart</h1>
+                    <button id='titleCloseBtn' onClick={cancelFn}>{closeIcon ?? 'X'}</button>
+                </div>
 
                 {/* cart Items Section */}
                 <div className="cartBody">
-                    <h3>Shopping Cart</h3>
-
-                    {/* sample buttons to add items */}
-                    <button onClick={() => addItemToCart('Apple')} className="addItemBtn">Add Apple</button>
-                    <button onClick={() => addItemToCart('Banana')} className="addItemBtn">Add Banana</button>
-                    <button onClick={() => addItemToCart('Orange')} className="addItemBtn">Add Orange</button>
-
-                    {/* display items in cart */}
-                    <ul className="cartList">
+                    {/* If there are items, display them. If there are no items, display a card saying "No items" */}
+                    
+                    
+                    {/* <ul className="cartList">
                         {cartItems.length > 0 ? (
                             cartItems.map((item) => (
                                 <li key={item.name} className="cartItem">
@@ -115,19 +105,12 @@ export const Cart: React.FC<Props> = (props) => {
                         ) : (
                             <p className="emptyCart">Your cart is empty.</p>
                         )}
-                    </ul>
+                    </ul> */}
                 </div>
 
                 {/* footer buttons */}
                 <div className="footer">
-                    {secondaryFn && (
-                        <button onClick={secondaryFn} id="cancelBtn">
-                            Cancel
-                        </button>
-                    )}
-                    {primaryFn && (
-                        <button onClick={primaryFn}>Checkout</button>
-                    )}
+                    <button onClick={primaryFn}>Checkout</button>
                 </div>
             </div>
         </div>
