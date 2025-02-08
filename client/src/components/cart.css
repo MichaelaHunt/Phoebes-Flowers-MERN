@@ -1,7 +1,7 @@
 /* Only the cart CSS will be here. */
 .modalBackground {
     z-index: 2;
-    width: 600px;
+    width: 550px;
     height: 800px;
     background-color: var(--modal-background);
     border-radius: 16px;
@@ -15,6 +15,13 @@
     align-items: center;
     height: 60px;
     padding: 0 16px;
+}
+
+.cartHeader > h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
 }
 
 .cartHeader>button {

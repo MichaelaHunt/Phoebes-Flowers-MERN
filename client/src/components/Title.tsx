@@ -9,13 +9,25 @@ function Title() {
 
     // Function to open the cart modal
     const openCart = () => {
+        addOverlay();
         setIsCartOpen(true);
     };
 
     // Function to close the cart modal
     const closeCart = () => {
+        removeOverlay();
         setIsCartOpen(false);
     };
+
+    function addOverlay() {
+        const home = document.getElementById('home');
+        home?.classList.add("overlay");
+    }
+
+    function removeOverlay() {
+        const home = document.getElementById('home');
+        home?.classList.remove("overlay");
+    }
 
     return (
         <>
@@ -26,8 +38,8 @@ function Title() {
                     </li>
                     {/* Shopping Basket Icon - Click to Open Cart */}
                     <li>
-                        <i 
-                            className="fa-solid fa-basket-shopping" 
+                        <i
+                            className="fa-solid fa-basket-shopping"
                             id="basket"
                             onClick={openCart} // Open modal on click
                             style={{ cursor: 'pointer' }} // Ensure it looks clickable
@@ -36,15 +48,17 @@ function Title() {
                     <li>Login/Logout</li>
                 </ul>
             </div>
+            <div className='cartHolder'>
+                {/* Cart Modal */}
+                <Cart
+                    open={isCartOpen}
+                    cancelFn={closeCart} // Close function
+                    primaryFn={() => console.log('Proceed to Checkout')}
+                    secondaryFn={closeCart} // Optional cancel function
+                    closeIcon="X"
+                />
+            </div>
 
-            {/* Cart Modal */}
-            <Cart 
-                open={isCartOpen} 
-                cancelFn={closeCart} // Close function
-                primaryFn={() => console.log('Proceed to Checkout')}
-                secondaryFn={closeCart} // Optional cancel function
-                closeIcon="X"
-            />
         </>
     );
 }
