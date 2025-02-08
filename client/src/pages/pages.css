@@ -2,13 +2,17 @@
 
 /* Home page */
 .cartHolder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
     position: absolute;
     left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
     z-index: 3;
 }
+
+/* .overlay {
+    overflow-y: hidden;
+} */
 
 .overlay::after {
     content: " ";

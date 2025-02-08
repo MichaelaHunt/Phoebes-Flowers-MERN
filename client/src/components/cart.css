@@ -1,10 +1,13 @@
 /* Only the cart CSS will be here. */
 .modalBackground {
     z-index: 2;
-    width: 550px;
+    width: 600px;
     height: 800px;
     background-color: var(--modal-background);
     border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
 }
 
 .cartHeader {
@@ -13,7 +16,7 @@
     background-color: var(--modal-accent);
     border-radius: 16px 16px 0 0;
     align-items: center;
-    height: 60px;
+    height: 80px;
     padding: 0 16px;
 }
 
@@ -31,9 +34,48 @@
     font-size: 24px;
 }
 
-.cartBody {}
+.cartHasNoItems {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-.cartFooter {}
+#cartBody {
+    height: 560px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scrollbar-color: var(--modal-accent) var(--modal-background);
+}
+/* Add scrollability to CartBody element! */
+
+.cartFooter {
+    border-radius: 0 0 16px 16px;
+    background-color: var(--modal-accent);
+    height: 160px;
+    padding: 24px 16px 16px 16px;
+}
+
+.cartFooter > button {
+    background-color: #402E2A;
+    color: white;
+    width: 100%;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 24px;
+}
+
+.cartFooter > div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.empty {
+    background-color: #402E2A;
+    width: 450px;
+    border-radius: 16px;
+    padding: 16px 0;
+}
 
 /* CartItem styling here */
 .cartItem {

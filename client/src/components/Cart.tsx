@@ -29,7 +29,11 @@ function Cart(props: Props) {
     // const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [cartItems, setCartItems] = useState<CartItem[]>([
         {id: 1, name: "Ceramic Taupe Vase", quantity: 2, price: 2.50},
-        {id: 2, name: "Peach Beauty", quantity: 20, price: 3}
+        {id: 2, name: "Peach Beauty", quantity: 20, price: 3},
+        {id: 3, name: "Ceramic Taupe Vase", quantity: 2, price: 2.50},
+        {id: 4, name: "Peach Beauty", quantity: 20, price: 3},
+        {id: 5, name: "Ceramic Taupe Vase", quantity: 2, price: 2.50},
+
     ]);
 
     function increaseQuantity() {
@@ -79,6 +83,20 @@ function Cart(props: Props) {
         return () => document.removeEventListener('keydown', handleKeyDown);
     }, [open, cancelFn]);
 
+    useEffect(() => {
+        decideCartBodyStyle();
+    });
+
+    function decideCartBodyStyle() {
+        const cartBody = document.getElementById('cartBody');
+        if (cartItems.length > 0) {
+            cartBody?.classList.remove("cartHasNoItems");
+        }
+        else {
+            cartBody?.classList.add("cartHasNoItems");
+        }
+    }
+
     // close modal when clicking outside (optional feature)
     const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target === e.currentTarget && cancelFn) {
@@ -89,10 +107,10 @@ function Cart(props: Props) {
     if (!open) {
         return null;
     }
+    //each cartItem * its quantity + the others
 
     return (
         <div className="modalBackground" onClick={handleBackgroundClick}>
-            <div className="modalContainer">
                 {/* modal title with close button */}
                 <div className="cartHeader row">
                     {/* <h2>{itemsNumber} items</h2> */}
@@ -102,24 +120,27 @@ function Cart(props: Props) {
                 </div>
 
                 {/* cart Items Section */}
-                <div className="cartBody">
+                <div className="cartHasNoItems" id='cartBody'>
                     {/* If there are items, display them. If there are no items, display a card saying "No items" */}
-                    {cartItems.length > 0 ? 
-                    (
-                        cartItems.map((item) => (
-                        <CartItem key={item.id} price={item.price} title={item.name} quantity={item.quantity} increaseQuantFn={increaseQuantity} decreaseQuantFn={decreaseQuantity}></CartItem>
-                    ))) : (
-                        <div>
-                            <h1>No items - order some flowers first!</h1>
-                        </div>
-                    )}
+                    {cartItems.length > 0 ?
+                        (
+                            cartItems.map((item) => (
+                                <CartItem key={item.id} price={item.price} title={item.name} quantity={item.quantity} increaseQuantFn={increaseQuantity} decreaseQuantFn={decreaseQuantity}></CartItem>
+                            ))) : (
+                            <div className='empty'>
+                                <h1>No items - order some<br></br>flowers first!</h1>
+                            </div>
+                        )}
                 </div>
 
                 {/* footer buttons */}
                 <div className="cartFooter">
+                    <div className='row'>
+                        <h2>Total before tax: </h2>
+                        <h2>$TOTAL HERE</h2>
+                    </div>
                     <button onClick={primaryFn}>Checkout</button>
                 </div>
-            </div>
         </div>
     );
 };
