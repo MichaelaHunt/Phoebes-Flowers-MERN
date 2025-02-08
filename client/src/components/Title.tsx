@@ -54,8 +54,6 @@ function Title() {
                     open={isCartOpen}
                     cancelFn={closeCart} // Close function
                     primaryFn={() => console.log('Proceed to Checkout')}
-                    secondaryFn={closeCart} // Optional cancel function
-                    closeIcon="X"
                 />
             </div>
 

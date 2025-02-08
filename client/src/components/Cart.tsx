@@ -6,8 +6,6 @@ interface Props {
     open: boolean; // controls modal visibility
     cancelFn?: () => void;// function to close the modal
     primaryFn?: () => void;// primary action (e.g., "Continue")
-    secondaryFn?: () => void; // secondary action (e.g., "Cancel")
-    closeIcon?: string; // custom close button icon
     className?: string; // additional class for styling
 }
 
@@ -23,7 +21,7 @@ interface CartItem {
 //Also allows the user to change the quantity of each item (should be reflected in User's document)
 //Allows user to remove an item from their cart (should be reflected in User's document)
 function Cart(props: Props) {
-    const { open, cancelFn, primaryFn, secondaryFn, closeIcon } = props;
+    const { open, cancelFn, primaryFn} = props;
 
     // state to hold cart items
     // const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -44,30 +42,16 @@ function Cart(props: Props) {
 
     }
 
-    //function to add item to cart
-    // const addItemToCart = (itemName: string) => {
-    //     setCartItems((prevItems) => {
-    //         const existingItem = prevItems.find((item) => item.name === itemName);
-    //         if (existingItem) {
-    //             return prevItems.map((item) =>
-    //                 item.name === itemName ? { ...item, quantity: item.quantity + 1 } : item
-    //             );
-    //         } else {
-    //             return [...prevItems, { name: itemName, quantity: 1 }];
-    //         }
-    //     });
-    // };
-
-    // //function to remove item from cart
-    // const removeItemFromCart = (itemName: string) => {
-    //     setCartItems((prevItems) => {
-    //         return prevItems
-    //             .map((item) =>
-    //                 item.name === itemName ? { ...item, quantity: item.quantity - 1 } : item
-    //             )
-    //             .filter((item) => item.quantity > 0);
-    //     });
-    // };
+    //function to remove item from cart
+    const removeItemFromCart = (itemName: string) => {
+        setCartItems((prevItems) => {
+            return prevItems
+                .map((item) =>
+                    item.name === itemName ? { ...item, quantity: item.quantity - 1 } : item
+                )
+                .filter((item) => item.quantity > 0);
+        });
+    };
 
     //use effect captures esc key to close modal
 
