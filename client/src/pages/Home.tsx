@@ -17,6 +17,8 @@ function Home() {
     });
     //fetch 3 random non-gift items
     const { loading: bestSellerLoading, error: bestSellerError, data: bestSellerData } = useQuery(QUERY_RANDOM_NON_GIFT_ITEMS);
+    console.log("Query Data:", bestSellerData);
+    console.log("Query Error:", bestSellerError);
 
     //extract 6 items
     const giftItems = data?.items.slice(0, 6) || [];
