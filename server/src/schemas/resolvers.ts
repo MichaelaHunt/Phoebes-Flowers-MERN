@@ -95,6 +95,28 @@ const resolvers = {
       createCart: async (_parent: any, { userId, items }: CartArgs) => {
         return User.create({ userId, items });
       },
-    },
+      //remove item from cart
+      removeItemFromCart: async (_parent: any, { userId, itemId }: { userId: string; itemId: string }) => {
+        const user = await User.findById(userId).populate('cart');
+        if (!user) {
+          throw new AuthenticationError('User not found');
+        }
+        //find the index of the item in the cart
+        const itemIndex = user.cart.findIndex((cartItem: any) => cartItem.itemId.toString() === itemId);
+        if (itemIndex === -1) {
+          throw new Error('Item not found in cart');
+        }
+        //reduce the quantity of the item or remove if item quantity is 0
+        if (user.cart[itemIndex].quantity > 1) {
+          user.cart[itemIndex].quantity--;
+        } else {
+          user.cart.splice(itemIndex, 1);
+        }
+        //save the updated cart
+        await user.save();
+        //return user with the updated cart
+        return await User.findById(userId).populate('cart');
+      }
+    }
 };
     export default resolvers;
