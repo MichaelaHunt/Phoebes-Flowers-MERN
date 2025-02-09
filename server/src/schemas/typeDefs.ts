@@ -44,6 +44,7 @@ const typeDefs = `
   login(email: String!, password: String!): AuthPayload
   createItem(name: String!, price: Float!, tags: [String]): Item
   createCart(userId: ID!, items: [CartItemInput]): User
+  alterQuantityInCart(userId: ID!, itemId: ID!): User
   removeItemFromCart(userId: ID!, itemId: ID!): User
   }
 `;

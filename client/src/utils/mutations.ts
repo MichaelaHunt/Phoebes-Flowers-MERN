@@ -66,3 +66,27 @@ removeFromCart(itemId: $itemId) {
 }
 }
 `;
+
+export const ALTER_QUANTITY_IN_CART = gql`
+mutation alterQuantityInCart($userId: ID!, $itemId: ID!) {
+alterQuantityInCart(userId: $userId, itemId: $itemId) {
+_id
+cart {
+itemId
+quantity
+}
+}
+}
+`;
+
+export const REMOVE_ITEM_FROM_CART = gql`
+mutation removeItemFromCart($userId: ID!, $itemId: ID!) {
+removeItemFromCart(userId: $userId, itemId: $itemId) {
+_id
+cart {
+itemId
+quantity
+}
+}
+}
+`;
