@@ -11,7 +11,7 @@ interface UserArgs {
 }
 
 interface CartItem {
-  id: string;
+  id?: string;
   itemId: string;
   quantity: number;
 }
@@ -87,15 +87,33 @@ const resolvers = {
       const token = signToken(user.email, user.username, user.id);
       return { token, user };
     },
-    // create a new item
-    createItem: async (_parent: any, { name, price, tags }: ItemArgs) => {
-      return Item.create({ name, price, tags });
-    },
-    // create a new cart
-    createCart: async (_parent: any, { userId, items }: CartArgs) => {
-      return User.create({ userId, items });
-    },
+    addItemToCart: async (_parent: any, { userId, itemId, quantity }: { userId: string; itemId: number, quantity: number }) => {
+      //find the user and populate their cart
+      const user = await User.findById(userId).populate('cart');
+      //check if user exists
+      if (!user) {
+        throw new AuthenticationError('User not found');
+      }
+      //ensure user has a cart array
+      if (!user.cart) {
+        user.cart = [];
+      }
+      //check if item is already in cart
+      const existingItem = user.cart.find((cartItem: any) => cartItem.itemId.toString() === itemId);
+//if item is already in cart, update the quantity
+if (existingItem) {
+  existingItem.quantity += quantity;
+} else {
+  //if item is not in cart, add it to the cart
+  user.cart.push({ item: itemId, quantity });
+}
+      //save the updated cart
+      await user.save();
+      //return user with the updated cart
+      return await User.findById(userId).populate('cart');
 
+},
+   
     //mutation that allows us to add or subtract from the quantity of an item in the cart or remove the item from the cart when the value reachest 0
     alterQuantityInCart: async (_parent: any, { userId, itemId, quantityChange }: { userId: string; itemId: string; quantityChange: number }) => {
       const user = await User.findById(userId).populate('cart');
