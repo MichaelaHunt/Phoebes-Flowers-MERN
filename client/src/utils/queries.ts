@@ -5,7 +5,13 @@ export const QUERY_USERS = gql`
         users {
         _id
         username
-        email
+        email 
+        cart {
+            _id
+            name
+            price
+            imagePath
+            }
         }
     }
 `;
@@ -17,6 +23,12 @@ export const QUERY_USER = gql`
         _id
         username
         email
+        cart {
+            _id
+            name
+            price
+            imagePath
+            }
         }
     }
 `;
@@ -27,6 +39,12 @@ export const QUERY_ME = gql`
         _id
         username
         email
+        cart {
+            _id
+            name
+            price
+            imagePath
+            }
         }
     }
 `;
@@ -69,16 +87,16 @@ export const QUERY_RANDOM_NON_GIFT_ITEMS = gql`
 `;
 
 
-export const QUERY_CART = gql`
-    query getCart {
-        cart {
-        _id
-        name
-        price
-        imagePath
-        tags
-        }
-    }
-`;
+// export const QUERY_CART = gql`
+//     query getCart {
+//         cart {
+//         _id
+//         name
+//         price
+//         imagePath
+//         tags
+//         }
+//     }
+// `;
 
 
