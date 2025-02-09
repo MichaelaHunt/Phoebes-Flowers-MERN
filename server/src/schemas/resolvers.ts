@@ -35,12 +35,15 @@ interface ItemArgs {
 const resolvers = {
     Query: {
       // get user by id
+      //added populate to include cart
       user: async (_parent: any, { id }: { id: string }) => {
         return User.findById(id).populate('cart');
       },
       // get all users
+      //added populate to include cart
       users: async () => {
-        return User.find().populate('cart');
+        return User.find()
+        // .populate('cart');
       },
       // get item by id
       item: async (_parent: any, { id }: { id: string }) => {

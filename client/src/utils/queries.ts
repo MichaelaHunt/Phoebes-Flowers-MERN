@@ -6,12 +6,6 @@ export const QUERY_USERS = gql`
         _id
         username
         email 
-        cart {
-            _id
-            name
-            price
-            imagePath
-            }
         }
     }
 `;
@@ -28,6 +22,7 @@ export const QUERY_USER = gql`
             name
             price
             imagePath
+            quantity
             }
         }
     }
@@ -44,6 +39,7 @@ export const QUERY_ME = gql`
             name
             price
             imagePath
+            quantity
             }
         }
     }
