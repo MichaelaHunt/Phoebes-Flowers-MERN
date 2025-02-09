@@ -2,7 +2,7 @@ import db from '../config/connections.js';
 import { Item } from '../models/index.js';
 import cleanDB from './cleanDB.js';
 
-import itemData from './itemData.json' assert { type: 'json'};
+import itemData from './itemData.json' with { type: 'json'};
 
 const seedDatabase = async (): Promise<void> => {
   try {
