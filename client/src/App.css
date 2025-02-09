@@ -9,6 +9,8 @@
   --powder-pink: #FFBBBB;
   --powder-orange: #FFDBAC;
   --powder-yellow: #E9EBC6;
+  --modal-background: #C2C9A8;
+  --modal-accent: #94A68C;
   background-color: white;
 }
 
@@ -81,6 +83,7 @@ ul {
 
 button {
   border: none;
+  cursor: pointer;
 }
 
 link, a {

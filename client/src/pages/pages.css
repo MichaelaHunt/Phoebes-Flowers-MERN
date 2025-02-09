@@ -1,6 +1,31 @@
 /* This file should only contain CSS that applies to pages */
 
 /* Home page */
+.cartHolder {
+    position: absolute;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 3;
+}
+
+/* .overlay {
+    overflow-y: hidden;
+} */
+
+.overlay::after {
+    content: " ";
+    z-index: 2;
+    display: block;
+    position: absolute;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
 .homeSection {
     margin: 40px 0 0 0;
 }
@@ -193,8 +218,9 @@
     text-align: left;
     padding: 0 16px;
 }
-#tag > h5 {
-color: black;
-margin: 24px 0;
-font-size: 24px;
+
+#tag>h5 {
+    color: black;
+    margin: 24px 0;
+    font-size: 24px;
 }

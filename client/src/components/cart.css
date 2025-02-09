@@ -1,0 +1,117 @@
+/* Only the cart CSS will be here. */
+.modalBackground {
+    z-index: 2;
+    width: 600px;
+    height: 800px;
+    background-color: var(--modal-background);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+}
+
+.cartHeader {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--modal-accent);
+    border-radius: 16px 16px 0 0;
+    align-items: center;
+    height: 80px;
+    padding: 0 16px;
+}
+
+.cartHeader > h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+.cartHeader>button {
+    background-color: var(--modal-accent);
+    height: 32px;
+    color: white;
+    font-size: 24px;
+}
+
+.cartHasNoItems {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cartBody {
+    height: 560px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scrollbar-color: var(--modal-accent) var(--modal-background);
+}
+/* Add scrollability to CartBody element! */
+
+.cartFooter {
+    border-radius: 0 0 16px 16px;
+    background-color: var(--modal-accent);
+    height: 160px;
+    padding: 24px 16px 16px 16px;
+}
+
+.cartFooter > button {
+    background-color: #402E2A;
+    color: white;
+    width: 100%;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 24px;
+}
+
+.cartFooter > div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.empty {
+    background-color: #402E2A;
+    width: 450px;
+    border-radius: 16px;
+    padding: 16px 0;
+}
+
+/* CartItem styling here */
+.cartItem {
+    border-bottom: solid 2px var(--modal-accent);
+    padding: 24px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cartItemDetails {
+    align-items: center;
+}
+
+.cartItemDetails>button {
+    background-color: var(--modal-background);
+    color: var(--modal-accent);
+    font-size: 24px;
+    margin-right: 24px;
+}
+
+.quantityButtons {
+    background-color: var(--modal-background);
+    color: white;
+    font-size: 18px;
+}
+
+.quantity {
+    align-items: center;
+    padding: 0 4px;
+}
+
+.cartItemDetails>h2 {
+    font-family: 'Poppins-Light';
+    font-weight: 600;
+}
+
+.cartItem>h2 {
+    font-weight: 400;
+}
