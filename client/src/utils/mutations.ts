@@ -99,3 +99,19 @@ removeItemFromCart(userId: $userId, itemId: $itemId) {
             }
         }
 `;
+
+export const ADD_ITEM_TO_CART = gql`
+mutation addItemToCart($userId: ID!, $itemId: ID!, $quantity: Int!) {
+addItemToCart(userId: $userId, itemId: $itemId, quantity: $quantity) {
+        _id
+        username
+        email
+        cart {
+            _id
+            name
+            price
+            imagePath
+            quantity
+            }
+        }
+`;
