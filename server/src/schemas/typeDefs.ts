@@ -42,7 +42,7 @@ const typeDefs = `
   type Mutation {
   createUser(username: String!, email: String!, password: String!): User
   login(email: String!, password: String!): AuthPayload
- 
+ addItemToCart(userId: ID!, item: CartItemInput!): User
   alterQuantityInCart(userId: ID!, itemId: ID!): User
   removeItemFromCart(userId: ID!, itemId: ID!): User
   }
