@@ -83,6 +83,8 @@ export const QUERY_RANDOM_NON_GIFT_ITEMS = gql`
 `;
 
 
+
+
 // export const QUERY_CART = gql`
 //     query getCart {
 //         cart {

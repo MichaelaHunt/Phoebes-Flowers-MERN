@@ -2,15 +2,15 @@ import {Schema, model, Document} from 'mongoose';
 import bcrypt from 'bcrypt';
 
 // Define an interface for the User document
-interface ICartItem extends Document {
-    item: Schema.Types.ObjectId;
+interface ICartItem {
+    item: number;
     quantity: number;
 }
 //Define the schema for a cart item (used within the Item schema, but no standalone model)
 const cartItemSchema = new Schema<ICartItem>(
     {
         item: {
-            type: Schema.Types.ObjectId,
+            type: Number,
             ref: 'Item',
         },
         quantity: {
@@ -83,5 +83,6 @@ userSchema.pre<IUser>('save', async function (next) {
 };
 
 const User = model<IUser>('User', userSchema);
+
 
 export default User;
