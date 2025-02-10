@@ -2,7 +2,7 @@ import {Schema, model, Document} from 'mongoose';
 import bcrypt from 'bcrypt';
 
 // Define an interface for the User document
-interface ICartItem extends Document {
+interface ICartItem {
     item: number;
     quantity: number;
 }
@@ -83,5 +83,6 @@ userSchema.pre<IUser>('save', async function (next) {
 };
 
 const User = model<IUser>('User', userSchema);
+
 
 export default User;

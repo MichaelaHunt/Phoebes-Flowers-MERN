@@ -1,5 +1,6 @@
 import { signToken, AuthenticationError } from '../utils/auth.js';
 import { User, Item } from '../models/index.js';
+// import { ICartItem } from '../models/User.js';
 
 //define types for the resolvers
 
@@ -10,25 +11,25 @@ interface UserArgs {
   password: string;
 }
 
-interface CartItem {
-  id?: string;
-  itemId: string;
-  quantity: number;
-}
+// interface CartItem {
+//   id?: string;
+//   itemId: number;
+//   quantity: number;
+// }
 
-interface CartArgs {
-  id: string;
-  userId: string;
-  items: CartItem[];
-}
+// interface CartArgs {
+//   id: string;
+//   userId: string;
+//   items: CartItem[];
+// }
 
-//changed name for item to ItemArgs
-interface ItemArgs {
-  id: string;
-  name: string;
-  price: number;
-  tags: string[];
-}
+// //changed name for item to ItemArgs
+// interface ItemArgs {
+//   id: string;
+//   name: string;
+//   price: number;
+//   tags: string[];
+// }
 
 
 // define the resolvers
@@ -115,7 +116,7 @@ if (existingItem) {
 },
    
     //mutation that allows us to add or subtract from the quantity of an item in the cart or remove the item from the cart when the value reachest 0
-    alterQuantityInCart: async (_parent: any, { userId, itemId, quantityChange }: { userId: string; itemId: string; quantityChange: number }) => {
+    alterQuantityInCart: async (_parent: any, { userId, itemId, quantityChange }: { userId: string; itemId: number; quantityChange: number }) => {
       const user = await User.findById(userId).populate('cart');
       if (!user) {
         throw new AuthenticationError('User not found');
@@ -140,7 +141,7 @@ if (existingItem) {
     },
 
     //make mutation for removing entire item from cart regardless of quantity
-    removeItemFromCart: async (_parent: any, { userId, itemId }: { userId: string; itemId: string }) => {
+    removeItemFromCart: async (_parent: any, { userId, itemId }: { userId: string; itemId: number }) => {
       //find the user and populate their cart
       const user = await User.findById(userId).populate('cart');
       //check if user exists
