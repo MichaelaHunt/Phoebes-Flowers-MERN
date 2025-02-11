@@ -3,6 +3,7 @@ import auth from "../utils/auth";
 import { ADD_ITEM_TO_CART } from "../utils/mutations";
 
 interface Iitem {
+    id: number;
     imagePath: string;
     name: string;
     price: number;
@@ -10,22 +11,18 @@ interface Iitem {
 
 function Item(props: Iitem) {
     //the add item query
-    let addToCart = useMutation(ADD_ITEM_TO_CART);
+    const [addToCart] = useMutation(ADD_ITEM_TO_CART);
 
-    function itemClicked() {
+    async function itemClicked() {
         if (auth.getToken() != '') {
-            console.log("User labeled as Logged In");
             let quantity = window.prompt("Please enter the quantity you'd like.");
-            // let token = auth.getToken();
-            // try {
-            //     await addToCart({variables: { userId: token, itemId, quantity }});
-            // } catch (err) {
-            //     console.error(err);
-            // }
-
+            try {
+                await addToCart({variables: { userId: auth.getUser, itemId: props.id, quantity }});
+            } catch (err) {
+                console.error(err);
+            }
         }
         else {
-            console.log("User labeled as Logged Out!");
             window.alert("User must be logged in to add items to the cart.");
         }
     }

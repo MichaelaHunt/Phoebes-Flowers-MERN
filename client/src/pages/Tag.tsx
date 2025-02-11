@@ -4,7 +4,6 @@ import Title from "../components/Title";
 import { QUERY_BY_TAG } from "../utils/queries";
 import { useQuery } from '@apollo/client';
 import { useLocation } from "react-router-dom";
-import image from '../assets/images/bouquet1.png'
 
 //set up a function to get the query parameter from the URL and check for the tag
 function useQueryByTag() {
@@ -46,10 +45,11 @@ function Tag() {
                     ) : (
                     <div className="itemContainer">
                       {items.length > 0 ? (
-                        items.map((item: { _id: string; imagePath: string; name: string; price: number }) => (
+                        items.map((item: { _id: number; imagePath: string; name: string; price: number }) => (
                             <Item
                                 key={item._id}
-                                imagePath={item.imagePath || image }
+                                id={item._id}
+                                imagePath={item.imagePath}
                                 name={item.name}
                                 price={item.price}
                             />
