@@ -63,22 +63,27 @@ const increaseQuantity = async (itemId: number) => {
 //function to decrease quantity of an item in cart
 const decreaseQuantity = async (itemId: number) => {
     try {
-        const { data } = await alterQuantityInCart({
-            variables: { userId: 1, item: itemId },
+        //check to make sure the item exists and that the quantity is greater than 1
+        const item = cartItems.find((item) => item.id === itemId);
+        //if not, return
+        if (!item || item.quantity <= 1) return;
+//create a new item with the updated quantity
+        const { data } = await alterQuantityInCart({ 
+            variables: { userId: 1, item: itemId }, 
         });
-
+//if the data exists, update the quantity of the item in the cart
         if (data) {
-            //update the quantity of the item in the cart
-            setCartItems((prevItems) =>
-                prevItems.map((item) =>
+            setCartItems((prev) =>
+                prev.map(item =>
                     item.id === itemId ? { ...item, quantity: item.quantity - 1 } : item
                 )
             );
         }
     } catch (error) {
-        console.error(error);
+        console.error("Error decreasing quantity:", error);
     }
 };
+
 
 //function to remove an item from the cart
 const removeItem = async (itemId: number) => {
