@@ -1,4 +1,6 @@
+import { useMutation } from "@apollo/client";
 import auth from "../utils/auth";
+import { ADD_ITEM_TO_CART } from "../utils/mutations";
 
 interface Iitem {
     imagePath: string;
@@ -7,18 +9,28 @@ interface Iitem {
 }
 
 function Item(props: Iitem) {
+    //the add item query
+    let addToCart = useMutation(ADD_ITEM_TO_CART);
+
     function itemClicked() {
         if (auth.getToken() != '') {
             console.log("User labeled as Logged In");
-            //dialog or something?
+            let quantity = window.prompt("Please enter the quantity you'd like.");
+            // let token = auth.getToken();
+            // try {
+            //     await addToCart({variables: { userId: token, itemId, quantity }});
+            // } catch (err) {
+            //     console.error(err);
+            // }
+
         }
         else {
-            console.log("User labeled as Logged Out!")
-            //alert()
+            console.log("User labeled as Logged Out!");
+            window.alert("User must be logged in to add items to the cart.");
         }
-        //if they are signed in, then ask how many they'd like
-        //if they are not signed in, pop up a dialog that asks them to please log in. 
     }
+
+
     return (
         <>
             <div className="item column">
