@@ -1,4 +1,5 @@
 //import Cart from './Cart';
+import { Link } from 'react-router-dom';
 import './components.css'
 import { useState } from 'react';
 
@@ -13,13 +14,13 @@ function Nav() {
                     <li className="dropdown">
                         <span>Occasions</span>
                             <ul className='dropdown-menu'>
-                                <li>Wedding</li>
-                                <li>Get Well</li>
-                                <li>Condolences</li>
-                                <li>Romance</li>
-                                <li>Birthday</li>
-                                <li>Congratulations</li>
-                                <li>Thank You</li>
+                                <li><Link to='/tag?tag=wedding'>Wedding</Link></li>
+                                <li><Link to='/tag?tag=get%20well'>Get Well</Link></li>
+                                <li><Link to='/tag?tag=condolences'>Condolences</Link></li>
+                                <li><Link to='/tag?tag=romance'>Romance</Link></li>
+                                <li><Link to='/tag?tag=birthday'>Birthday</Link></li>
+                                <li><Link to='/tag?tag=congratulations'>Congratulations</Link></li>
+                                <li><Link to='/tag?tag=thank%20you'>Thank you</Link></li>
                             </ul>
                     </li>
 
@@ -29,14 +30,14 @@ function Nav() {
                         <span>Browse By Color</span>
                         <ul className='dropdown-menu'>
                             <ul className='dropdown-menu'>
-                                <li>Pink</li>
-                                <li>Red</li>
-                                <li>Gold</li>
-                                <li>Yellow</li>
-                                <li>Blue</li>
-                                <li>Purple</li>
-                                <li>Pastel</li>
-                                <li>Silver</li>
+                                <li><Link to='/tag?tag=pink'>Pink</Link></li>
+                                <li><Link to='/tag?tag=red'>Red</Link></li>
+                                <li><Link to='/tag?tag=gold'>Gold</Link></li>
+                                <li><Link to='/tag?tag=yellow'>Yellow</Link></li>
+                                <li><Link to='/tag?tag=blue'>Blue</Link></li>
+                                <li><Link to='/tag?tag=purple'>Purple</Link></li>
+                                <li><Link to='/tag?tag=pastel'>Pastel</Link></li>
+                                <li><Link to='/tag?tag=silver'>Silver</Link></li>
                             </ul>
         
                         </ul>

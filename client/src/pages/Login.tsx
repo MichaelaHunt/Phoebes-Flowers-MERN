@@ -1,4 +1,4 @@
-import { useState, type FormEvent, ChangeEvent } from 'react';
+import { useState, type FormEvent, ChangeEvent, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import Inputfield from '../components/Inputfield';
@@ -12,10 +12,13 @@ function Login() {
   const [login, { error }] = useMutation(LOGIN_USER);
   const navigate = useNavigate();
 
-  const title = document.getElementById("title");
-  if (title) {
-    title.classList.add("titlePeach");
-  }
+  useEffect(() => {
+    const title = document.getElementById("title");
+    if (title) {
+      title.classList.add("titlePeach");
+    }
+  }, []);
+  
   
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -56,8 +59,8 @@ function Login() {
       <div id="loginpage" className='site'>
         <div>
           <h2>Login to<br></br>Phoebe's Flowers</h2>
-          <Inputfield value={formState.email} onChange={handleChange} name="Email" placeholder="Enter your email" />
-          <Inputfield value={formState.password} onChange={handleChange} name="Password" placeholder="Enter your password" />
+          <Inputfield value={formState.email} onChange={handleChange} name="Email" isLogin={true}/>
+          <Inputfield value={formState.password} onChange={handleChange} name="Password" isLogin={true}/>
           <p className='error loginError'>Incorrect login. Please try again.</p>
           <button onClick={handleFormSubmit}>Login</button>
           <p id='space'>or</p>
