@@ -80,6 +80,22 @@ const decreaseQuantity = async (itemId: number) => {
     }
 };
 
+//function to remove an item from the cart
+const removeItem = async (itemId: number) => {
+    try {
+        const { data } = await removeItemFromCart({
+            variables: { userId: 1, item: itemId },
+        });
+
+        if (data) {
+            //remove the item from the cart
+            setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 
 
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
