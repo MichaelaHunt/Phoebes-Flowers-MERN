@@ -51,7 +51,7 @@ function Title() {
                         ></i>
                     </li>
 
-                    {auth.getToken() != '' ?
+                    {auth.getToken() == '' ?
                         <li>
                             <Link to={'/login'}>Login</Link>
                         </li>
