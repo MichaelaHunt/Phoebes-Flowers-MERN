@@ -3,6 +3,7 @@ import './cart.css';
 import CartItem from './CartItem';
 import { useMutation } from '@apollo/client';
 import { ALTER_QUANTITY_IN_CART, REMOVE_ITEM_FROM_CART } from '../utils/mutations';
+import AuthService from '../utils/auth';
 
 interface Props {
     open: boolean; // controls modal visibility
@@ -39,29 +40,43 @@ function Cart(props: Props) {
 const [alterQuantityInCart] = useMutation(ALTER_QUANTITY_IN_CART);
 const [removeItemFromCart] = useMutation(REMOVE_ITEM_FROM_CART);
 
-//function to increase quantity of an item in cart
+// Function to increase the quantity of an item in the cart
 const increaseQuantity = async (itemId: number) => {
-    //find item in cart
+    // Get userId from AuthService
+    const userId = AuthService.getUser();
+    // If user is not logged in, return
+    if (!userId) {
+        console.error("User is not logged in.");
+        return;
+    }
+//try to increase the quantity of the item in the cart
     try {
         const { data } = await alterQuantityInCart({
-            variables: { userId: 1, item: itemId },
-    });
-
-    if (data) {
-        //update the quantity of the item in the cart
-        setCartItems((prevItems) =>
-            prevItems.map((item) =>
-                item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
-            )
-        );
+            //pass in the userId, itemId, and quantityChange
+            variables: { userId, itemId, quantityChange: 1 }, 
+        });
+//if the data exists, update the quantity of the item in the cart
+        if (data) {
+            setCartItems((prevItems) =>
+                prevItems.map((item) =>
+                    item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
+                )
+            );
+        }
+    } catch (error) {
+        console.error("Error increasing quantity:", error);
     }
-} catch (error) {
-    console.error(error);
-}
 };
 
 //function to decrease quantity of an item in cart
 const decreaseQuantity = async (itemId: number) => {
+    // Get userId from AuthService
+    const userId = AuthService.getUser();
+    //if user is not logged in, return
+    if (!userId) {
+        console.error("User is not logged in.");
+        return;
+    }
     try {
         //check to make sure the item exists and that the quantity is greater than 1
         const item = cartItems.find((item) => item.id === itemId);
@@ -69,7 +84,8 @@ const decreaseQuantity = async (itemId: number) => {
         if (!item || item.quantity <= 1) return;
 //create a new item with the updated quantity
         const { data } = await alterQuantityInCart({ 
-            variables: { userId: 1, item: itemId }, 
+            //pass in the userId, itemId, and quantityChange
+            variables: { userId, itemId, quantityChange: -1 }, 
         });
 //if the data exists, update the quantity of the item in the cart
         if (data) {
@@ -87,9 +103,16 @@ const decreaseQuantity = async (itemId: number) => {
 
 //function to remove an item from the cart
 const removeItem = async (itemId: number) => {
+    // Get userId from AuthService
+    const userId = AuthService.getUser();
+    //if user is not logged in, return
+    if (!userId) {
+        console.error("User is not logged in.");
+        return;
+    }
     try {
         const { data } = await removeItemFromCart({
-            variables: { userId: 1, item: itemId },
+            variables: { userId, itemId },
         });
 
         if (data) {
@@ -97,7 +120,7 @@ const removeItem = async (itemId: number) => {
             setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
         }
     } catch (error) {
-        console.error(error);
+        console.error("Error removing item:", error);
     }
 };
 
