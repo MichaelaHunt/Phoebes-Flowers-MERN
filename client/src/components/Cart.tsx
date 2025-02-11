@@ -33,8 +33,37 @@ function Cart(props: Props) {
         {id: 3, name: "Ceramic Taupe Vase", quantity: 2, price: 2.50},
         {id: 4, name: "Peach Beauty", quantity: 20, price: 3},
         {id: 5, name: "Ceramic Taupe Vase", quantity: 2, price: 2.50},
+]);
 
-    ]);
+//add mutations for altering quantity and removing item from cart
+const [alterQuantityInCart] = useMutation(ALTER_QUANTITY_IN_CART);
+const [removeItemFromCart] = useMutation(REMOVE_ITEM_FROM_CART);
+
+//function to increase quantity of an item in cart
+const increaseQuantity = (itemId: number) => {
+    //find item in cart
+    const item = cartItems.find((item) => item.id === itemId);
+    try {
+        const { data } = await alterQuantityInCart({
+            variables: { userId: 1, item: itemId },
+    });
+
+    if (data) {
+        //update the quantity of the item in the cart
+        setCartItems((prevItems) =>
+            prevItems.map((item) =>
+                item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
+            )
+        );
+    }
+} catch (error) {
+    console.error(error);
+}
+};
+
+//function to decrease quantity of an item in cart
+
+
 
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
         if (e.key === 'Escape' && open && cancelFn) {
