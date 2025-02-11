@@ -56,7 +56,8 @@ function Title() {
                             <Link to={'/login'}>Login</Link>
                         </li>
                         :
-                        <li style={{cursor: "pointer"}} onClick={handleLogout}>Logout</li>}
+                        <li style={{cursor: "pointer"}} onClick={handleLogout}>Logout</li>
+                    }
                 </ul>
             </div>
             <div className='cartHolder'>

@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import auth from "../utils/auth";
-import { ADD_TO_CART } from "../utils/mutations";
+import { ADD_ITEM_TO_CART } from "../utils/mutations";
 
 interface Iitem {
     imagePath: string;
@@ -10,14 +10,15 @@ interface Iitem {
 
 function Item(props: Iitem) {
     //the add item query
-    let addToCart = useMutation(ADD_TO_CART);
+    let addToCart = useMutation(ADD_ITEM_TO_CART);
 
     function itemClicked() {
         if (auth.getToken() != '') {
             console.log("User labeled as Logged In");
             let quantity = window.prompt("Please enter the quantity you'd like.");
+            // let token = auth.getToken();
             // try {
-            //     await addToCart({variables: { itemId, quantity }});
+            //     await addToCart({variables: { userId: token, itemId, quantity }});
             // } catch (err) {
             //     console.error(err);
             // }
