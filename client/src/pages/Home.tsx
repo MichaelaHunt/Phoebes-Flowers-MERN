@@ -100,7 +100,7 @@ function Home() {
                         </div>
                     )}
 
-                    <button className="sectionButton giftButton">Shop Extras</button>
+                    <button className="sectionButton giftButton">Shop Gifts</button>
                 </div>
             </div>
         </>

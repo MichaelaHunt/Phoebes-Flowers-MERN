@@ -24,7 +24,7 @@ function Nav() {
                             </ul>
                     </li>
 
-                    <li>Browse Extras</li>
+                    <li>Browse All</li>
 
                     <li className="dropdown">
                         <span>Browse By Color</span>
