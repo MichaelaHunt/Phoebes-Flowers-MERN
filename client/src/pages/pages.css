@@ -155,7 +155,11 @@
     z-index: 1;
 }
 
-#loginpage>div:nth-child(2) {
+/* #loginpage:first-child {
+    z-index: 5;
+} */
+
+#loginpage>div {
     background-color: #e58673;
     width: 598px;
     border-radius: 16px;
