@@ -115,7 +115,7 @@ if (existingItem) {
 
 },
    
-    //mutation that allows us to add or subtract from the quantity of an item in the cart or remove the item from the cart when the value reachest 0
+    //mutation that allows us to add or subtract from the quantity of an item in the cart or remove the item from the cart when the value reaches 0
     alterQuantityInCart: async (_parent: any, { userId, itemId, quantityChange }: { userId: string; itemId: number; quantityChange: number }) => {
       const user = await User.findById(userId).populate('cart');
       if (!user) {

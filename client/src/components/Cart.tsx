@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './cart.css';
 import CartItem from './CartItem';
+import { useMutation } from '@apollo/client';
+import { ALTER_QUANTITY_IN_CART, REMOVE_ITEM_FROM_CART } from '../utils/mutations';
 
 interface Props {
     open: boolean; // controls modal visibility
@@ -33,27 +35,6 @@ function Cart(props: Props) {
         {id: 5, name: "Ceramic Taupe Vase", quantity: 2, price: 2.50},
 
     ]);
-
-    function increaseQuantity() {
-
-    }
-
-    function decreaseQuantity() {
-
-    }
-
-    //function to remove item from cart
-    const removeItemFromCart = (itemName: string) => {
-        setCartItems((prevItems) => {
-            return prevItems
-                .map((item) =>
-                    item.name === itemName ? { ...item, quantity: item.quantity - 1 } : item
-                )
-                .filter((item) => item.quantity > 0);
-        });
-    };
-
-    //use effect captures esc key to close modal
 
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
         if (e.key === 'Escape' && open && cancelFn) {
