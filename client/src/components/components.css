@@ -173,3 +173,24 @@
 .nav-item:hover .dropdown-menu {
     display: block;
 }
+
+.nav-item > button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 16px;
+   
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dropdown span {
+    padding: 10px;
+    display: block;
+    cursor: pointer;
+}
