@@ -44,8 +44,8 @@ setFormState({
         <Title></Title>
         <div>
           <h2>Login to<br></br>Phoebe's Flowers</h2>
-          <Inputfield value={formState.email} onChange={handleChange} name="Email" />
-          <Inputfield value={formState.password} onChange={handleChange} name="Password" />
+          <Inputfield value={formState.email} onChange={handleChange} name="Email" placeholder="Enter your email" />
+          <Inputfield value={formState.password} onChange={handleChange} name="Password" placeholder="Enter your password" />
           <p className='error loginError'>Incorrect login. Please try again.</p>
           <button>Login</button>
           <p id='space'>or</p>

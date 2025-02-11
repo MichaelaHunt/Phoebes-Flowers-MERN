@@ -4,6 +4,7 @@ import { useMutation} from '@apollo/client';
 import { CREATE_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import Inputfield from '../components/Inputfield';
+import Title from '../components/Title';
 
 function Signup() {
     const [formState, setFormState] = useState({ email: '', username: '', password: '', confirmPassword: '' });
@@ -33,26 +34,27 @@ function Signup() {
     };
 
 
-return (
-    <>
-    <div id="SignUppage">
-         <div>
-         
-        <h2>Sign Up for Phoebe's Flowers</h2>
-    
-    <Inputfield name="email" value={formState.email} onChange={handleChange} />
-    <p>invalid Email</p>
-    <Inputfield name="username" value={formState.username} onChange={handleChange} />
-    <p>Username already exists</p>
-    <Inputfield name="password" value={formState.password} onChange={handleChange} />
-    <p>Password must contain...details here</p>
-    <Inputfield name="confirmPassword" value={formState.confirmPassword} onChange={handleChange} />
-    <p>Passwords do not match</p>
-    <button>Create Account</button>
-    </div>
-    </div>
-   
-    </>
-);
+    return (
+        <>
+            <div id="signuppage" className='site'>
+                <Title></Title>
+                <div>
+                    <h2>Sign Up to<br />Phoebe's Flowers</h2>
+                    <Inputfield name="Email" value={formState.email} onChange={handleChange} placeholder="Email Address" />
+                    <p className='error'>Invalid email</p>
+                    <Inputfield name="Username" value={formState.username} onChange={handleChange} placeholder="Username" />
+                    <p className='error'>Username already exists</p>
+                    <Inputfield name="Password" value={formState.password} onChange={handleChange} placeholder="Password" />
+                    <p className='error'>Password must contain [details here]</p>
+                    <Inputfield name="ConfirmPassword" value={formState.confirmPassword} onChange={handleChange} placeholder="Confirm Password" />
+                    <p className='error'>Passwords do not match</p>
+                    <button onClick={handleFormSubmit}>Create Account</button>
+                    <p id='space'>or</p>
+                    <Link to="/login">back to login</Link>
+                </div>
+            </div>
+        </>
+    );
 }
+
 export default Signup;
