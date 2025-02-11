@@ -33,11 +33,16 @@ function Signup() {
         }
     };
 
+    const title = document.getElementById("title");
+  if (title) {
+    title.classList.add("titlePeach");
+  }
+
 
     return (
         <>
+        <Title></Title>
             <div id="signuppage" className='site'>
-                <Title></Title>
                 <div>
                     <h2>Sign Up to<br />Phoebe's Flowers</h2>
                     <Inputfield name="Email" value={formState.email} onChange={handleChange} placeholder="Email Address" />
