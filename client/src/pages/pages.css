@@ -155,7 +155,9 @@
     z-index: 1;
 }
 
-#loginpage>div:nth-child(2) {
+
+
+#loginpage>div {
     background-color: #e58673;
     width: 598px;
     border-radius: 16px;
@@ -191,10 +193,9 @@
     margin-bottom: 8px;
 }
 
-#loginpage>.title {
+.titlePeach {
     background-color: #E58673;
     border-bottom: none;
-    z-index: 2;
 }
 
 #space {

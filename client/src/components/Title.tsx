@@ -36,27 +36,28 @@ function Title() {
 
     return (
         <>
-            <div className='headerBlue title'>
+            <div className='headerBlue title' id='title'>
                 <ul className='center-row center-column' id='titleList'>
                     <li>
                         <Link to='/' id="title">Phoebe's Flowers</Link>
                     </li>
-                    {/* Shopping Basket Icon - Click to Open Cart */}
-                    <li>
-                        <i
-                            className="fa-solid fa-basket-shopping"
-                            id="basket"
-                            onClick={openCart} // Open modal on click
-                            style={{ cursor: 'pointer' }} // Ensure it looks clickable
-                        ></i>
-                    </li>
-
                     {auth.getToken() == '' ?
                         <li>
                             <Link to={'/login'}>Login</Link>
                         </li>
                         :
-                        <li style={{cursor: "pointer"}} onClick={handleLogout}>Logout</li>
+                        <>
+                            <li>
+                                <i
+                                    className="fa-solid fa-basket-shopping"
+                                    id="basket"
+                                    onClick={openCart} // Open modal on click
+                                    style={{ cursor: 'pointer' }} // Ensure it looks clickable
+                                ></i>
+                            </li>
+                            <li style={{ cursor: "pointer" }} onClick={handleLogout}>Logout</li>
+                        </>
+
                     }
                 </ul>
             </div>
