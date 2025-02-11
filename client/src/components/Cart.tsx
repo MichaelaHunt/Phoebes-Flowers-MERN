@@ -40,9 +40,8 @@ const [alterQuantityInCart] = useMutation(ALTER_QUANTITY_IN_CART);
 const [removeItemFromCart] = useMutation(REMOVE_ITEM_FROM_CART);
 
 //function to increase quantity of an item in cart
-const increaseQuantity = (itemId: number) => {
+const increaseQuantity = async (itemId: number) => {
     //find item in cart
-    const item = cartItems.find((item) => item.id === itemId);
     try {
         const { data } = await alterQuantityInCart({
             variables: { userId: 1, item: itemId },
@@ -62,6 +61,24 @@ const increaseQuantity = (itemId: number) => {
 };
 
 //function to decrease quantity of an item in cart
+const decreaseQuantity = async (itemId: number) => {
+    try {
+        const { data } = await alterQuantityInCart({
+            variables: { userId: 1, item: itemId },
+        });
+
+        if (data) {
+            //update the quantity of the item in the cart
+            setCartItems((prevItems) =>
+                prevItems.map((item) =>
+                    item.id === itemId ? { ...item, quantity: item.quantity - 1 } : item
+                )
+            );
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 
 
