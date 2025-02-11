@@ -12,6 +12,12 @@ function Login() {
   const [login, { error }] = useMutation(LOGIN_USER);
   const navigate = useNavigate();
 
+  const title = document.getElementById("title");
+  if (title) {
+    title.classList.add("titlePeach");
+  }
+  
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
@@ -48,7 +54,6 @@ function Login() {
     <>
     <Title></Title>
       <div id="loginpage" className='site'>
-        
         <div>
           <h2>Login to<br></br>Phoebe's Flowers</h2>
           <Inputfield value={formState.email} onChange={handleChange} name="Email" />

@@ -36,7 +36,7 @@ function Title() {
 
     return (
         <>
-            <div className='headerBlue title'>
+            <div className='headerBlue title' id='title'>
                 <ul className='center-row center-column' id='titleList'>
                     <li>
                         <Link to='/' id="title">Phoebe's Flowers</Link>
