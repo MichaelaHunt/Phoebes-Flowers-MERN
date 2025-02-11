@@ -57,6 +57,7 @@ removeItemFromCart(userId: $userId, itemId: $itemId) {
             quantity
             }
         }
+}
 `;
 
 export const ADD_ITEM_TO_CART = gql`
@@ -73,4 +74,5 @@ addItemToCart(userId: $userId, itemId: $itemId, quantity: $quantity) {
             quantity
             }
         }
+}
 `;

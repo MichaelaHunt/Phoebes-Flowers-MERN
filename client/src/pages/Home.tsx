@@ -61,9 +61,10 @@ function Home() {
                         <p>Error loading best sellers.</p>
                     ) : (
                         <div className="itemContainer">
-                            {bestSellers.map((item: { _id: string; imagePath: string; name: string; price: number }) => (
+                            {bestSellers.map((item: { _id: number; imagePath: string; name: string; price: number }) => (
                                 <Item
                                     key={item._id}
+                                    id={item._id}
                                     imagePath={item.imagePath || image}
                                     name={item.name}
                                     price={item.price}
@@ -84,9 +85,10 @@ function Home() {
                         <p>Error loading gifts.</p>
                     ) : (
                         <div className="itemContainer">
-                            {giftItems.map((item: { _id: string; imagePath: string; name: string; price: number }) => (
+                            {giftItems.map((item: { _id: number; imagePath: string; name: string; price: number }) => (
                                 <Item
                                     key={item._id}
+                                    id={item._id}
                                     imagePath={item.imagePath || image}
                                     name={item.name}
                                     price={item.price}

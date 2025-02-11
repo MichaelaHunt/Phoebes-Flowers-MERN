@@ -50,10 +50,11 @@ class AuthService {
         localStorage.removeItem('id_token');
         window.location.assign('/');
     }
-//get user
- getUser() {
-    return jwtDecode<ExtendedJwt>(this.getToken()).data._id;
- }
+
+    getUser() {
+        return jwtDecode<ExtendedJwt>(this.getToken()).data._id;
+    }
+
 }
 
 export default new AuthService();

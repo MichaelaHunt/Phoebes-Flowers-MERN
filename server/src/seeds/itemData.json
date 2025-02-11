@@ -99,7 +99,7 @@
         "_id": 9,
         "name": "Blue Belle Mug",
         "price": 35.00,
-        "imagePath": "./src/assets/images/mug1.png",
+        "imagePath": "./src/assets/images/sqMug1.png",
         "tags": [
             "Mini",
             "Blue"
@@ -109,7 +109,7 @@
         "_id": 10,
         "name": "Purple Bud Mug",
         "price": 28.00,
-        "imagePath": "./src/assets/images/mug2.jpg",
+        "imagePath": "./src/assets/images/sqMug2.png",
         "tags": [
             "Mini",
             "Purple"
@@ -119,7 +119,7 @@
         "_id": 11,
         "name": "Pink Assorted Mug",
         "price": 20.99,
-        "imagePath": "./src/assets/images/mug3.png",
+        "imagePath": "./src/assets/images/sqMug3.png",
         "tags": [
             "Pink",
             "Mini"

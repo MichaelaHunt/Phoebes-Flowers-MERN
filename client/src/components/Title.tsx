@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Cart from './Cart';
 import './components.css';
+import auth from '../utils/auth';
 
 function Title() {
     // State to control modal visibility
@@ -29,6 +30,10 @@ function Title() {
         home?.classList.remove("overlay");
     }
 
+    function handleLogout() {
+        auth.logout();
+    }
+
     return (
         <>
             <div className='headerBlue title'>
@@ -45,7 +50,14 @@ function Title() {
                             style={{ cursor: 'pointer' }} // Ensure it looks clickable
                         ></i>
                     </li>
-                    <li>Login/Logout</li>
+
+                    {auth.getToken() == '' ?
+                        <li>
+                            <Link to={'/login'}>Login</Link>
+                        </li>
+                        :
+                        <li style={{cursor: "pointer"}} onClick={handleLogout}>Logout</li>
+                    }
                 </ul>
             </div>
             <div className='cartHolder'>
