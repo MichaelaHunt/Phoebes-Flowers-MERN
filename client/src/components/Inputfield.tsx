@@ -2,6 +2,7 @@ interface InputFieldProps {
     name: string;
     value: string;
     onChange: (event: any) => void;
+    placeholder: string;
   };
   
   function InputField(props: InputFieldProps) {
