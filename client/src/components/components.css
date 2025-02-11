@@ -75,6 +75,7 @@
 
 .item > img {
     width: 25rem;
+    border: thick solid white;
 }
 
 .item > h3 {
