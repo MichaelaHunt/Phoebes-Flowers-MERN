@@ -157,7 +157,15 @@ const removeItem = async (itemId: number) => {
                     {cartItems.length > 0 ?
                         (
                             cartItems.map((item) => (
-                                <CartItem key={item.id} price={item.price} title={item.name} quantity={item.quantity} increaseQuantFn={increaseQuantity} decreaseQuantFn={decreaseQuantity}></CartItem>
+                                <CartItem key={item.id} 
+                                id={item.id}
+                                price={item.price} 
+                                title={item.name} 
+                                quantity={item.quantity} 
+                                increaseQuantFn={increaseQuantity} 
+                                decreaseQuantFn={decreaseQuantity}
+                                    removeItemFn={removeItem}>
+                                </CartItem>
                             ))) : (
                             <div className='empty'>
                                 <h1>No items - order some<br></br>flowers first!</h1>
