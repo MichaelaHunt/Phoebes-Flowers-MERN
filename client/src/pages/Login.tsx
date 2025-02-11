@@ -46,8 +46,9 @@ function Login() {
 
   return (
     <>
+    <Title></Title>
       <div id="loginpage" className='site'>
-        <Title></Title>
+        
         <div>
           <h2>Login to<br></br>Phoebe's Flowers</h2>
           <Inputfield value={formState.email} onChange={handleChange} name="Email" />

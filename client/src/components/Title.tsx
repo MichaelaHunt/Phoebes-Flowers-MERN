@@ -41,9 +41,6 @@ function Title() {
                     <li>
                         <Link to='/' id="title">Phoebe's Flowers</Link>
                     </li>
-                    {/* Shopping Basket Icon - Click to Open Cart */}
-
-
                     {auth.getToken() == '' ?
                         <li>
                             <Link to={'/login'}>Login</Link>

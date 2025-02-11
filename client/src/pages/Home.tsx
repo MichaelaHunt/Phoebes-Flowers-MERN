@@ -24,6 +24,9 @@ function Home() {
     const giftItems = data?.items.slice(0, 6) || [];
     //extract 3 items without "gift" tag
     const bestSellers = bestSellerData?.randomNonGiftItems || [];
+
+    //do a state where if the modal is open, the user cannot scroll.
+
     return (
         <>
             <div id="home">
