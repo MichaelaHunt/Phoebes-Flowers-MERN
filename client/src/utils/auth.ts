@@ -54,6 +54,7 @@ class AuthService {
     getUser() {
         return jwtDecode<ExtendedJwt>(this.getToken()).data._id;
     }
+
 }
 
 export default new AuthService();

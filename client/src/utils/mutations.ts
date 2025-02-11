@@ -26,50 +26,9 @@ export const LOGIN_USER = gql`
   }
 `;
 
-export const ADD_TO_CART = gql`
-  mutation addToCart($itemId: ID!) {
-    addToCart(itemId: $itemId) {
-      _id
-      cart {
-        _id
-        name
-        price
-      }
-    }
-  }
-`;
-
-export const UPDATE_CART = gql`
-  mutation updateCart($itemId: ID!, $quantity: Int!) {
-    updateCart(itemId: $itemId, quantity: $quantity) {
-      _id
-      cart {
-        _id
-        name
-        price
-        quantity
-      }
-    }
-  }
-`;
-
-export const REMOVE_FROM_CART = gql`
-  mutation removeFromCart($itemId: ID!) {
-    removeFromCart(itemId: $itemId) {
-      _id
-      cart {
-        _id
-        name
-        price
-        quantity
-      }
-    }
-  }
-`;
-
 export const ALTER_QUANTITY_IN_CART = gql`
-  mutation alterQuantityInCart($userId: ID!, $itemId: ID!) {
-    alterQuantityInCart(userId: $userId, itemId: $itemId) {
+  mutation alterQuantityInCart($userId: ID!, $quantityChange: Int!, $itemId: ID!) {
+    alterQuantityInCart(userId: $userId, $quantityChange: $quantityChange, itemId: $itemId) {
       _id
       username
       email

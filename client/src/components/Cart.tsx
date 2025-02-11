@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './cart.css';
 import CartItem from './CartItem';
+import { useMutation } from '@apollo/client';
+import { ALTER_QUANTITY_IN_CART, REMOVE_ITEM_FROM_CART } from '../utils/mutations';
+import AuthService from '../utils/auth';
 
 interface Props {
     open: boolean; // controls modal visibility
@@ -31,29 +34,97 @@ function Cart(props: Props) {
         {id: 3, name: "Ceramic Taupe Vase", quantity: 2, price: 2.50},
         {id: 4, name: "Peach Beauty", quantity: 20, price: 3},
         {id: 5, name: "Ceramic Taupe Vase", quantity: 2, price: 2.50},
+]);
 
-    ]);
+//add mutations for altering quantity and removing item from cart
+const [alterQuantityInCart] = useMutation(ALTER_QUANTITY_IN_CART);
+const [removeItemFromCart] = useMutation(REMOVE_ITEM_FROM_CART);
 
-    function increaseQuantity() {
-
+// Function to increase the quantity of an item in the cart
+const increaseQuantity = async (itemId: number) => {
+    // Get userId from AuthService
+    const userId = AuthService.getUser();
+    // If user is not logged in, return
+    if (!userId) {
+        console.error("User is not logged in.");
+        return;
     }
-
-    function decreaseQuantity() {
-
-    }
-
-    //function to remove item from cart
-    const removeItemFromCart = (itemName: string) => {
-        setCartItems((prevItems) => {
-            return prevItems
-                .map((item) =>
-                    item.name === itemName ? { ...item, quantity: item.quantity - 1 } : item
-                )
-                .filter((item) => item.quantity > 0);
+//try to increase the quantity of the item in the cart
+    try {
+        const { data } = await alterQuantityInCart({
+            //pass in the userId, itemId, and quantityChange
+            variables: { userId, itemId, quantityChange: 1 }, 
         });
-    };
+//if the data exists, update the quantity of the item in the cart
+        if (data) {
+            setCartItems((prevItems) =>
+                prevItems.map((item) =>
+                    item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
+                )
+            );
+        }
+    } catch (error) {
+        console.error("Error increasing quantity:", error);
+    }
+};
 
-    //use effect captures esc key to close modal
+//function to decrease quantity of an item in cart
+const decreaseQuantity = async (itemId: number) => {
+    // Get userId from AuthService
+    const userId = AuthService.getUser();
+    //if user is not logged in, return
+    if (!userId) {
+        console.error("User is not logged in.");
+        return;
+    }
+    try {
+        //check to make sure the item exists and that the quantity is greater than 1
+        const item = cartItems.find((item) => item.id === itemId);
+        //if not, return
+        if (!item || item.quantity <= 1) return;
+//create a new item with the updated quantity
+        const { data } = await alterQuantityInCart({ 
+            //pass in the userId, itemId, and quantityChange
+            variables: { userId, itemId, quantityChange: -1 }, 
+        });
+//if the data exists, update the quantity of the item in the cart
+        if (data) {
+            setCartItems((prev) =>
+                prev.map(item =>
+                    item.id === itemId ? { ...item, quantity: item.quantity - 1 } : item
+                )
+            );
+        }
+    } catch (error) {
+        console.error("Error decreasing quantity:", error);
+    }
+};
+
+
+//function to remove an item from the cart
+const removeItem = async (itemId: number) => {
+    // Get userId from AuthService
+    const userId = AuthService.getUser();
+    //if user is not logged in, return
+    if (!userId) {
+        console.error("User is not logged in.");
+        return;
+    }
+    try {
+        const { data } = await removeItemFromCart({
+            variables: { userId, itemId },
+        });
+
+        if (data) {
+            //remove the item from the cart
+            setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+        }
+    } catch (error) {
+        console.error("Error removing item:", error);
+    }
+};
+
+
 
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
         if (e.key === 'Escape' && open && cancelFn) {
@@ -109,7 +180,15 @@ function Cart(props: Props) {
                     {cartItems.length > 0 ?
                         (
                             cartItems.map((item) => (
-                                <CartItem key={item.id} price={item.price} title={item.name} quantity={item.quantity} increaseQuantFn={increaseQuantity} decreaseQuantFn={decreaseQuantity}></CartItem>
+                                <CartItem key={item.id} 
+                                id={item.id}
+                                price={item.price} 
+                                title={item.name} 
+                                quantity={item.quantity} 
+                                increaseQuantFn={increaseQuantity} 
+                                decreaseQuantFn={decreaseQuantity}
+                                    removeItemFn={removeItem}>
+                                </CartItem>
                             ))) : (
                             <div className='empty'>
                                 <h1>No items - order some<br></br>flowers first!</h1>
