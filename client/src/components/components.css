@@ -89,20 +89,26 @@
 }
 
 /* input field component */
-#input-field {
+#input-field-login {
     display: flex;
     margin: 12px 0 8px;
     text-align: left;
     justify-content: center;
 }
 
-#input-field > h4 {
-    color: white;
-    font-size: 20px;
-    width: 40px;
+#input-field-signup {
+    display: flex;
+    margin: 0 0 0 8px;
+    text-align: left;
+    justify-content: center;
 }
 
-#input-field > input {
+#input-field-login > h4, #input-field-signup > h4 {
+    color: white;
+    font-size: 20px;
+}
+
+#input-field-login > input, #input-field-signup > input {
     width: 470px;
     height: 40px;
     border: solid white 2px;

@@ -1,6 +1,6 @@
-import { useState, type FormEvent, ChangeEvent } from 'react';
+import { useState, type FormEvent, ChangeEvent, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation} from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import Inputfield from '../components/Inputfield';
@@ -33,28 +33,29 @@ function Signup() {
         }
     };
 
-    const title = document.getElementById("title");
-  if (title) {
-    title.classList.add("titlePeach");
-  }
+    useEffect(() => {
+        const title = document.getElementById("title");
+        if (title) {
+            title.classList.add("titlePeach");
+        }
+    }, []);
 
 
     return (
         <>
-        <Title></Title>
+            <Title></Title>
             <div id="signuppage" className='site'>
                 <div>
                     <h2>Sign Up to<br />Phoebe's Flowers</h2>
-                    <Inputfield name="Email" value={formState.email} onChange={handleChange} placeholder="Email Address" />
+                    <Inputfield name="Email" value={formState.email} isLogin={false} onChange={handleChange}/>
                     <p className='error'>Invalid email</p>
-                    <Inputfield name="Username" value={formState.username} onChange={handleChange} placeholder="Username" />
+                    <Inputfield name="Username" value={formState.username} isLogin={false} onChange={handleChange}/>
                     <p className='error'>Username already exists</p>
-                    <Inputfield name="Password" value={formState.password} onChange={handleChange} placeholder="Password" />
+                    <Inputfield name="Password" value={formState.password} isLogin={false} onChange={handleChange}/>
                     <p className='error'>Password must contain [details here]</p>
-                    <Inputfield name="ConfirmPassword" value={formState.confirmPassword} onChange={handleChange} placeholder="Confirm Password" />
+                    <Inputfield name="Confirm Password" value={formState.confirmPassword} isLogin={false} onChange={handleChange}/>
                     <p className='error'>Passwords do not match</p>
-                    <button onClick={handleFormSubmit}>Create Account</button>
-                    <p id='space'>or</p>
+                    <button style={{marginBottom: "12px"}} onClick={handleFormSubmit}>Create Account</button>
                     <Link to="/login">back to login</Link>
                 </div>
             </div>
