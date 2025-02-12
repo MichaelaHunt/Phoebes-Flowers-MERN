@@ -17,36 +17,18 @@ function Signup() {
             ...prevState,
             [name]: value,
         }));
-    
-        console.log("Form state: " + JSON.stringify(formState));
     };
-
-    // const handleFormSubmit = async (event: FormEvent) => {
-    //     event.preventDefault();
-    
-    //     const { email, username, password } = formState;
-    
-    //     try {
-    //         const { data } = await createUser({
-    //             variables: { input: { email, username, password } },
-    //         });
-    
-    //         Auth.login(data.createUser.token);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
 
     const handleFormSubmit = async (event: FormEvent) => {
         event.preventDefault();
     
-        console.log("Submitting form state:", formState);  // <-- Debugging log
+        console.log("Submitting form state:", formState);
     
         const { email, username, password } = formState;
     
         if (!email || !username || !password) {
             console.error("Missing required fields!");
-            return;  // Prevent mutation from running if fields are empty
+            return;
         }
     
         try {
@@ -58,7 +40,6 @@ function Signup() {
                 },
             });
     
-            console.log("Signup successful:", data);  // <-- Debugging log
             Auth.login(data.createUser.token);
         } catch (error) {
             console.error("GraphQL Error:", error);
