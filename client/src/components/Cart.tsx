@@ -117,7 +117,9 @@ function Cart(props: Props) {
         }
     };
 
+    function refreshCart() {
 
+    }
 
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
         if (e.key === 'Escape' && open && cancelFn) {
@@ -145,25 +147,20 @@ function Cart(props: Props) {
         }
     }
 
-    // close modal when clicking outside (optional feature)
-    const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.target === e.currentTarget && cancelFn) {
-            cancelFn();
-        }
-    };
-
     if (!open) {
         return null;
     }
     //each cartItem * its quantity + the others
 
     return (
-        <div className="modalBackground" onClick={handleBackgroundClick}>
+        <div className="modalBackground">
             {/* modal title with close button */}
             <div className="cartHeader row">
                 {/* <h2>{itemsNumber} items</h2> */}
                 <h2>0 Items</h2>
+                <div style={{visibility: "hidden"}}><h3>I am invisible</h3></div>
                 <h1>Cart</h1>
+                <button onClick={refreshCart}><i className="fa-solid fa-arrows-rotate"></i></button>
                 <button id='titleCloseBtn' onClick={cancelFn}><i className="fa-solid fa-xmark"></i></button>
             </div>
 
