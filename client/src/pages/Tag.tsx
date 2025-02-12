@@ -7,7 +7,6 @@ import { useLocation } from "react-router-dom";
 
 //set up a function to get the query parameter from the URL and check for the tag
 function useQueryByTag() {
-    console.log(useLocation().search);
    return new URLSearchParams(useLocation().search); 
 }
 
@@ -19,19 +18,19 @@ function Tag() {
     //capitalize the first letter of the tag
     var tag2 = tag.replace(/%20/g, ' ');
     const formatTag = tag2.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
-    console.log(formatTag);
+
     // fetch items with the tag
     const { loading, error, data } = useQuery(QUERY_BY_TAG, {
         variables: { tag: formatTag },
         // skip the query if tag is not present
         skip: !formatTag, 
     });
-//extract items from the data
+    //extract items from the data
     const items = data?.items || [];
 
     return (
         <>
-            <div className="site">
+            <div id='tagPageTop' className="site">
                 <Title></Title>
                 <Nav></Nav>
                 <div id="tag">

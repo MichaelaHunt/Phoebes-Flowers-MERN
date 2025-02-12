@@ -23,11 +23,18 @@ function Title() {
     function addOverlay() {
         const home = document.getElementById('home');
         home?.classList.add("overlay");
+        //or for tag page: 
+        const tag = document.getElementById('tagPageTop');
+        tag?.classList.add("overlay");
     }
 
     function removeOverlay() {
         const home = document.getElementById('home');
         home?.classList.remove("overlay");
+        //or for tag page: 
+        const tag = document.getElementById('tagPageTop');
+        tag?.classList.remove("overlay");
+        
     }
 
     function handleLogout() {
@@ -63,11 +70,9 @@ function Title() {
             </div>
             <div className='cartHolder'>
                 {/* Cart Modal */}
-                <Cart
-                    open={isCartOpen}
-                    cancelFn={closeCart} // Close function
-                    primaryFn={() => console.log('Proceed to Checkout')}
-                />
+                {isCartOpen ? 
+                <Cart open={isCartOpen} cancelFn={closeCart} primaryFn={() => console.log('Proceed to Checkout')} />
+                : <></> }
             </div>
 
         </>

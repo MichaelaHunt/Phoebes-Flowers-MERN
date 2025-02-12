@@ -3,13 +3,13 @@ import bcrypt from 'bcrypt';
 
 // Define an interface for the User document
 interface ICartItem {
-    item: number;
+    inventoryItem: number;
     quantity: number;
 }
 //Define the schema for a cart item (used within the Item schema, but no standalone model)
 const cartItemSchema = new Schema<ICartItem>(
     {
-        item: {
+        inventoryItem: {
             type: Number,
             ref: 'Item',
         },

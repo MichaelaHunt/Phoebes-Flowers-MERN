@@ -23,7 +23,8 @@ function Item(props: Iitem) {
                 let quantity = parseInt(response);
                 try {
                     // console.log("itemId: " + props.id);
-                    await addToCart({variables: { userId: String(auth.getUser()), itemId: props.id, quantity }});//HERE TODO:
+                    var res = await addToCart({variables: { userId: String(auth.getUser()), itemId: props.id, quantity }});//HERE TODO:
+                    console.log("mutation response")
                 } catch (err) {
                     console.error(err);
                 }

@@ -33,11 +33,13 @@ export const ALTER_QUANTITY_IN_CART = gql`
       username
       email
       cart {
-        _id
-        name
-        price
-        imagePath
-        quantity
+        inventoryItem {
+            _id
+            name
+            price
+            imagePath
+        }
+        quantity    
       }
     }
   }
@@ -50,11 +52,13 @@ export const REMOVE_ITEM_FROM_CART = gql`
       username
       email
       cart {
-        _id
-        name
-        price
-        imagePath
-        quantity
+        inventoryItem {
+            _id
+            name
+            price
+            imagePath
+        }
+        quantity    
       }
     }
   }

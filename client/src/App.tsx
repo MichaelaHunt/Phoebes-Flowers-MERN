@@ -7,6 +7,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
+import { CartProvider } from './utils/cartContext';
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -35,9 +36,11 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <div className='site'>
+      <CartProvider>
+        <div className='site'>
           <Outlet />
-      </div>
+        </div>
+      </CartProvider>
     </ApolloProvider>
   )
 }
