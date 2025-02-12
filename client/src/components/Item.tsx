@@ -1,6 +1,7 @@
 import { useMutation } from "@apollo/client";
 import auth from "../utils/auth";
 import { ADD_ITEM_TO_CART } from "../utils/mutations";
+import { ReactNode } from "react";
 
 interface Iitem {
     id: number;
@@ -34,13 +35,18 @@ function Item(props: Iitem) {
         }
     }
 
+    function formatPrice(): ReactNode {
+            var val = props.price
+            return val.toFixed(2);
+        }
+
 
     return (
         <>
             <div className="item column">
                 <img src={props.imagePath} onClick={itemClicked}></img>
                 <h3>{props.name}</h3>
-                <p>${props.price}</p>
+                <p>${formatPrice()}</p>
             </div>
         </>
     );

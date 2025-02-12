@@ -13,19 +13,30 @@ import image from '../assets/images/bouquet1.png'
 function Home() {
     //fetch "gift" tag items
     const { loading, error, data } = useQuery(QUERY_BY_TAG, {
-        variables: { tag: "gift" }
+        variables: { tag: "Gift" }
     });
     //fetch 3 random non-gift items
     const { loading: bestSellerLoading, error: bestSellerError, data: bestSellerData } = useQuery(QUERY_RANDOM_NON_GIFT_ITEMS);
-    console.log("Query Data:", bestSellerData);
-    console.log("Query Error:", bestSellerError);
+
 
     //extract 6 items
-    const giftItems = data?.items.slice(0, 6) || [];
+    const giftItems = data?.items.slice(0, 6) || [];//is this working?
     //extract 3 items without "gift" tag
     const bestSellers = bestSellerData?.randomNonGiftItems || [];
 
     //do a state where if the modal is open, the user cannot scroll.
+    
+    function miniButtonHandler() {
+        window.location.assign('/tag?tag=mini');
+    }
+
+    function giftsButtonHandler() {
+        window.location.assign('/tag?tag=gift');
+    }
+
+    function bestSellerButtonHandler() {
+        window.location.assign('/tag?tag=best%20seller');
+    }
 
     return (
         <>
@@ -50,7 +61,7 @@ function Home() {
                         <div id="mugText">
                             <h1>New!</h1>
                             <h3>Mini-Bouquets in a<br></br>Mug!</h3>
-                            <button className="sectionButton miniButton">Shop Minis</button>
+                            <button className="sectionButton miniButton" onClick={miniButtonHandler}>Shop Minis</button>
                         </div>
                     </div>
                 </div>
@@ -76,7 +87,7 @@ function Home() {
                         </div>
                     )}
 
-                    <button className="sectionButton bestSellerButton">Shop Best Sellers</button>
+                    <button className="sectionButton bestSellerButton" onClick={bestSellerButtonHandler}>Shop Best Sellers</button>
                 </div>
                 {/* Gifts to Accompany Section */}
                 <div className="homeSection giftSection">
@@ -100,7 +111,7 @@ function Home() {
                         </div>
                     )}
 
-                    <button className="sectionButton giftButton">Shop Extras</button>
+                    <button className="sectionButton giftButton" onClick={giftsButtonHandler}>Shop Gifts</button>
                 </div>
             </div>
         </>
