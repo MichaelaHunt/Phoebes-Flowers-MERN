@@ -15,12 +15,11 @@ function useQueryByTag() {
 function Tag() {
     //get the tag from the query string in the URL
     const query = useQueryByTag();
-    var tag = query.get("tag");
+    var tag = query.get("tag") || "";;
     //capitalize the first letter of the tag
-    const formatTag = tag 
-        ? tag.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") 
-        : "";
-
+    var tag2 = tag.replace(/%20/g, ' ');
+    const formatTag = tag2.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+    console.log(formatTag);
     // fetch items with the tag
     const { loading, error, data } = useQuery(QUERY_BY_TAG, {
         variables: { tag: formatTag },

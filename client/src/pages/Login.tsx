@@ -1,5 +1,5 @@
-import { useState, type FormEvent, ChangeEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, type FormEvent, ChangeEvent, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import Inputfield from '../components/Inputfield';
 import Title from '../components/Title';
@@ -10,46 +10,61 @@ import { LOGIN_USER } from '../utils/mutations';
 function Login() {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN_USER);
+  const navigate = useNavigate();
 
-const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-  const { name, value } = event.target;
+  useEffect(() => {
+    const title = document.getElementById("title");
+    if (title) {
+      title.classList.add("titlePeach");
+    }
+  }, []);
+  
+  
 
-  setFormState({
-    ...formState,
-    [name]: value,
-  })
-};
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
 
-const handleFormSubmit = async (event: FormEvent) => {
-  event.preventDefault();
-  console.log(formState);
-try {
-  const { data } = await login({
-    variables: { ...formState },
-});
+    setFormState({
+      ...formState,
+      [name]: value,
+    })
+  };
 
-Auth.login(data.login.token);
-} catch (error) {
-  console.error(error);
-}
+  const handleFormSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    console.log(formState);
+    try {
+      const { data } = await login({
+        variables: { ...formState },
+      });
 
-setFormState({
-  email: '',
-  password: '',
-});
-};
+      Auth.login(data.login.token);
+    } catch (error) {
+      console.error(error);
+    }
+
+    setFormState({
+      email: '',
+      password: '',
+    });
+  };
+
+  const handleSignupClick = () => {
+    navigate("/signup");
+  };
+
   return (
     <>
+    <Title></Title>
       <div id="loginpage" className='site'>
-        <Title></Title>
         <div>
           <h2>Login to<br></br>Phoebe's Flowers</h2>
-          <Inputfield value={formState.email} onChange={handleChange} name="Email" />
-          <Inputfield value={formState.password} onChange={handleChange} name="Password" />
+          <Inputfield value={formState.email} onChange={handleChange} name="Email" isLogin={true}/>
+          <Inputfield value={formState.password} onChange={handleChange} name="Password" isLogin={true}/>
           <p className='error loginError'>Incorrect login. Please try again.</p>
-          <button>Login</button>
+          <button onClick={handleFormSubmit}>Login</button>
           <p id='space'>or</p>
-          <button>Sign Up</button>
+          <button onClick={handleSignupClick}>Sign Up</button>
         </div>
       </div>
     </>
@@ -57,4 +72,3 @@ setFormState({
 }
 
 export default Login;
- 
