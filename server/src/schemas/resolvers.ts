@@ -76,10 +76,10 @@ const resolvers = {
       try {
         // Create the user
         const user = await User.create({ username, email, password });
-    
+
         // Generate authentication token
         const token = signToken(user.username, user.email, user._id);
-    
+
         // Return the token and user data
         return { token, user };
       } catch (error) {
@@ -101,35 +101,37 @@ const resolvers = {
       return { token, user };
     },
     addItemToCart: async (_parent: any, { userId, itemId, quantity }: { userId: string; itemId: number, quantity: number }) => {
-      console.log("userId: " + userId);
-      console.log("itemId: " + itemId);
-      console.log("quantity: " + quantity);
       //find the user and populate their cart
       const user = await User.findById(userId).populate('cart');
       //check if user exists
+      
       if (!user) {
         throw new AuthenticationError('User not found');
       }
+      
       //ensure user has a cart array
       if (!user.cart) {
         user.cart = [];
       }
       //check if item is already in cart
-      const existingItem = user.cart.find((cartItem: any) => cartItem.itemId.toString() === itemId);
-//if item is already in cart, update the quantity
-if (existingItem) {
-  existingItem.quantity += quantity;
-} else {
-  //if item is not in cart, add it to the cart
-  user.cart.push({ item: itemId, quantity });
-}
+      console.log("line 117");
+      const existingItem = user.cart.find((cartItem: any) => cartItem.inventoryItem._id.toString() === itemId.toString());//TODO:
+      console.log("existing item: " + JSON.stringify(existingItem));
+      console.log("line 120");
+      //if item is already in cart, update the quantity
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        //if item is not in cart, add it to the cart
+        user.cart.push({ item: itemId, quantity });
+      }
       //save the updated cart
       await user.save();
       //return user with the updated cart
       return await User.findById(userId).populate('cart');
 
-},
-   
+    },
+
     //mutation that allows us to add or subtract from the quantity of an item in the cart or remove the item from the cart when the value reaches 0
     alterQuantityInCart: async (_parent: any, { userId, itemId, quantityChange }: { userId: string; itemId: number; quantityChange: number }) => {
       const user = await User.findById(userId).populate('cart');

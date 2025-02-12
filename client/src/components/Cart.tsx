@@ -53,7 +53,7 @@ function Cart(props: Props) {
                 setCartItems((prevItems) =>
                     prevItems.map((item) =>
                         item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
-                    )
+                    )//TODO: if this don't work it may need to be _id
                 );
             }
         } catch (error) {
