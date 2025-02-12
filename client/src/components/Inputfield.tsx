@@ -1,7 +1,7 @@
 interface InputFieldProps {
     name: string;
     value: string;
-    onChange: (event: any) => void;
+    change: (event: any) => void;
     isLogin: boolean;
   };
   
@@ -10,7 +10,7 @@ interface InputFieldProps {
       <>
         <div id={props.isLogin ? "input-field-login" : "input-field-signup"} className = "column">
           <h4>{props.name}</h4>
-          <input type="text" />
+          <input type="text" onChange={props.change}/>
         </div>
       </>
     );
