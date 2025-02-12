@@ -8,6 +8,9 @@ import Title from '../components/Title';
 
 function Signup() {
     const [formState, setFormState] = useState({ email: '', username: '', password: '', confirmPassword: '' });
+
+const [formErrors, setFormErrors] = useState({ email: '',username: '', password: '', confirmPassword: ''});
+
     const [createUser, { error }] = useMutation(CREATE_USER);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +20,7 @@ function Signup() {
             ...formState,
             [name]: value,
         });
-        
+
     };
 
     const handleFormSubmit = async (event: FormEvent) => {
@@ -48,15 +51,15 @@ function Signup() {
             <div id="signuppage" className='site'>
                 <div>
                     <h2>Sign Up to<br />Phoebe's Flowers</h2>
-                    <Inputfield name="Email" value={formState.email} isLogin={false} onChange={handleChange}/>
+                    <Inputfield name="Email" value={formState.email} isLogin={false} onChange={handleChange} />
                     <p className='error'>Invalid email</p>
-                    <Inputfield name="Username" value={formState.username} isLogin={false} onChange={handleChange}/>
+                    <Inputfield name="Username" value={formState.username} isLogin={false} onChange={handleChange} />
                     <p className='error'>Username already exists</p>
-                    <Inputfield name="Password" value={formState.password} isLogin={false} onChange={handleChange}/>
+                    <Inputfield name="Password" value={formState.password} isLogin={false} onChange={handleChange} />
                     <p className='error'>Password must contain [details here]</p>
-                    <Inputfield name="Confirm Password" value={formState.confirmPassword} isLogin={false} onChange={handleChange}/>
+                    <Inputfield name="Confirm Password" value={formState.confirmPassword} isLogin={false} onChange={handleChange} />
                     <p className='error'>Passwords do not match</p>
-                    <button style={{marginBottom: "12px"}} onClick={handleFormSubmit}>Create Account</button>
+                    <button style={{ marginBottom: "12px" }} onClick={handleFormSubmit}>Create Account</button>
                     <Link to="/login">back to login</Link>
                 </div>
             </div>
