@@ -12,7 +12,7 @@ interface Iitem {
 
 function Item(props: Iitem) {
     //the add item query
-    const [addToCart, { data, loading, error }] = useMutation(ADD_ITEM_TO_CART);
+    const [addToCart] = useMutation(ADD_ITEM_TO_CART);
 
     async function itemClicked() {
         if (auth.getToken() != '') {
