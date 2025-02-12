@@ -5,7 +5,7 @@
         "price": 15.00,
         "imagePath": "./src/assets/images/bear.png",
         "tags": [
-            "Best Seller",
+            "All",
             "Gift",
             "Red",
             "Romance",
@@ -18,6 +18,7 @@
         "price": 40.00,
         "imagePath": "./src/assets/images/bouquet1.png",
         "tags": [
+            "All",
             "Best Seller",
             "Pastel",
             "Full-Size",
@@ -34,6 +35,7 @@
         "price": 25.00,
         "imagePath": "./src/assets/images/bouquet2.png",
         "tags": [
+            "All",
             "Best Seller",
             "Pastel",
             "Small",
@@ -51,6 +53,7 @@
         "price": 45.00,
         "imagePath": "./src/assets/images/bouquet3.png",
         "tags": [
+            "All",
             "Best Seller",
             "Pink",
             "Red",
@@ -67,6 +70,7 @@
         "price": 1.50,
         "imagePath": "./src/assets/images/card.png",
         "tags": [
+            "All",
             "Best Seller",
             "Personalized",
             "Cards",
@@ -79,6 +83,7 @@
         "price": 18.00,
         "imagePath": "./src/assets/images/chocolates.jpg",
         "tags": [
+            "All",
             "Best Seller",
             "Gift"
         ]
@@ -89,6 +94,7 @@
         "price": 10.00,
         "imagePath": "./src/assets/images/chocolatestrawberries.png",
         "tags": [
+            "All",
             "Best Seller",
             "Gift"
         ]
@@ -99,6 +105,7 @@
         "price": 4.00,
         "imagePath": "./src/assets/images/flowerFood.png",
         "tags": [
+            "All",
             "Best Seller",
             "Gift"
         ]
@@ -109,6 +116,7 @@
         "price": 35.00,
         "imagePath": "./src/assets/images/sqMug1.png",
         "tags": [
+            "All",
             "Best Seller",
             "Mini",
             "Blue"
@@ -120,6 +128,7 @@
         "price": 28.00,
         "imagePath": "./src/assets/images/sqMug2.png",
         "tags": [
+            "All",
             "Best Seller",
             "Mini",
             "Purple"
@@ -131,6 +140,7 @@
         "price": 20.99,
         "imagePath": "./src/assets/images/sqMug3.png",
         "tags": [
+            "All",
             "Best Seller",
             "Pink",
             "Mini"
@@ -142,6 +152,7 @@
         "price": 55.00,
         "imagePath": "./src/assets/images/vase.png",
         "tags": [
+            "All",
             "Best Seller",
             "Pastel",
             "Earthy",
@@ -155,7 +166,7 @@
         "price": 55.00,
         "imagePath": "./src/assets/images/vase2.png",
         "tags": [
-            "Best Seller",
+            "All",
             "Pastel",
             "Earthy",
             "Gift",
@@ -168,7 +179,7 @@
         "price": 50.00,
         "imagePath": "./src/assets/images/vase3.png",
         "tags": [
-            "Best Seller",
+            "All",
             "Pastel",
             "Glass",
             "Vase",
@@ -181,6 +192,7 @@
         "price": 35.00,
         "imagePath": "./src/assets/images/bouquet4.png",
         "tags": [
+            "All",
             "Best Seller",
             "Full-Size",
             "Birthday",
@@ -195,6 +207,7 @@
         "price": 3.00,
         "imagePath": "./src/assets/images/Ribbon1.png",
         "tags": [
+            "All",
             "Best Seller",
             "Pink",
             "Ribbon",
@@ -207,7 +220,7 @@
         "price": 3.00,
         "imagePath": "./src/assets/images/Ribbon2.png",
         "tags": [
-            "Best Seller",
+            "All",
             "Yellow",
             "Ribbon",
             "Gift"
@@ -219,6 +232,7 @@
         "price": 3.00,
         "imagePath": "./src/assets/images/Ribbon3.png",
         "tags": [
+            "All",
             "Best Seller",
             "Silver",
             "Ribbon",
@@ -231,7 +245,7 @@
         "price": 3.00,
         "imagePath": "./src/assets/images/Ribbon4.png",
         "tags": [
-            "Best Seller",
+            "All",
             "Blue",
             "Ribbon",
             "Gift"
@@ -243,7 +257,7 @@
         "price": 3.00,
         "imagePath": "./src/assets/images/Ribbon5.png",
         "tags": [
-            "Best Seller",
+            "All",
             "Pink",
             "Ribbon",
             "Gift"
@@ -255,6 +269,7 @@
         "price": 3.00,
         "imagePath": "./src/assets/images/Ribbon6.png",
         "tags": [
+            "All",
             "Best Seller",
             "Gold",
             "Ribbon",

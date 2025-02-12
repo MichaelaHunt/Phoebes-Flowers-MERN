@@ -7,6 +7,10 @@ function Nav() {
     const [showOccasions, setShowOccasions] = useState(false);
     const [showColors, setShowColors] = useState(false);
 
+    function toBrowseAll() {
+        window.location.assign('/tag?tag=All');
+    }
+
     return (
         <>
             <div className='headerBlue nav'>
@@ -24,7 +28,7 @@ function Nav() {
                             </ul>
                     </li>
 
-                    <li>Browse All</li>
+                    <li onClick={toBrowseAll}>Browse All</li>
 
                     <li className="dropdown">
                         <span>Browse By Color</span>
