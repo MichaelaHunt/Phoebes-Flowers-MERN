@@ -12,7 +12,7 @@ interface Iitem {
 
 function Item(props: Iitem) {
     //the add item query
-    const [addToCart] = useMutation(ADD_ITEM_TO_CART);
+    const [addToCart, { data, loading, error }] = useMutation(ADD_ITEM_TO_CART);
 
     async function itemClicked() {
         if (auth.getToken() != '') {
@@ -23,7 +23,8 @@ function Item(props: Iitem) {
                 let quantity = parseInt(response);
                 try {
                     // console.log("itemId: " + props.id);
-                    await addToCart({variables: { userId: String(auth.getUser()), itemId: props.id, quantity }});//HERE TODO:
+                    var res = await addToCart({variables: { userId: String(auth.getUser()), itemId: props.id, quantity }});//HERE TODO:
+                    console.log("mutation response")
                 } catch (err) {
                     console.error(err);
                 }

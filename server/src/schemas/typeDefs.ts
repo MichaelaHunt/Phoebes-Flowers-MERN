@@ -8,8 +8,8 @@ const typeDefs = `
   }
 
   type CartItem {
-    inventoryItem: Item!
-    quantity: Int!
+    inventoryItem: Item
+    quantity: Int
   }
 
   type AuthPayload {
