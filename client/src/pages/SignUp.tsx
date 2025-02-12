@@ -7,24 +7,73 @@ import Inputfield from '../components/Inputfield';
 import Title from '../components/Title';
 
 function Signup() {
-    const [formState, setFormState] = useState({ email: '', username: '', password: '', confirmPassword: '' });
+    const [formState, setFormState] = useState({
+        email: '',
+        username: '',
+        password: '',
+        confirmPassword: ''
+    });
+
+    const [formErrors, setFormErrors] = useState({
+        email: '',
+        username: '',
+        password: '',
+        confirmPassword: '',
+        apiError: '' // Store API error responses here
+    });
+
     const [createUser, { error }] = useMutation(CREATE_USER);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-    
+      
         setFormState((prevState) => ({
             ...prevState,
             [name]: value,
         }));
+
+        // Live validation
+        let newErrors = { ...formErrors, apiError: '' }; // Reset API error on input
+        if (name === 'email' && !/\S+@\S+\.\S+/.test(value)) {
+            newErrors.email = 'Invalid email format';
+        } else {
+            newErrors.email = '';
+        }
+
+        if (name === 'password' && value.length < 6) {
+            newErrors.password = 'Password must be at least 6 characters long';
+        } else {
+            newErrors.password = '';
+        }
+
+        if (name === 'confirmPassword' && value !== formState.password) {
+            newErrors.confirmPassword = 'Passwords do not match';
+        } else {
+            newErrors.confirmPassword = '';
+        }
+
+        setFormErrors(newErrors);
     };
 
     const handleFormSubmit = async (event: FormEvent) => {
         event.preventDefault();
-    
-        console.log("Submitting form state:", formState);
-    
-        const { email, username, password } = formState;
+
+        // Final validation before submission
+        let newErrors = { ...formErrors };
+
+        if (!formState.email) newErrors.email = 'Email is required';
+        if (!formState.username) newErrors.username = 'Username is required';
+        if (!formState.password) newErrors.password = 'Password is required';
+        if (formState.password !== formState.confirmPassword) {
+            newErrors.confirmPassword = 'Passwords do not match';
+        }
+
+        setFormErrors(newErrors);
+
+        // Stop if any errors exist
+        if (Object.values(newErrors).some(error => error)) return;
+
+       const { email, username, password } = formState;
     
         if (!email || !username || !password) {
             console.error("Missing required fields!");
@@ -41,8 +90,8 @@ function Signup() {
             });
     
             Auth.login(data.createUser.token);
-        } catch (error) {
-            console.error("GraphQL Error:", error);
+        } catch (err) {
+            setFormErrors({ ...formErrors, apiError: error?.message || 'Signup failed. Try again.' });
         }
     };
 
@@ -53,22 +102,28 @@ function Signup() {
         }
     }, []);
 
-
     return (
         <>
-            <Title></Title>
+            <Title />
             <div id="signuppage" className='site'>
                 <div>
                     <h2>Sign Up to<br />Phoebe's Flowers</h2>
+                    
                     <Inputfield name="email" label="Email" value={formState.email} isLogin={false} change={handleChange}/>
-                    <p className='error'>Invalid email</p>
+                    {formErrors.email && <p className='error'>{formErrors.email}</p>}
+                    
                     <Inputfield name="username" label="Username" value={formState.username} isLogin={false} change={handleChange}/>
-                    <p className='error'>Username already exists</p>
+                    {formErrors.username && <p className='error'>{formErrors.username}</p>}
+                    
                     <Inputfield name="password" label="Password" value={formState.password} isLogin={false} change={handleChange}/>
-                    <p className='error'>Password must contain [details here]</p>
+                    {formErrors.password && <p className='error'>{formErrors.password}</p>}
+                    
                     <Inputfield name="confirmPassword" label="Confirm Password" value={formState.confirmPassword} isLogin={false} change={handleChange}/>
-                    <p className='error'>Passwords do not match</p>
-                    <button style={{marginBottom: "12px"}} onClick={handleFormSubmit}>Create Account</button>
+                    {formErrors.confirmPassword && <p className='error'>{formErrors.confirmPassword}</p>}
+
+                    {formErrors.apiError && <p className='error'>{formErrors.apiError}</p>}
+
+                    <button style={{ marginBottom: "12px" }} onClick={handleFormSubmit}>Create Account</button>
                     <Link to="/login">back to login</Link>
                 </div>
             </div>
