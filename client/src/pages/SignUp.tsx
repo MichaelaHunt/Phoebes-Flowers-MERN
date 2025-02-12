@@ -21,6 +21,33 @@ const [formErrors, setFormErrors] = useState({ email: '',username: '', password:
             [name]: value,
         });
 
+        // Validate the input and set errors accordingly
+        let newErrors = { ...formErrors };
+        // Validate email format (simple regex for demonstration)
+        if (name === 'email') {
+            newErrors.email = value ? '' : 'Invalid email';
+        } else {
+            newErrors.email = '';
+        }
+        // Validate username (check if it already exists in the database)
+        if (name === 'username') {
+            newErrors.username = value ? '' : 'Username already exists';
+        } else {
+            newErrors.username = '';
+        }
+        // Validate password (check if it meets certain criteria)
+        if (name === 'password') {
+            newErrors.password = value ? '' : 'Password must contain [details here]';
+        } else {
+            newErrors.password = '';
+        }
+        // Validate confirm password (check if it matches the password above)
+        if (name === 'confirmPassword') {
+            newErrors.confirmPassword = value === formState.password ? '' : 'Passwords do not match';
+        } else {
+            newErrors.confirmPassword = '';
+        }
+        setFormErrors(newErrors);
     };
 
     const handleFormSubmit = async (event: FormEvent) => {
