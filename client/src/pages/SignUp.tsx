@@ -26,11 +26,11 @@ function Signup() {
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-
-        setFormState({
-            ...formState,
-            [name]: value
-        });
+      
+        setFormState((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
 
         // Live validation
         let newErrors = { ...formErrors, apiError: '' }; // Reset API error on input
@@ -73,15 +73,22 @@ function Signup() {
         // Stop if any errors exist
         if (Object.values(newErrors).some(error => error)) return;
 
+       const { email, username, password } = formState;
+    
+        if (!email || !username || !password) {
+            console.error("Missing required fields!");
+            return;
+        }
+    
         try {
             const { data } = await createUser({
                 variables: { 
-                    username: formState.username, 
                     email: formState.email, 
+                    username: formState.username, 
                     password: formState.password 
-                }
+                },
             });
-
+    
             Auth.login(data.createUser.token);
         } catch (err) {
             setFormErrors({ ...formErrors, apiError: error?.message || 'Signup failed. Try again.' });
@@ -102,16 +109,16 @@ function Signup() {
                 <div>
                     <h2>Sign Up to<br />Phoebe's Flowers</h2>
                     
-                    <Inputfield name="email" value={formState.email} isLogin={false} onChange={handleChange} />
+                    <Inputfield name="email" label="Email" value={formState.email} isLogin={false} change={handleChange}/>
                     {formErrors.email && <p className='error'>{formErrors.email}</p>}
                     
-                    <Inputfield name="username" value={formState.username} isLogin={false} onChange={handleChange} />
+                    <Inputfield name="username" label="Username" value={formState.username} isLogin={false} change={handleChange}/>
                     {formErrors.username && <p className='error'>{formErrors.username}</p>}
                     
-                    <Inputfield name="password" value={formState.password} isLogin={false} onChange={handleChange} />
+                    <Inputfield name="password" label="Password" value={formState.password} isLogin={false} change={handleChange}/>
                     {formErrors.password && <p className='error'>{formErrors.password}</p>}
                     
-                    <Inputfield name="confirmPassword" value={formState.confirmPassword} isLogin={false} onChange={handleChange} />
+                    <Inputfield name="confirmPassword" label="Confirm Password" value={formState.confirmPassword} isLogin={false} change={handleChange}/>
                     {formErrors.confirmPassword && <p className='error'>{formErrors.confirmPassword}</p>}
 
                     {formErrors.apiError && <p className='error'>{formErrors.apiError}</p>}

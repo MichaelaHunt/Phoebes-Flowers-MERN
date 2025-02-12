@@ -101,6 +101,9 @@ const resolvers = {
       return { token, user };
     },
     addItemToCart: async (_parent: any, { userId, itemId, quantity }: { userId: string; itemId: number, quantity: number }) => {
+      console.log("userId: " + userId);
+      console.log("itemId: " + itemId);
+      console.log("quantity: " + quantity);
       //find the user and populate their cart
       const user = await User.findById(userId).populate('cart');
       //check if user exists
