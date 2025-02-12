@@ -12,18 +12,13 @@ const typeDefs = `
     quantity: Int!
   }
 
-  input CartItemInput {
-    itemId: ID!
-    quantity: Int!
-  }
-
   type AuthPayload {
     token: String!
     user: User!
   }
 
   type Item {
-    _id: ID!
+    _id: Int!
     name: String!
     price: Float!
     imagePath: String!
@@ -40,11 +35,11 @@ const typeDefs = `
 }
 
   type Mutation {
-  createUser(username: String!, email: String!, password: String!): User
+  createUser(username: String!, email: String!, password: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
- addItemToCart(userId: ID!, item: CartItemInput!): User
-  alterQuantityInCart(userId: ID!, itemId: ID!): User
-  removeItemFromCart(userId: ID!, itemId: ID!): User
+  addItemToCart(userId: ID!, itemId: Int!, quantity: Int!): User
+  alterQuantityInCart(userId: ID!, itemId: Int!): User
+  removeItemFromCart(userId: ID!, itemId: Int!): User
   }
 `;
 

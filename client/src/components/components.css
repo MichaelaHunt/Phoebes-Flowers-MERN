@@ -122,7 +122,7 @@
 }
 
 /* button component for dropdown button */
-.dropdown-btn {
+/* .dropdown-btn {
     background: none;
     border: none;
     cursor: pointer;
@@ -131,14 +131,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */
 
 /* Dropdown menu */
 
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 50;
     background: white;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -150,6 +150,7 @@
     opacity: 0; /* Hide with opacity */
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
     transform: translateY(-5px); /* Small animation */
+    color: #6689A1; 
     
 }
 
@@ -160,7 +161,7 @@
 }
 
 .dropdown-menu li {
-    color: black; /* Set text color */
+    color: #6689A1; /* Set text color to #6689A1 */
     padding: 8px 16px;
     font-size: 16px;
     transition: background 0.2s ease-in-out;
@@ -168,14 +169,14 @@
 
 
 .dropdown-menu li:hover {
-    background-color: rgba(20, 7, 7, 0.1)
+    background-color: rgba(20, 7, 7, 0.1);
 }
 
-/* #navList > li:nth-child(3):hover .dropdown-menu {
+#navList > li:nth-child(3):hover .dropdown-menu {
     display: block;
     opacity: 1;
     transform: translateY(0);
-} */
+}
 
 .nav-item:hover .dropdown-menu {
     display: block;
@@ -187,13 +188,13 @@
     padding: 0;
     cursor: pointer;
     font-size: 16px;
+    
    
 }
 
 .dropdown {
     position: relative;
-    display: inline-block;
-    cursor: pointer;
+
 }
 
 .dropdown span {
@@ -201,3 +202,29 @@
     display: block;
     cursor: pointer;
 }
+
+
+/* why did this take me over an hour... */
+.nav .dropdown-menu li a {
+    color: #6689A1;
+}
+
+/* Background color for the dropdown menu */
+.nav .dropdown-menu {
+    background-color: white;
+}
+
+/* Make sure the li elements inside the dropdown have the correct text color */
+.nav .dropdown-menu li {
+    color: #6689A1;
+}
+
+.nav .dropdown-menu li:hover {
+    background-color: rgba(20, 7, 7, 0.1);
+}
+
+/* Apply only to the first li (Occasions) to adjust dropdown positioning */
+#navList > li:nth-child(1) .dropdown-menu {
+    left: -25px; /* Adjust this to get it aligned just below "Occasions" */
+}
+
