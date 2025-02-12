@@ -14,6 +14,7 @@
 #titleList {
     display: flex;
     justify-content: end;
+    align-items: center;
     width: 100vw;
     position: relative;
     padding: 0 4rem;
@@ -28,6 +29,8 @@
 
 #titleList > li:nth-child(2) {
     padding: 0 4rem;
+    height: 36px;
+    font-size: 0px;
 }
 
 #titleList > li:last-child {
