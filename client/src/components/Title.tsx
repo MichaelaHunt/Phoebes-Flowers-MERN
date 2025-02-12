@@ -63,11 +63,14 @@ function Title() {
             </div>
             <div className='cartHolder'>
                 {/* Cart Modal */}
+                {isCartOpen ? 
                 <Cart
-                    open={isCartOpen}
-                    cancelFn={closeCart} // Close function
-                    primaryFn={() => console.log('Proceed to Checkout')}
-                />
+                open={isCartOpen}
+                cancelFn={closeCart} // Close function
+                primaryFn={() => console.log('Proceed to Checkout')}
+            />
+            : <></> }
+                
             </div>
 
         </>

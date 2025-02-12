@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import './cart.css';
 import CartItem from './CartItem';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { ALTER_QUANTITY_IN_CART, REMOVE_ITEM_FROM_CART } from '../utils/mutations';
 import AuthService from '../utils/auth';
 import { CartContext } from '../utils/cartContext';
+import { QUERY_ME } from '../utils/queries';
 
 interface Props {
     open: boolean; // controls modal visibility
@@ -12,9 +13,6 @@ interface Props {
     primaryFn?: () => void;// primary action (e.g., "Continue")
     className?: string; // additional class for styling
 }
-
-// define item structure
-
 
 //Goal of this modal: It grabs the items from our User's document, then displays them.
 //Also allows the user to change the quantity of each item (should be reflected in User's document)
@@ -28,6 +26,9 @@ function Cart(props: Props) {
     //add mutations for altering quantity and removing item from cart
     const [alterQuantityInCart] = useMutation(ALTER_QUANTITY_IN_CART);
     const [removeItemFromCart] = useMutation(REMOVE_ITEM_FROM_CART);
+    // const { data } = useQuery(QUERY_ME);
+    // console.log("data: " + JSON.stringify(data));
+    // setCartContents(data.me.cart);
 
     // Function to increase the quantity of an item in the cart
     const increaseQuantity = async (itemId: number) => {
@@ -112,9 +113,9 @@ function Cart(props: Props) {
         }
     };
 
-    // function refreshCart() {
-
-    // }
+    function refreshCart() {
+        
+    }
 
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
         if (e.key === 'Escape' && open && cancelFn) {
@@ -134,7 +135,7 @@ function Cart(props: Props) {
 
     function decideCartBodyStyle() {
         const cartBody = document.getElementById('cartBody');
-        if (cartItems.length > 0) {
+        if (cartContents.length > 0) {
             cartBody?.classList.remove("cartHasNoItems");
         }
         else {
@@ -153,9 +154,9 @@ function Cart(props: Props) {
             <div className="cartHeader row">
                 {/* <h2>{itemsNumber} items</h2> */}
                 <h2>0 Items</h2>
-                {/* <div style={{visibility: "hidden"}}><h3>I am invisible</h3></div> */}
+                <div style={{visibility: "hidden"}}><h3>I am invisible</h3></div>
                 <h1>Cart</h1>
-                {/* <button onClick={refreshCart}><i className="fa-solid fa-arrows-rotate"></i></button> */}
+                <button onClick={refreshCart}><i className="fa-solid fa-arrows-rotate"></i></button>
                 <button id='titleCloseBtn' onClick={cancelFn}><i className="fa-solid fa-xmark"></i></button>
             </div>
 

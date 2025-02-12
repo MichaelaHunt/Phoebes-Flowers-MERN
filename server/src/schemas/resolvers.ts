@@ -100,43 +100,6 @@ const resolvers = {
       const token = signToken(user.email, user.username, user.id);
       return { token, user };
     },
-    // addItemToCart: async (_parent: any, { userId, itemId, quantity }: { userId: string; itemId: number, quantity: number }) => {
-    //   //find the user and populate their cart
-    //   // const user = await User.findById(userId).populate('cart');
-    //   const user = await User.findById(userId).populate({
-    //     path: 'cart.inventoryItem', // Populate inventoryItem inside cart
-    //   });
-    //   //check if user exists
-      
-    //   if (!user) {
-    //     throw new AuthenticationError('User not found');
-    //   }
-      
-    //   //ensure user has a cart array
-    //   if (!user.cart) {
-    //     user.cart = [];
-    //   }
-    //   //check if item is already in cart
-    //   console.log("line 117");
-    //   const existingItem = user.cart.find((cartItem: any) => cartItem.inventoryItem._id.toString() === itemId.toString());//TODO:
-    //   console.log("existing item: " + JSON.stringify(existingItem));
-    //   console.log("line 120");
-    //   //if item is already in cart, update the quantity
-    //   if (existingItem) {
-    //   //   existingItem.quantity += quantity;
-    //   } else {
-    //     //if item is not in cart, add it to the cart
-    //     user.cart.push({ inventoryItem: itemId, quantity });
-    //   }
-    //   //save the updated cart
-    //   await user.save();
-    //   //return user with the updated cart
-    //   // return await User.findById(userId).populate('cart');
-    //   return await User.findById(userId).populate({
-    //     path: 'cart.inventoryItem',
-    //   });
-
-    // },
     addItemToCart: async (_parent: any, { userId, itemId, quantity }: { userId: string; itemId: number, quantity: number }) => {
       // Find user and ensure cart items are fully populated
       const user = await User.findById(userId).populate({
