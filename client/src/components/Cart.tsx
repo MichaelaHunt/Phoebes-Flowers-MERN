@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import './cart.css';
 import CartItem from './CartItem';
 import { useMutation } from '@apollo/client';
 import { ALTER_QUANTITY_IN_CART, REMOVE_ITEM_FROM_CART } from '../utils/mutations';
 import AuthService from '../utils/auth';
+import { CartContext } from '../utils/cartContext';
 
 interface Props {
     open: boolean; // controls modal visibility
@@ -13,12 +14,7 @@ interface Props {
 }
 
 // define item structure
-interface CartItem {
-    id: number;
-    name: string;
-    quantity: number;
-    price: number;
-}
+
 
 //Goal of this modal: It grabs the items from our User's document, then displays them.
 //Also allows the user to change the quantity of each item (should be reflected in User's document)
@@ -27,7 +23,7 @@ function Cart(props: Props) {
     const { open, cancelFn, primaryFn } = props;
 
     // state to hold cart items
-    const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    const { cartContents, setCartContents } = useContext(CartContext);
 
     //add mutations for altering quantity and removing item from cart
     const [alterQuantityInCart] = useMutation(ALTER_QUANTITY_IN_CART);
@@ -50,7 +46,7 @@ function Cart(props: Props) {
             });
             //if the data exists, update the quantity of the item in the cart
             if (data) {
-                setCartItems((prevItems) =>
+                setCartContents((prevItems) =>
                     prevItems.map((item) =>
                         item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
                     )//TODO: if this don't work it may need to be _id
@@ -72,7 +68,7 @@ function Cart(props: Props) {
         }
         try {
             //check to make sure the item exists and that the quantity is greater than 1
-            const item = cartItems.find((item) => item.id === itemId);
+            const item = cartContents.find((item) => item.id === itemId);
             //if not, return
             if (!item || item.quantity <= 1) return;
             //create a new item with the updated quantity
@@ -82,7 +78,7 @@ function Cart(props: Props) {
             });
             //if the data exists, update the quantity of the item in the cart
             if (data) {
-                setCartItems((prev) =>
+                setCartContents((prev) =>
                     prev.map(item =>
                         item.id === itemId ? { ...item, quantity: item.quantity - 1 } : item
                     )
@@ -92,7 +88,6 @@ function Cart(props: Props) {
             console.error("Error decreasing quantity:", error);
         }
     };
-
 
     //function to remove an item from the cart
     const removeItem = async (itemId: number) => {
@@ -110,16 +105,16 @@ function Cart(props: Props) {
 
             if (data) {
                 //remove the item from the cart
-                setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+                setCartContents((prevItems) => prevItems.filter((item) => item.id !== itemId));
             }
         } catch (error) {
             console.error("Error removing item:", error);
         }
     };
 
-    function refreshCart() {
+    // function refreshCart() {
 
-    }
+    // }
 
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
         if (e.key === 'Escape' && open && cancelFn) {
@@ -158,18 +153,18 @@ function Cart(props: Props) {
             <div className="cartHeader row">
                 {/* <h2>{itemsNumber} items</h2> */}
                 <h2>0 Items</h2>
-                <div style={{visibility: "hidden"}}><h3>I am invisible</h3></div>
+                {/* <div style={{visibility: "hidden"}}><h3>I am invisible</h3></div> */}
                 <h1>Cart</h1>
-                <button onClick={refreshCart}><i className="fa-solid fa-arrows-rotate"></i></button>
+                {/* <button onClick={refreshCart}><i className="fa-solid fa-arrows-rotate"></i></button> */}
                 <button id='titleCloseBtn' onClick={cancelFn}><i className="fa-solid fa-xmark"></i></button>
             </div>
 
             {/* cart Items Section */}
             <div className="cartHasNoItems" id='cartBody'>
                 {/* If there are items, display them. If there are no items, display a card saying "No items" */}
-                {cartItems.length > 0 ?
+                {cartContents.length > 0 ?
                     (
-                        cartItems.map((item) => (
+                        cartContents.map((item) => (
                             <CartItem key={item.id}
                                 id={item.id}
                                 price={item.price}
