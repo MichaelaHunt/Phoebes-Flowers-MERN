@@ -13,15 +13,14 @@ import image from '../assets/images/bouquet1.png'
 function Home() {
     //fetch "gift" tag items
     const { loading, error, data } = useQuery(QUERY_BY_TAG, {
-        variables: { tag: "gift" }
+        variables: { tag: "Gift" }
     });
     //fetch 3 random non-gift items
     const { loading: bestSellerLoading, error: bestSellerError, data: bestSellerData } = useQuery(QUERY_RANDOM_NON_GIFT_ITEMS);
-    console.log("Query Data:", bestSellerData);
-    console.log("Query Error:", bestSellerError);
+
 
     //extract 6 items
-    const giftItems = data?.items.slice(0, 6) || [];
+    const giftItems = data?.items.slice(0, 6) || [];//is this working?
     //extract 3 items without "gift" tag
     const bestSellers = bestSellerData?.randomNonGiftItems || [];
 
