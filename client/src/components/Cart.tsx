@@ -29,6 +29,7 @@ function Cart(props: Props) {
     // const { data } = useQuery(QUERY_ME);
     // console.log("data: " + JSON.stringify(data));
     // setCartContents(data.me.cart);
+    //TODO: ^^ HELLA big errors from the above being uncommented!
 
     // Function to increase the quantity of an item in the cart
     const increaseQuantity = async (itemId: number) => {
@@ -113,10 +114,6 @@ function Cart(props: Props) {
         }
     };
 
-    function refreshCart() {
-        
-    }
-
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
         if (e.key === 'Escape' && open && cancelFn) {
             cancelFn();
@@ -154,9 +151,9 @@ function Cart(props: Props) {
             <div className="cartHeader row">
                 {/* <h2>{itemsNumber} items</h2> */}
                 <h2>0 Items</h2>
-                <div style={{visibility: "hidden"}}><h3>I am invisible</h3></div>
+                {/* <div style={{visibility: "hidden"}}><h3>I am invisible</h3></div> */}
                 <h1>Cart</h1>
-                <button onClick={refreshCart}><i className="fa-solid fa-arrows-rotate"></i></button>
+                {/* <button onClick={refreshCart}><i className="fa-solid fa-arrows-rotate"></i></button> */}
                 <button id='titleCloseBtn' onClick={cancelFn}><i className="fa-solid fa-xmark"></i></button>
             </div>
 
