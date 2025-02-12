@@ -61,16 +61,18 @@ export const REMOVE_ITEM_FROM_CART = gql`
 `;
 
 export const ADD_ITEM_TO_CART = gql`
-  mutation addItemToCart($userId: ID!, $itemId: ID!, $quantity: Int!) {
+  mutation addItemToCart($userId: ID!, $itemId: Int!, $quantity: Int!) {
     addItemToCart(userId: $userId, itemId: $itemId, quantity: $quantity) {
       _id
       username
       email
       cart {
-        _id
-        name
-        price
-        imagePath
+        inventoryItem {
+          _id
+          name
+          price
+          imagePath
+          }
         quantity
       }
     }

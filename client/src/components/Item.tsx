@@ -15,12 +15,19 @@ function Item(props: Iitem) {
 
     async function itemClicked() {
         if (auth.getToken() != '') {
-            let quantity = window.prompt("Please enter the quantity you'd like.");
-            try {
-                await addToCart({variables: { userId: auth.getUser, itemId: props.id, quantity }});
-            } catch (err) {
-                console.error(err);
+            let response = window.prompt("Please enter the quantity you'd like.");
+            //response could be null if user cancels the prompt! TODO:
+            let quantity: number;
+            if (response) {
+                let quantity = parseInt(response);
+                try {
+                    // console.log("itemId: " + props.id);
+                    await addToCart({variables: { userId: String(auth.getUser()), itemId: props.id, quantity }});//HERE TODO:
+                } catch (err) {
+                    console.error(err);
+                }
             }
+            
         }
         else {
             window.alert("User must be logged in to add items to the cart.");
