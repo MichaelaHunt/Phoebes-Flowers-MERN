@@ -73,7 +73,19 @@ const resolvers = {
   Mutation: {
     // create a new user
     createUser: async (_parent: any, { username, email, password }: UserArgs) => {
-      return User.create({ username, email, password });
+      try {
+        // Create the user
+        const user = await User.create({ username, email, password });
+    
+        // Generate authentication token
+        const token = signToken(user.username, user.email, user._id);
+    
+        // Return the token and user data
+        return { token, user };
+      } catch (error) {
+        console.error("Error creating user:", error);
+        throw new Error("Failed to create user. Username or email might already be in use.");
+      }
     },
     // login user
     login: async (_parent: any, { email, password }: { email: string; password: string }) => {

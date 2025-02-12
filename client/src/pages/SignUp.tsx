@@ -17,6 +17,7 @@ function Signup() {
             ...formState,
             [name]: value,
         });
+        
     };
 
     const handleFormSubmit = async (event: FormEvent) => {
