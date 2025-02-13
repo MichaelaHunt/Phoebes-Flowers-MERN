@@ -38,7 +38,7 @@ const typeDefs = `
   createUser(username: String, email: String, password: String): AuthPayload
   login(email: String, password: String): AuthPayload
   addItemToCart(userId: ID, itemId: Int, quantity: Int): User
-  alterQuantityInCart(userId: ID, itemId: Int): User
+  alterQuantityInCart(userId: ID, itemId: Int, quantityChange: Int): User
   removeItemFromCart(userId: ID, itemId: Int): User
   }
 `;

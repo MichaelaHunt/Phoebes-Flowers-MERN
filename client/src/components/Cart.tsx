@@ -45,7 +45,7 @@ function Cart(props: Props) {
 
     useEffect(() => {
         if (data?.user?.cart && !userLoading) {
-            console.log("user.cart exists");
+            // console.log("user.cart exists");
             const input: CartItemInfo[] = transformCartData(data.user.cart);
             setCartContents(input);  // This will only run when `data` changes
         }
@@ -68,6 +68,7 @@ function Cart(props: Props) {
                 //pass in the userId, itemId, and quantityChange
                 variables: { userId, itemId, quantityChange: 1 },
             });
+            
             //if the data exists, update the quantity of the item in the cart
             if (data) {
                 setCartContents((prevItems) =>
