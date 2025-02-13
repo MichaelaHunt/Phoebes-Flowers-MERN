@@ -49,7 +49,7 @@ function Home() {
                 {/* Body */}
                 {/* Mini's Section */}
                 <div className="homeSection miniSection">
-                    <div className="row">
+                    <div className="mugSectionContainer">
                         <div>
                             <h2></h2>
                         </div>
