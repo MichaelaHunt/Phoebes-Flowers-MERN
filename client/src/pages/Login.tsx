@@ -1,5 +1,5 @@
 import { useState, type FormEvent, ChangeEvent, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import Inputfield from '../components/Inputfield';
 import Title from '../components/Title';
@@ -9,7 +9,7 @@ import { LOGIN_USER } from '../utils/mutations';
 
 function Login() {
   const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login, { error }] = useMutation(LOGIN_USER);
+  const [login] = useMutation(LOGIN_USER);
   const navigate = useNavigate();
 
   useEffect(() => {

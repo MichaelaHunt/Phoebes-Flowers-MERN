@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Cart from './Cart';
 import './components.css';
@@ -71,7 +71,7 @@ function Title() {
             <div className='cartHolder'>
                 {/* Cart Modal */}
                 {isCartOpen ? 
-                <Cart open={isCartOpen} cancelFn={closeCart} primaryFn={() => console.log('Proceed to Checkout')} />
+                <Cart cancelFn={closeCart} primaryFn={() => console.log('Proceed to Checkout')} />
                 : <></> }
             </div>
 

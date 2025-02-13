@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useContext } from 'react';
+import { useState, useEffect, useContext, ReactNode } from 'react';
 import './cart.css';
 import { useMutation, useQuery } from '@apollo/client';
 import { ALTER_QUANTITY_IN_CART, REMOVE_ITEM_FROM_CART } from '../utils/mutations';
@@ -9,7 +9,6 @@ import auth from '../utils/auth';
 import CartItem from './CartItem';
 
 interface Props {
-    open: boolean; // controls modal visibility
     cancelFn?: () => void;// function to close the modal
     primaryFn?: () => void;// primary action (e.g., "Continue")
     className?: string; // additional class for styling
@@ -19,7 +18,9 @@ interface Props {
 //Also allows the user to change the quantity of each item (should be reflected in User's document)
 //Allows user to remove an item from their cart (should be reflected in User's document)
 function Cart(props: Props) {
-    const { open, cancelFn, primaryFn } = props;
+    const { cancelFn, primaryFn } = props;
+    const [itemsAmountCart, setItemsAmountCart] = useState(0);
+    const [cartTotal, setCartTotal] = useState(0);
 
     // state to hold cart items
     const { cartContents, setCartContents } = useContext(CartContext);
@@ -33,28 +34,46 @@ function Cart(props: Props) {
     const { loading: userLoading, data } = useQuery(QUERY_USER, {
         variables: { username },
         // skip the query if tag is not present
-        skip: !username, 
+        skip: !username,
     });
+
+    function formatPrice(val: number): ReactNode {
+        return val.toFixed(2);
+    }
 
     const transformCartData = (cart: any[]): CartItemInfo[] => {
         return cart.map(item => ({
-          id: item.inventoryItem._id,
-          name: item.inventoryItem.name,
-          quantity: item.quantity,
-          price: item.inventoryItem.price
+            id: item.inventoryItem._id,
+            name: item.inventoryItem.name,
+            quantity: item.quantity,
+            price: item.inventoryItem.price
         }));
     };
+
+    function calculateTotal() {
+        //loop thru the cartContents
+        var total = 0;
+        cartContents.forEach(item => {
+            var val = item.price * item.quantity;
+            total += val;
+        });
+        setCartTotal(parseFloat(total.toFixed(2)));
+    }
 
     useEffect(() => {
         if (data?.user?.cart && !userLoading) {
             // console.log("user.cart exists");
             const input: CartItemInfo[] = transformCartData(data.user.cart);
             setCartContents(input);  // This will only run when `data` changes
+
         }
     }, [data, userLoading, setCartContents]);
 
-    
-    
+    useEffect(() => {
+        setItemsAmountCart(cartContents.length);
+        calculateTotal();
+    }, [cartContents]);
+
     // Function to increase the quantity of an item in the cart
     const increaseQuantity = async (itemId: number) => {
         const userId = AuthService.getUser();
@@ -62,14 +81,14 @@ function Cart(props: Props) {
             console.error("User is not logged in.");
             return;
         }
-    
+
         console.log("Before increase:", cartContents);
-    
+
         try {
             const { data } = await alterQuantityInCart({
                 variables: { userId, itemId, quantityChange: 1 },
             });
-    
+
             if (data) {
                 setCartContents(prevItems => {
                     const updatedCart = prevItems.map(item =>
@@ -83,7 +102,6 @@ function Cart(props: Props) {
             console.error("Error increasing quantity:", error);
         }
     };
-    
 
     //function to decrease quantity of an item in cart
     const decreaseQuantity = async (itemId: number) => {
@@ -92,9 +110,9 @@ function Cart(props: Props) {
             console.error("User is not logged in.");
             return;
         }
-    
+
         console.log("Before decrease:", cartContents);
-    
+
         try {
             //check to make sure the item exists and that the quantity is greater than 1
             const item = cartContents.find((item) => item.id === itemId);
@@ -103,7 +121,7 @@ function Cart(props: Props) {
             const { data } = await alterQuantityInCart({
                 variables: { userId, itemId, quantityChange: -1 },
             });
-    
+
             if (data) {
                 setCartContents(prevItems => {
                     const updatedCart = prevItems.map(item =>
@@ -117,7 +135,6 @@ function Cart(props: Props) {
             console.error("Error decreasing quantity:", error);
         }
     };
-    
 
     //function to remove an item from the cart
     const removeItem = async (itemId: number) => {
@@ -142,23 +159,7 @@ function Cart(props: Props) {
         }
     };
 
-    const handleKeyDown = useCallback((e: KeyboardEvent) => {
-        if (e.key === 'Escape' && open && cancelFn) {
-            cancelFn();
-        }
-    }, [open, cancelFn]);
-
-
     useEffect(() => {
-        document.addEventListener('keydown', handleKeyDown);
-        return () => document.removeEventListener('keydown', handleKeyDown);
-    }, [open, cancelFn]);
-
-    useEffect(() => {
-        decideCartBodyStyle();
-    });
-
-    function decideCartBodyStyle() {
         const cartBody = document.getElementById('cartBody');
         if (cartContents.length > 0) {
             cartBody?.classList.remove("cartHasNoItems");
@@ -166,19 +167,14 @@ function Cart(props: Props) {
         else {
             cartBody?.classList.add("cartHasNoItems");
         }
-    }
-
-    if (!open) {
-        return null;
-    }
-    //each cartItem * its quantity + the others
+    });
 
     return (
         <div className="modalBackground">
             {/* modal title with close button */}
             <div className="cartHeader row">
                 {/* <h2>{itemsNumber} items</h2> */}
-                <h2>0 Items</h2>
+                <h2>{itemsAmountCart} Items</h2>
                 {/* <div style={{visibility: "hidden"}}><h3>I am invisible</h3></div> */}
                 <h1>Cart</h1>
                 {/* <button onClick={refreshCart}><i className="fa-solid fa-arrows-rotate"></i></button> */}
@@ -211,7 +207,7 @@ function Cart(props: Props) {
             <div className="cartFooter">
                 <div className='row'>
                     <h2>Total before tax: </h2>
-                    <h2>$TOTAL HERE</h2>
+                    <h2>${formatPrice(cartTotal)}</h2>
                 </div>
                 <button onClick={primaryFn}>Checkout</button>
             </div>
