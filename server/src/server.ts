@@ -41,10 +41,10 @@ const startApolloServer = async () => {
 //serve static files in production
     if (process.env.NODE_ENV === 'production') {
         //serve static files from client/dist
-        app.use(express.static(path.join(__dirname, '../client/dist')));
+        app.use(express.static(path.join(__dirname, '../../client/dist')));
 //handle all other routes by serving index.html
         app.get('*', (_req: Request, res: Response) => {
-            res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+            res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
         });
     }
 //start server
