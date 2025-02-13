@@ -96,6 +96,10 @@ function Cart(props: Props) {
         console.log("Before decrease:", cartContents);
     
         try {
+            //check to make sure the item exists and that the quantity is greater than 1
+            const item = cartContents.find((item) => item.id === itemId);
+            //if not, return
+            if (!item || item.quantity <= 1) return;
             const { data } = await alterQuantityInCart({
                 variables: { userId, itemId, quantityChange: -1 },
             });

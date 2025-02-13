@@ -135,7 +135,6 @@ const resolvers = {
 
     //mutation that allows us to add or subtract from the quantity of an item in the cart or remove the item from the cart when the value reaches 0
     alterQuantityInCart: async (_parent: any, { userId, itemId, quantityChange }: { userId: string; itemId: number; quantityChange: number }) => {
-      console.log("entered alterquantity resolver");
       const user = await User.findById(userId).populate({
         path: 'cart.inventoryItem',
       });
@@ -147,14 +146,14 @@ const resolvers = {
       if (itemIndex === -1) {
         throw new Error('Item not found in cart');
       }
-      console.log("user before alteration: " + JSON.stringify(user));
       //update the quantity based on the quantityChange value
       user.cart[itemIndex].quantity += quantityChange;
+      console.log("1: " + user.cart[itemIndex].quantity);
       //remove the item if quantity goes to 0
       if (user.cart[itemIndex].quantity <= 0) {
         user.cart.splice(itemIndex, 1);
       }
-      console.log("user after alteration: " + JSON.stringify(user));
+      
       //save the updated cart
       await user.save();
       //return user with the updated cart
