@@ -10,7 +10,9 @@ Phoebe's Flowers is a full-stack MERN (MongoDB, Express, React, Node.js) website
 - [Contribution](#contribution)
 - [Questions](#questions)
 
-![alt text](client/src/assets/images/Screenshot.png)
+![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/michaelahunt/bootcamp/Phoebes-Flowers-MERN/client/src/assets/images/Screenshot%202025-02-13%20at%201.54.32%E2%80%AFPM.png?version%3D1739473321536)
+
+![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/michaelahunt/bootcamp/Phoebes-Flowers-MERN/client/src/assets/images/Screenshot%202025-02-13%20at%201.55.47%E2%80%AFPM.png?version%3D1739473323171)
 
 ## Installation
 - Frontend: React, React Router, Bootstrap CSS
