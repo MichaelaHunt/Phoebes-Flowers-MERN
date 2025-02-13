@@ -105,7 +105,7 @@ function Signup() {
     return (
         <>
             <Title />
-            <div id="signuppage" className='site'>
+            <div id="loginpage" className='site'>
                 <div>
                     <h2>Sign Up to<br />Phoebe's Flowers</h2>
                     
@@ -123,7 +123,7 @@ function Signup() {
 
                     {formErrors.apiError && <p className='error'>{formErrors.apiError}</p>}
 
-                    <button style={{ marginBottom: "12px" }} onClick={handleFormSubmit}>Create Account</button>
+                    <button style={{ marginBottom: "12px", marginTop: "12px"}} onClick={handleFormSubmit}>Create Account</button>
                     <Link to="/login">back to login</Link>
                 </div>
             </div>

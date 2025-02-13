@@ -134,7 +134,9 @@
     margin-top: 24px;
 }
 
-.miniSection>div {
+.mugSectionContainer {
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 16px 16px;
@@ -144,7 +146,6 @@
 #loginpage {
     background-color: #ffdabc;
     align-items: center;
-
 }
 
 #loginpage::after {
@@ -155,8 +156,6 @@
     background: url('../assets/images/flowers-warm.png') no-repeat center center/cover;
     z-index: 1;
 }
-
-
 
 #loginpage>div {
     background-color: #e58673;
@@ -236,11 +235,11 @@
     position: absolute;
     width: 100%;
     height: 100%;
-     background: url('../assets/images/flowers-warm.png') no-repeat center center/cover; 
+    background: url('../assets/images/flowers-warm.png') no-repeat center center/cover;
     z-index: 1;
 }
 
-#signuppage > div {  
+#signuppage>div {
     background-color: #e58673;
     width: 598px;
     border-radius: 16px;
@@ -252,15 +251,13 @@
     z-index: 2;
 }
 
-
-
-#signuppage > div > h2 {
+#signuppage>div>h2 {
     font-size: 48px;
     font-family: "Poppins-Light";
     margin-bottom: 24px;
 }
 
-#signuppage > div > button {
+#signuppage>div>button {
     width: 470px;
     height: 60px;
     border-radius: 12px;
@@ -283,4 +280,120 @@
     flex: 1;
     height: 2px;
     background-color: white;
+}
+
+@media (max-width: 1478px) {
+    #mug3 {
+        display: none;
+    }
+
+    /* remove one of the mug pics */
+}
+
+@media (max-width: 1250px) {
+    .itemContainer {
+        justify-content: left;
+    }
+}
+
+@media (max-width: 1146px) {
+    #mug1 {
+        display: none;
+    }
+}
+
+@media (max-width: 920px) {
+    .mugSectionContainer {
+        display: flex;
+        flex-direction: column;
+        padding: 48px 0;
+    }
+
+    #mugText {
+        position: relative;
+        padding: 0;
+    }
+
+    #mugText > h1 {
+        position: absolute;
+        top: -15px;
+    }
+
+    #mugText > h3 {
+        margin: 100px 0 0;
+    }
+
+    .miniButton {
+        margin: 16px 0 0 0;
+    }
+}
+
+@media (max-width: 635px) {
+    #loginpage>div>h2 {
+        font-size: 36px;
+    }
+
+    #loginpage>div>button {
+        width: 300px;
+    }
+
+    #loginpage>div {
+        display: flex;
+        flex-direction: column;
+        width: 360px;
+        padding: 32px 0;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #space {
+        width: 300px;
+    }
+
+    #input-field-login > input, #input-field-signup > input {
+        width: 300px;
+        height: 40px;
+        border: solid white 2px;
+        background-color: #e58673;
+        border-radius: 12px;
+        font-size: 20px;
+        font-family:"Poppins-Light";
+        padding-left: 8px;
+        color: white;
+    }
+
+    /* signup */
+
+    #signuppage>div {
+        display: flex;
+        flex-direction: column;
+        width: 360px;
+        padding: 32px 0;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #signuppage>div>h2 {
+        font-size: 36px;
+    }
+
+    #signuppage>div>button {
+        width: 300px;
+    }
+}
+
+@media (max-width: 565px) {
+    #mugText > h1 {
+        font-size: 60px;
+        top: 40px;
+        right: 300px;
+    }
+
+    #mugText > h3 {
+        font-size: 32px;
+    }
+
+    .sectionButton {
+        font-size: 24px;
+    }
 }
