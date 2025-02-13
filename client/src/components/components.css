@@ -11,27 +11,39 @@
     font-size: 4rem;
 }
 
+.basketIcon {
+    /* position: absolute; */
+    right: 8rem;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+   
+}
+
+
 #titleList {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
     width: 100vw;
     position: relative;
     padding: 0 4rem;
+
 }
 
-#titleList>li:first-child {
+.titleItem {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
 }
 
-#titleList > li:nth-child(2) {
+/* #titleList > li:nth-child(2) {
     padding: 0 4rem;
     height: 36px;
     font-size: 0px;
-}
+} */
 
 #titleList > li:last-child {
     font-size: 24px;
@@ -44,7 +56,9 @@
 
 #basket {
     font-size: 32px;
+ 
 }
+
 
 /* Nav component */
 .nav {
@@ -231,3 +245,102 @@
     left: -25px; /* Adjust this to get it aligned just below "Occasions" */
 }
 
+
+@media (max-width: 768px) {
+    /* Center title & stack elements properly */
+    #titleList {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 1rem; /* Space out items */
+        padding-top: 0.5rem;
+    }
+
+    /* Reduce title size slightly for spacing */
+    #title {
+        font-size: 2.2rem;
+        white-space: nowrap;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Move Cart & Logout up slightly */
+    #basket, #logout {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        margin: 0 auto; /* Center them */
+        padding: 0.25rem;
+        position: relative;
+        top: -10px; /* Moves them up slightly */
+    }
+
+    /* Nav bar adjustments */
+    .nav {
+        background-color: var(--powder-blue);
+        padding: 1rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Center Navigation Items */
+    #navList {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center; /* Centers vertically */
+        gap: 1rem; /* Space between nav items */
+        padding: 0;
+        width: 100%;
+        margin: 0;
+    }
+
+    /* Adjust the width and positioning for each item */
+    #navList > li {
+        text-align: center;
+        padding: 0.5rem 0;
+        max-width: 120px; /* Controls the size of each nav item */
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Adjust the Browse by Color and Custom Order alignment */
+    #navList > li:nth-child(2),
+    #navList > li:nth-child(3) {
+        flex: 0 0 45%; /* Ensures they are side by side */
+    }
+
+    /* Adjust the position of 'Occasions' (1st item) */
+    #navList > li:nth-child(1) {
+        flex: 0 0 35%; /* Move it to the left */
+        justify-content: flex-start; /* Align it to the left */
+        padding-left: 1rem; /* Space it a bit from the edge */
+    }
+
+    /* Adjust the position of 'Browse All' (4th item) */
+    #navList > li:nth-child(4) {
+        flex: 0 0 35%; /* Move it to the right */
+        justify-content: flex-end; /* Align it to the right */
+        padding-right: 1rem; /* Space it a bit from the edge */
+    }
+
+    /* Adjust the position of 'Custom Order' (5th item) */
+    #navList > li:nth-child(5) {
+        flex: 0 0 35%; /* Move it further right */
+        justify-content: flex-end; /* Align it to the right */
+        padding-right: 1rem; /* Space it a bit from the edge */
+        margin-top: -10px; /* Move it up */
+    }
+
+    /* Ensure dropdown menu aligns properly */
+    #navList > li:nth-child(1) .dropdown-menu {
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 180px;
+        text-align: center;
+    }
+}
