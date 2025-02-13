@@ -1,4 +1,4 @@
-import {Schema, model, Document} from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 // Define an interface for the User document
@@ -7,25 +7,25 @@ interface ICartItem {
     quantity: number;
 }
 //Define the schema for a cart item (used within the Item schema, but no standalone model)
-const cartItemSchema = new Schema<ICartItem>(
-    {
-        inventoryItem: {
-            type: Number,
-            ref: 'Item',
-        },
-        quantity: {
-            type: Number,
-            required: true,
-            min: 1,
-        },
-    },
-    {
-        _id: false, // Prevents Mongoose from automatically creating an _id field for embedded documents
-        toJSON: { getters: true }, // Ensures virtuals and getters are included when converting to JSON
-        toObject: { getters: true }, // Ensures virtuals and getters are included when converting to a JavaScript object
-        timestamps: true, // Adds createdAt and updatedAt timestamps
-    }
-);
+// const cartItemSchema = new Schema<ICartItem>(
+//     {
+//         inventoryItem: {
+//             type: Number,
+//             ref: 'Item',
+//         },
+//         quantity: {
+//             type: Number,
+//             required: true,
+//             min: 1,
+//         },
+//     },
+//     {
+//         _id: false, // Prevents Mongoose from automatically creating an _id field for embedded documents
+//         toJSON: { getters: true }, // Ensures virtuals and getters are included when converting to JSON
+//         toObject: { getters: true }, // Ensures virtuals and getters are included when converting to a JavaScript object
+//         timestamps: true, // Adds createdAt and updatedAt timestamps
+//     }
+// );
 interface IUser extends Document {
     username: string;
     email: string;
@@ -56,15 +56,18 @@ const userSchema = new Schema<IUser>(
         },
         cart: [
             {
-                type: cartItemSchema,
-                ref: 'CartItem',
-            },
-        ],
+                inventoryItem: {
+                    type: Number,
+                    ref: "Item"
+                },
+                quantity: Number,
+            }
+        ]
     },
     {
         timestamps: true,
-        toJSON: {getters: true},
-        toObject: {getters: true},
+        toJSON: { getters: true },
+        toObject: { getters: true },
     }
 );
 // Middleware: Runs before saving a new user or modifying the password
@@ -78,7 +81,7 @@ userSchema.pre<IUser>('save', async function (next) {
     next();
 })
 // Method to check if the entered password matches the stored hashed password
-    userSchema.methods.isCorrectPassword = async function (password: string): Promise<boolean> {
+userSchema.methods.isCorrectPassword = async function (password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);
 };
 

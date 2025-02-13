@@ -12,8 +12,8 @@ export const QUERY_USERS = gql`
 
 
 export const QUERY_USER = gql`
-    query user($id: String!) {
-        user(_id: $id) {
+    query user($username: String) {
+        user(username: $username) {
         _id
         username
         email
@@ -49,7 +49,7 @@ export const QUERY_ME = gql`
 
 
 export const QUERY_SINGLE_ITEM = gql`
-    query getItem($itemId: ID!) {
+    query getItem($itemId: ID) {
         item(itemId: $itemId) {
         _id
         name
@@ -61,7 +61,7 @@ export const QUERY_SINGLE_ITEM = gql`
 `;
 
 export const QUERY_BY_TAG = gql`
-    query getItems($tag: String!) {
+    query getItems($tag: String) {
         items(tag: $tag) {
         _id
         name

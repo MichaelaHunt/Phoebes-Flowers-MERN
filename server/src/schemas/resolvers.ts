@@ -1,5 +1,6 @@
 import { signToken, AuthenticationError } from '../utils/auth.js';
 import { User, Item } from '../models/index.js';
+// import mongoose from 'mongoose';
 // import { ICartItem } from '../models/User.js';
 
 //define types for the resolvers
@@ -35,11 +36,11 @@ interface UserArgs {
 // define the resolvers
 const resolvers = {
   Query: {
-    // get user by id
-    //added populate to include cart
-    user: async (_parent: any, { id }: { id: string }) => {
-      console.log("Entered user resolver");
-      return User.findById(id).populate('cart');
+    user: async (_parent: any, { username }: { username: string }) => {
+      // console.log("Entered user resolver with ID:", _id);
+      return User.findOne({username}).populate({
+        path: 'cart.inventoryItem', // Ensure inventoryItem inside cart is populated
+      });
     },
     // get all users
     //added populate to include cart
