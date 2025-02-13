@@ -9,6 +9,7 @@ import auth from '../utils/auth';
 import CartItem from './CartItem';
 
 interface Props {
+    open: boolean; // whether the modal is open
     cancelFn?: () => void;// function to close the modal
     primaryFn?: () => void;// primary action (e.g., "Continue")
     className?: string; // additional class for styling
