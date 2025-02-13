@@ -24,7 +24,7 @@ Phoebe's Flowers is a full-stack MERN (MongoDB, Express, React, Node.js) website
 ## Usage
 
 - Github repo: <https://github.com/MichaelaHunt/Phoebes-Flowers-MERN>
-- Link to site: <>
+- Link to site: <https://phoebes-flowers-mern-og93.onrender.com>
 
 ## Contribution
 - Michaela Hunt
@@ -38,7 +38,7 @@ Phoebe's Flowers is a full-stack MERN (MongoDB, Express, React, Node.js) website
 This is licensed under <https://opensource.org/licenses/MIT>
 
 ## Questions
-If you have questions you can reach out to the GitHub or email below.
+If you have questions you can reach out to the emails below.
 - jschob93@gmail.com
 - micapplehunt@gmail.com
 - Danieltwarg@gmail.com
