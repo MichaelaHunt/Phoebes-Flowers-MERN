@@ -17,14 +17,11 @@ function Item(props: Iitem) {
     async function itemClicked() {
         if (auth.getToken() != '') {
             let response = window.prompt("Please enter the quantity you'd like.");
-            //response could be null if user cancels the prompt! TODO:
-            let quantity: number;
             if (response) {
                 let quantity = parseInt(response);
                 try {
                     // console.log("itemId: " + props.id);
-                    var res = await addToCart({variables: { userId: String(auth.getUser()), itemId: props.id, quantity }});//HERE TODO:
-                    console.log("mutation response")
+                    await addToCart({variables: { userId: String(auth.getUser()), itemId: props.id, quantity }});
                 } catch (err) {
                     console.error(err);
                 }
