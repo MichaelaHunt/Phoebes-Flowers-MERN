@@ -33,7 +33,7 @@ function Cart(props: Props) {
         // skip the query if tag is not present
         skip: !userId, 
     });
-    // console.log("data: " + JSON.stringify(data));
+    console.log("data: " + JSON.stringify(data));
     // // var input: CartItem = []
 
     
