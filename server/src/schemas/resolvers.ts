@@ -168,12 +168,19 @@ const resolvers = {
       }
 
       //remove item from cart regardless of quantity
-      user.cart = user.cart.filter((cartItem: any) => cartItem.inventoryItem._id.toString() !== itemId);
+
+      await User.findOneAndUpdate(
+        { _id: userId },
+        { $pull: { cart: { inventoryItem: itemId } } },
+        { new: true }
+      )
 
       //save the updated cart
       await user.save();
       //return user with the updated cart
-      return await User.findById(userId).populate('cart');
+      return await User.findById(userId).populate({
+        path: 'cart.inventoryItem',
+      });
     }
   }
 };
