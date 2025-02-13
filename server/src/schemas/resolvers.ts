@@ -38,6 +38,7 @@ const resolvers = {
     // get user by id
     //added populate to include cart
     user: async (_parent: any, { id }: { id: string }) => {
+      console.log("Entered user resolver");
       return User.findById(id).populate('cart');
     },
     // get all users
@@ -97,7 +98,7 @@ const resolvers = {
       if (!correctPw) {
         throw new AuthenticationError('Invalid credentials');
       }
-      const token = signToken(user.email, user.username, user.id);
+      const token = signToken(user.username, user.email, user.id);
       return { token, user };
     },
     addItemToCart: async (_parent: any, { userId, itemId, quantity }: { userId: string; itemId: number, quantity: number }) => {

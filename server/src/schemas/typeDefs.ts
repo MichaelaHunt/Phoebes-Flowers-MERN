@@ -27,7 +27,7 @@ const typeDefs = `
 
   type Query {
   users: [User]
-  user(username: String!): User
+  user(_id: String!): User
   items(tag: String!): [Item]
   item(itemId: ID!): Item
   randomNonGiftItems: [Item]

@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState } from "react";
 
-interface CartItem {
+export interface CartItemInfo {
   id: number;
   name: string;
   quantity: number;
@@ -8,8 +8,8 @@ interface CartItem {
 }
 
 interface CartContextType {// this function courtesy of ChatGPT
-  cartContents: CartItem[];
-  setCartContents: React.Dispatch<React.SetStateAction<CartItem[]>>;
+  cartContents: CartItemInfo[];
+  setCartContents: React.Dispatch<React.SetStateAction<CartItemInfo[]>>;
 }
 
 export const CartContext = createContext<CartContextType>({
@@ -22,7 +22,7 @@ interface CartProviderProps {
 }
 
 export function CartProvider({children} : CartProviderProps) {
-  const [cartContents, setCartContents] = useState<CartItem[]>([]);
+  const [cartContents, setCartContents] = useState<CartItemInfo[]>([]);
   return (
     <CartContext.Provider value={{ cartContents, setCartContents }}>
       {children}

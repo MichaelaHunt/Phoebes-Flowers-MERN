@@ -12,16 +12,18 @@ export const QUERY_USERS = gql`
 
 
 export const QUERY_USER = gql`
-    query user($username: String!) {
-        user(username: $username) {
+    query user($id: String!) {
+        user(_id: $id) {
         _id
         username
         email
         cart {
-            _id
-            name
-            price
-            imagePath
+            inventoryItem {
+                _id
+                name
+                price
+                imagePath
+                }
             quantity
             }
         }

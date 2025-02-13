@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import './cart.css';
-import CartItem from './CartItem';
 import { useMutation, useQuery } from '@apollo/client';
 import { ALTER_QUANTITY_IN_CART, REMOVE_ITEM_FROM_CART } from '../utils/mutations';
 import AuthService from '../utils/auth';
-import { CartContext } from '../utils/cartContext';
-import { QUERY_ME } from '../utils/queries';
+import { CartContext, CartItemInfo } from '../utils/cartContext';
+import { QUERY_ME, QUERY_USER } from '../utils/queries';
+import auth from '../utils/auth';
+// import CartItem from './CartItem';
 
 interface Props {
     open: boolean; // controls modal visibility
@@ -26,11 +27,29 @@ function Cart(props: Props) {
     //add mutations for altering quantity and removing item from cart
     const [alterQuantityInCart] = useMutation(ALTER_QUANTITY_IN_CART);
     const [removeItemFromCart] = useMutation(REMOVE_ITEM_FROM_CART);
-    // const { data } = useQuery(QUERY_ME);
+    var userId = auth.getUser();
+    const { data } = useQuery(QUERY_USER, {
+        variables: { _id: userId },
+        // skip the query if tag is not present
+        skip: !userId, 
+    });
     // console.log("data: " + JSON.stringify(data));
-    // setCartContents(data.me.cart);
-    //TODO: ^^ HELLA big errors from the above being uncommented!
+    // // var input: CartItem = []
 
+    
+    // //TODO: ^^ HELLA big errors from the above being uncommented!
+
+    // const transformCartData = (cart: any[]): CartItemInfo[] => {
+    //     return cart.map(item => ({
+    //       id: item.inventoryItem._id,
+    //       name: item.inventoryItem.name,
+    //       quantity: item.quantity,
+    //       price: item.inventoryItem.price
+    //     }));
+    //   };
+
+    // const input: CartItemInfo[] = transformCartData(data.user.cart);
+    // setCartContents(input);
     // Function to increase the quantity of an item in the cart
     const increaseQuantity = async (itemId: number) => {
         // Get userId from AuthService
