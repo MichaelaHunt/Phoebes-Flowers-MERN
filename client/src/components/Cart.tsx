@@ -25,7 +25,9 @@ function Cart(props: Props) {
     const { cartContents, setCartContents } = useContext(CartContext);
 
     //add mutations for altering quantity and removing item from cart
-    const [alterQuantityInCart] = useMutation(ALTER_QUANTITY_IN_CART);
+    const [alterQuantityInCart] = useMutation(ALTER_QUANTITY_IN_CART, {
+        fetchPolicy: 'no-cache',
+    });
     const [removeItemFromCart] = useMutation(REMOVE_ITEM_FROM_CART);
     var username = auth.getUsername();
     const { loading: userLoading, data } = useQuery(QUERY_USER, {
@@ -55,64 +57,63 @@ function Cart(props: Props) {
     
     // Function to increase the quantity of an item in the cart
     const increaseQuantity = async (itemId: number) => {
-        // Get userId from AuthService
         const userId = AuthService.getUser();
-        // If user is not logged in, return
         if (!userId) {
             console.error("User is not logged in.");
             return;
         }
-        //try to increase the quantity of the item in the cart
+    
+        console.log("Before increase:", cartContents);
+    
         try {
             const { data } = await alterQuantityInCart({
-                //pass in the userId, itemId, and quantityChange
                 variables: { userId, itemId, quantityChange: 1 },
             });
-            
-            //if the data exists, update the quantity of the item in the cart
+    
             if (data) {
-                setCartContents((prevItems) =>
-                    prevItems.map((item) =>
+                setCartContents(prevItems => {
+                    const updatedCart = prevItems.map(item =>
                         item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
-                    )//TODO: if this don't work it may need to be _id
-                );
+                    );
+                    console.log("After increase:", updatedCart);
+                    return updatedCart;
+                });
             }
         } catch (error) {
             console.error("Error increasing quantity:", error);
         }
     };
+    
 
     //function to decrease quantity of an item in cart
     const decreaseQuantity = async (itemId: number) => {
-        // Get userId from AuthService
         const userId = AuthService.getUser();
-        //if user is not logged in, return
         if (!userId) {
             console.error("User is not logged in.");
             return;
         }
+    
+        console.log("Before decrease:", cartContents);
+    
         try {
-            //check to make sure the item exists and that the quantity is greater than 1
-            const item = cartContents.find((item) => item.id === itemId);
-            //if not, return
-            if (!item || item.quantity <= 1) return;
-            //create a new item with the updated quantity
             const { data } = await alterQuantityInCart({
-                //pass in the userId, itemId, and quantityChange
                 variables: { userId, itemId, quantityChange: -1 },
             });
-            //if the data exists, update the quantity of the item in the cart
+    
             if (data) {
-                setCartContents((prev) =>
-                    prev.map(item =>
+                setCartContents(prevItems => {
+                    const updatedCart = prevItems.map(item =>
                         item.id === itemId ? { ...item, quantity: item.quantity - 1 } : item
-                    )
-                );
+                    );
+                    console.log("After decrease:", updatedCart);
+                    return updatedCart;
+                });
             }
         } catch (error) {
             console.error("Error decreasing quantity:", error);
         }
     };
+    
 
     //function to remove an item from the cart
     const removeItem = async (itemId: number) => {
