@@ -36,12 +36,11 @@ interface UserArgs {
 // define the resolvers
 const resolvers = {
   Query: {
-    // get user by id
-    //added populate to include cart
     user: async (_parent: any, { username }: { username: string }) => {
-      console.log("Entered user resolver");
-      console.log("username is: " + username);
-      return User.findOne({ username });
+      // console.log("Entered user resolver with ID:", _id);
+      return User.findOne({username}).populate({
+        path: 'cart.inventoryItem', // Ensure inventoryItem inside cart is populated
+      });
     },
     // get all users
     //added populate to include cart
