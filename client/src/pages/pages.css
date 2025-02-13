@@ -364,7 +364,22 @@
 
     /* signup */
 
+    #signuppage>div {
+        display: flex;
+        flex-direction: column;
+        width: 360px;
+        padding: 32px 0;
+        align-items: center;
+        justify-content: center;
+    }
 
+    #signuppage>div>h2 {
+        font-size: 36px;
+    }
+
+    #signuppage>div>button {
+        width: 300px;
+    }
 }
 
 @media (max-width: 565px) {

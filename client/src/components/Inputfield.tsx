@@ -9,7 +9,7 @@ interface InputFieldProps {
 function InputField(props: InputFieldProps) {
   return (
     <>
-      <div id={props.isLogin ? "input-field-login" : "input-field-signup"} className="column">
+      <div id='input-field-login' className="column">
         <h4>{props.label}</h4>
         <input
           type="text"
