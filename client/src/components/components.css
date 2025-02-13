@@ -245,6 +245,36 @@
     left: -25px; /* Adjust this to get it aligned just below "Occasions" */
 }
 
+@media (max-width: 1250px) {
+    .item {
+        flex: 1 1 calc(50% - 10px); /*This line courtesy of ChatGPT*/
+        max-width: calc(50% - 10px); /*This line courtesy of ChatGPT*/
+    }
+}
+
+@media (max-width: 1065px) {
+    #navList {
+        padding: 0 5%;
+    }
+}
+
+@media (max-width: 915px) {
+    .item {
+        flex: 1 1 calc(100% - 10px); /*This line courtesy of ChatGPT*/
+        max-width: calc(100% - 10px); /*This line courtesy of ChatGPT*/
+    }
+}
+
+@media (max-width: 750px) {
+    #navList {
+        width: 100vw;
+        justify-content: space-around;
+        padding: 0;
+    }
+    #navList>li {
+        font-size: 16px;
+    }
+}
 
 @media (max-width: 768px) {
     /* Center title & stack elements properly */
@@ -344,3 +374,13 @@
         text-align: center;
     }
 }
+
+@media (max-width: 480px) {
+    #navList {
+        justify-content: space-between;
+    }
+    #navList>li {
+        font-size: 16px;
+    }
+}
+
