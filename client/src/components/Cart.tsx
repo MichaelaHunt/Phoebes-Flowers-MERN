@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import { useState, useEffect, useCallback, useContext } from 'react';
 import './cart.css';
 import { useMutation, useQuery } from '@apollo/client';
 import { ALTER_QUANTITY_IN_CART, REMOVE_ITEM_FROM_CART } from '../utils/mutations';
 import AuthService from '../utils/auth';
 import { CartContext, CartItemInfo } from '../utils/cartContext';
-import { QUERY_ME, QUERY_USER } from '../utils/queries';
+import { QUERY_USER } from '../utils/queries';
 import auth from '../utils/auth';
-// import CartItem from './CartItem';
+import CartItem from './CartItem';
 
 interface Props {
     open: boolean; // controls modal visibility
@@ -27,29 +27,32 @@ function Cart(props: Props) {
     //add mutations for altering quantity and removing item from cart
     const [alterQuantityInCart] = useMutation(ALTER_QUANTITY_IN_CART);
     const [removeItemFromCart] = useMutation(REMOVE_ITEM_FROM_CART);
-    var userId = auth.getUser();
-    const { data } = useQuery(QUERY_USER, {
-        variables: { _id: userId },
+    var username = auth.getUsername();
+    const { loading: userLoading, data } = useQuery(QUERY_USER, {
+        variables: { username },
         // skip the query if tag is not present
-        skip: !userId, 
+        skip: !username, 
     });
-    console.log("data: " + JSON.stringify(data));
-    // // var input: CartItem = []
+
+    const transformCartData = (cart: any[]): CartItemInfo[] => {
+        return cart.map(item => ({
+          id: item.inventoryItem._id,
+          name: item.inventoryItem.name,
+          quantity: item.quantity,
+          price: item.inventoryItem.price
+        }));
+    };
+
+    useEffect(() => {
+        if (data?.user?.cart && !userLoading) {
+            console.log("user.cart exists");
+            const input: CartItemInfo[] = transformCartData(data.user.cart);
+            setCartContents(input);  // This will only run when `data` changes
+        }
+    }, [data, userLoading, setCartContents]);
 
     
-    // //TODO: ^^ HELLA big errors from the above being uncommented!
-
-    // const transformCartData = (cart: any[]): CartItemInfo[] => {
-    //     return cart.map(item => ({
-    //       id: item.inventoryItem._id,
-    //       name: item.inventoryItem.name,
-    //       quantity: item.quantity,
-    //       price: item.inventoryItem.price
-    //     }));
-    //   };
-
-    // const input: CartItemInfo[] = transformCartData(data.user.cart);
-    // setCartContents(input);
+    
     // Function to increase the quantity of an item in the cart
     const increaseQuantity = async (itemId: number) => {
         // Get userId from AuthService

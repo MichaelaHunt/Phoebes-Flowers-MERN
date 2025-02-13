@@ -27,7 +27,7 @@ export const LOGIN_USER = gql`
 `;
 
 export const ALTER_QUANTITY_IN_CART = gql`
-  mutation updateItemQuantityInCart($userId: ID!, $quantityChange: Int!, $itemId: ID!) {
+  mutation updateItemQuantityInCart($userId: ID!, $quantityChange: Int!, $itemId: Int!) {
     alterQuantityInCart(userId: $userId, quantityChange: $quantityChange, itemId: $itemId) {
       _id
       username
@@ -46,7 +46,7 @@ export const ALTER_QUANTITY_IN_CART = gql`
 `;
 
 export const REMOVE_ITEM_FROM_CART = gql`
-  mutation removeItemFromCart($userId: ID!, $itemId: ID!) {
+  mutation removeItemFromCart($userId: ID!, $itemId: Int!) {
     removeItemFromCart(userId: $userId, itemId: $itemId) {
       _id
       username
