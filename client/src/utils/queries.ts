@@ -12,21 +12,21 @@ export const QUERY_USERS = gql`
 
 
 export const QUERY_USER = gql`
-    query user($username: String) {
-        user(username: $username) {
-        _id
-        username
-        email
-        cart {
-            inventoryItem {
-                _id
-                name
-                price
-                imagePath
-                }
-            quantity
-            }
-        }
+    query user($username: String) {   
+        user(username: $username) { 
+            _id 
+            username 
+            email 
+            cart { 
+                inventoryItem { 
+                    _id 
+                    name 
+                    price 
+                    imagePath 
+                } 
+                quantity 
+            } 
+        } 
     }
 `;
 
